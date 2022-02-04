@@ -1,4 +1,4 @@
-name: "Build on master and dev only"
+name: "Build on master and dev only."
 
 on:
   push:
