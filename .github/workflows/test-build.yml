@@ -9,12 +9,12 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: "check links"
-      uses: ammaraskar/sphinx-action@master
+      uses: ammaraskar/sphinx-action@main
       with:
         docs-folder: "."
         build-command: "make linkcheck"
     - name: "test build"
-      uses: ammaraskar/sphinx-action@master
+      uses: ammaraskar/sphinx-action@main
       with:
         docs-folder: "."
 
