@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Welcome to SpinalHDL’s documentation! &mdash; NaxRiscv  documentation</title>
+  <title>NaxRiscv &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -44,7 +44,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="About SpinalHDL" href="NaxRiscv/index.html" /> 
+    <link rel="next" title="Introduction" href="NaxRiscv/introduction/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,17 +90,42 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/index.html">About SpinalHDL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/faq.html">FAQ</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/faq.html#what-is-the-overhead-of-spinalhdl-generated-rtl-compared-to-human-written-vhdl-verilog">What is the overhead of SpinalHDL generated RTL compared to human written VHDL/Verilog?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/faq.html#what-if-spinalhdl-becomes-unsupported-in-the-future">What if SpinalHDL becomes unsupported in the future?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/faq.html#does-spinalhdl-keep-comments-in-generated-vhdl-verilog">Does SpinalHDL keep comments in generated VHDL/verilog?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/faq.html#could-spinalhdl-scale-up-to-big-projects">Could SpinalHDL scale up to big projects?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/faq.html#how-spinalhdl-came-to-be">How SpinalHDL came to be</a></li>
-<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/faq.html#why-develop-a-new-language-when-there-is-vhdl-verilog-systemverilog">Why develop a new language when there is VHDL/Verilog/SystemVerilog?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/faq.html#how-to-use-an-unreleased-version-of-spinalhdl-but-committed-on-git">How to use an unreleased version of SpinalHDL (but committed on git)?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/introduction/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/introduction/naxriscv.html">NaxRiscv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/introduction/pipeline.html">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/introduction/hardware_description.html">Hardwared description</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/fetch/index.html">Fetch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/fetch/pc.html">PC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/fetch/fetchCache.html">I$</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/frontend/index.html">Frontend</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/frontend/Decoder.html">Decoder</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/execution_units/index.html">Execution units</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/execution_units/IntAlu.html">Int</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/backend/index.html">Backend</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/backend/commit.html">Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/simulation/index.html">Simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/simulation/debug.html">Debug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/simulation/lockstep.html">Lock-step</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/simulation/konata.html">Konata</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/performance/index.html">Performance</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/framework/index.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/framework/framework.html">Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/framework/plugin.html">Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/framework/pipeline.html">Pipeline</a></li>
 </ul>
 </li>
 </ul>
@@ -151,7 +176,7 @@
     
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Welcome to SpinalHDL’s documentation!</li>
+      <li>NaxRiscv</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -172,95 +197,621 @@
             
   <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/index.html">About SpinalHDL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/introduction/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/introduction/naxriscv.html">NaxRiscv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/introduction/pipeline.html">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/introduction/hardware_description.html">Hardwared description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/fetch/index.html">Fetch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/fetch/pc.html">PC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/fetch/fetchCache.html">I$</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/frontend/index.html">Frontend</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/frontend/Decoder.html">Decoder</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/execution_units/index.html">Execution units</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/execution_units/IntAlu.html">Int</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/backend/index.html">Backend</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/backend/commit.html">Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/simulation/index.html">Simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/simulation/debug.html">Debug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/simulation/lockstep.html">Lock-step</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/simulation/konata.html">Konata</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/performance/index.html">Performance</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/framework/index.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/framework/framework.html">Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/framework/plugin.html">Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/framework/pipeline.html">Pipeline</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<div class="section" id="welcome-to-spinalhdl-s-documentation">
-<h1>Welcome to SpinalHDL’s documentation!<a class="headerlink" href="#welcome-to-spinalhdl-s-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="site-purpose-and-structure">
-<h2>Site purpose and structure<a class="headerlink" href="#site-purpose-and-structure" title="Permalink to this headline">¶</a></h2>
-<p>This site presents the <em>SpinalHDL</em> language and how to use it on concrete examples.</p>
-<p>If you are learning the language from scratch, <a class="reference external" href="https://cdn.jsdelivr.net/gh/SpinalHDL/SpinalDoc&#64;master/presentation/en/presentation.pdf">this presentation</a> is probably a good starting point.</p>
-</div>
-<div class="section" id="what-is-spinalhdl">
-<h2>What is SpinalHDL ?<a class="headerlink" href="#what-is-spinalhdl" title="Permalink to this headline">¶</a></h2>
-<p>SpinalHDL is an <a class="reference external" href="https://github.com/SpinalHDL/SpinalHDL">open source</a> high-level hardware description language. It can be used as an alternative to VHDL or Verilog and has several advantages over them.</p>
-<p>Also, SpinalHDL is not an HLS approach. Its goal is not to push something abstract into flip-flops and gates, but by using simple elements (flip-flops, gates, if / case statments) create a new abstraction level and help the designer to reuse their code and not write the same thing over and over again.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>SpinalHDL is <em>fully interoperable</em> with standard VHDL/Verilog-based EDA tools (simulators and synthetizers) as the output generated by the toolchain could be VHDL or Verilog.
-It also enables mixed designs where SpinalHDL components inter-operate with VHDL or Verilog IPs.</p>
-</div>
-<div class="section" id="advantages-of-using-spinalhdl-over-vhdl-verilog">
-<h3>Advantages of using SpinalHDL over VHDL / Verilog<a class="headerlink" href="#advantages-of-using-spinalhdl-over-vhdl-verilog" title="Permalink to this headline">¶</a></h3>
-<p>As SpinalHDL is based on a high-level language, it provides several advantages to improve your hardware coding:</p>
-<ol class="arabic simple">
-<li><p><strong>No more endless wiring</strong> - Create and connect complex buses like AXI in one single line.</p></li>
-<li><p><strong>Evolving capabilities</strong> - Create your own bus definitions and abstraction layers.</p></li>
-<li><p><strong>Reduce code size</strong> - By a high factor, especially for wiring. This enables you to have a better overview of your code base, increase your productivity and create fewer headaches.</p></li>
-<li><p><strong>Free and user friendly IDE</strong> - Thanks to Scala tools for auto-completion, error highlighting, navigation shortcuts, and many others.</p></li>
-<li><p><strong>Powerful and easy type conversions</strong> - Bidirectional translation between any data type and bits. Useful when loading a complex data structure from a CPU interface.</p></li>
-<li><p><strong>Loop detection</strong> - Tools check that there are no combinatorial loops / latches.</p></li>
-<li><p><strong>Clock domain safety</strong> - The tools inform you that there are no unintentional clock domain crossings.</p></li>
-<li><p><strong>Generic design</strong> - There are no restrictions to the genericity of your hardware description by using Scala constructs.</p></li>
-</ol>
-</div>
-<div class="section" id="license">
-<h3>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h3>
-<p>SpinalHDL uses two licenses, one for spinal.core, and one for spinal.lib.</p>
-<p><strong>spinal.core</strong> (the compiler) is under the LGPL license, which could be summarized with following statements:</p>
+<div class="section" id="naxriscv">
+<h1>NaxRiscv<a class="headerlink" href="#naxriscv" title="Permalink to this headline">¶</a></h1>
+<p>An RISC-V core currently characterised by :</p>
 <ul class="simple">
-<li><p>You can make money with your SpinalHDL description and its generated RTL.</p></li>
-<li><p>You don’t have to share your SpinalHDL description and its generated RTL.</p></li>
-<li><p>There are no fees and no royalties.</p></li>
-<li><p>If your make improvements to the SpinalHDL core, please share your modifications to make the tool better for everybody.</p></li>
+<li><p>Out of order execution</p></li>
+<li><p>Superscalar (ex : 2 decode, 3 execution units, 2 retire)</p></li>
+<li><p>RV32IMASU (Linux and freertos works in simulation)</p></li>
+<li><p>Portable HDL, but target FPGA with distributed ram (Xilinx series 7
+is the reference used so far)</p></li>
+<li><p>Target a (relatively) low area usage and high fmax (not the best IPC)</p></li>
+<li><p>Decentralized hardware elaboration (Empty toplevel parametrized with
+plugins)</p></li>
+<li><p>Frontend implemented around a pipelining framework to ease
+customisation</p></li>
+<li><p>Non-blocking Data cache with multiple refill and writeback slots</p></li>
+<li><p>BTB + GSHARE + RAS branch predictors</p></li>
+<li><p>Hardware refilled MMU</p></li>
+<li><p>Load to use latency of 3 cycles via the speculative cache hit
+predictor</p></li>
+<li><p>Pipeline visualisation via verilator simulation and Konata (gem5 file
+format)</p></li>
 </ul>
-<p><strong>spinal.lib</strong> (a general purpose library of components/tools/interfaces) is under the permissive MIT license.</p>
+<p>To test the project, see the “Running Verilator simulation” section</p>
+</div>
+<div class="section" id="performance-area">
+<h1>Performance / Area<a class="headerlink" href="#performance-area" title="Permalink to this headline">¶</a></h1>
+<p>A few things to keep in mind : - it is still WIP - You can trade FMax
+IPC Area - There is better IPC nor FMAX nor Area configs</p>
+<p>For the following configuration : - RV32IMASU, dual issue,OoO, linux
+compatible - 64 bits fetch, 2 decode, 2 issue, 2 retire - Shared issue
+queue with 32 entries - 2 execution unit (1*Int/Shift,
+1*Branch/load/store/mul/div/csr/env) - LSU with 16 load queue, 16 store
+queue - Load hit predictor (3 cycles load to use delay) - Store to load
+bypass / hazard free predictor - I$ 16KB/4W, D$ 16KB/4W 2 refill 2
+writeback slots - MMU with ITLB 6 way/192 entries, DTLB 6 way/192
+entries - BTB 1 way/512 entries, GSHARE 1 way/4KB, RAS 32 entries</p>
+<p>Performance : - Dhrystone : 2.51 DMIPS/Mhz (-O3 -fno-common -fno-inline)
+- Coremark : 4.13 Coremark/Mhz (-O3 and so many more random flags) -
+Embench-iot : 1.33 baseline (-O2 -ffunction-sections)</p>
+<p>On Artix 7 speed grade 3 : - 13.0 KLUT, 9.3 KFF, 13 BRAM, 4 DSP - 143
+Mhz</p>
+</div>
+<div class="section" id="running-verilator-simulation">
+<h1>Running Verilator simulation<a class="headerlink" href="#running-verilator-simulation" title="Permalink to this headline">¶</a></h1>
+<p>See src/test/cpp/naxriscv/README.md</p>
+<p>Linux/Buildroot running in simulation :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>./obj_dir/VNaxRiscv \
+    --load-bin $LINUX_IMAGES/fw_jump.bin,0x80000000 \
+    --load-bin $LINUX_IMAGES/linux.dtb,0x80F80000 \
+    --load-bin $LINUX_IMAGES/Image,0x80400000 \
+    --load-bin $LINUX_IMAGES/rootfs.cpio,0x81000000
+OpenSBI v0.8
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | &#39;_ \ / _ \ &#39;_ \ \___ \|  _ &lt; | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name       : NaxRiscv
+Platform Features   : timer,mfdeleg
+Platform HART Count : 1
+Boot HART ID        : 0
+Boot HART ISA       : rv32imasu
+BOOT HART Features  : scounteren,mcounteren
+BOOT HART PMP Count : 0
+Firmware Base       : 0x80000000
+Firmware Size       : 64 KB
+Runtime SBI Version : 0.2
+
+MIDELEG : 0x00000222
+MEDELEG : 0x0000b109
+[    0.000000] Linux version 5.10.1 (rawrr@rawrr) (riscv32-buildroot-linux-gnu-gcc.br_real (Buildroot 2020.11-rc3-8-g9ef54b7d0b) 10.2.0, GNU ld (GNU Binutils) 2.34) #2 SMP Wed Jan 26 14:18:17 CET 2022
+[    0.000000] earlycon: sbi0 at I/O port 0x0 (options &#39;&#39;)
+[    0.000000] printk: bootconsole [sbi0] enabled
+[    0.000000] Initial ramdisk at: 0x(ptrval) (8388608 bytes)
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000080400000-0x000000008fffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080400000-0x000000008fffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080400000-0x000000008fffffff]
+[    0.000000] SBI specification v0.2 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x8
+[    0.000000] SBI v0.2 TIME extension detected
+[    0.000000] SBI v0.2 IPI extension detected
+[    0.000000] SBI v0.2 RFENCE extension detected
+[    0.000000] SBI v0.2 HSM extension detected
+[    0.000000] riscv: ISA extensions aim
+[    0.000000] riscv: ELF capabilities aim
+[    0.000000] percpu: Embedded 10 pages/cpu s18700 r0 d22260 u40960
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 64008
+[    0.000000] Kernel command line: rootwait console=hvc0 earlycon=sbi root=/dev/ram0 init=/sbin/init
+[    0.000000] Dentry cache hash table entries: 32768 (order: 5, 131072 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Sorting __ex_table...
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] Memory: 241280K/258048K available (4717K kernel code, 553K rwdata, 632K rodata, 166K init, 213K bss, 16768K reserved, 0K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu:     RCU restricting CPUs from NR_CPUS=8 to nr_cpu_ids=1.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 32 local interrupts mapped
+[    0.000000] random: get_random_bytes called from start_kernel+0x35c/0x4dc with crng_init=0
+[    0.000000] riscv_timer_init_dt: Registering clocksource cpuid [0] hartid [0]
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x171024e7e0, max_idle_ns: 440795205315 ns
+[    0.000096] sched_clock: 64 bits at 100MHz, resolution 10ns, wraps every 4398046511100ns
+[    0.001452] Console: colour dummy device 80x25
+[    0.001923] printk: console [hvc0] enabled
+[    0.001923] printk: console [hvc0] enabled
+[    0.002597] printk: bootconsole [sbi0] disabled
+[    0.002597] printk: bootconsole [sbi0] disabled
+[    0.003469] Calibrating delay loop (skipped), value calculated using timer frequency.. 200.00 BogoMIPS (lpj=400000)
+[    0.004346] pid_max: default: 32768 minimum: 301
+[    0.006040] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.006715] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.018275] rcu: Hierarchical SRCU implementation.
+[    0.021169] smp: Bringing up secondary CPUs ...
+[    0.021752] smp: Brought up 1 node, 1 CPU
+[    0.024190] devtmpfs: initialized
+[    0.029478] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.030479] futex hash table entries: 256 (order: 2, 16384 bytes, linear)
+[    0.032419] NET: Registered protocol family 16
+[    0.072397] clocksource: Switched to clocksource riscv_clocksource
+[    0.130361] NET: Registered protocol family 2
+[    0.135484] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 6144 bytes, linear)
+[    0.136588] TCP established hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.137670] TCP bind hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.138674] TCP: Hash tables configured (established 2048 bind 2048)
+[    0.139694] UDP hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.140653] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.145111] Unpacking initramfs...
+[    0.382796] Initramfs unpacking failed: invalid magic at start of compressed archive
+[    0.438458] Freeing initrd memory: 8192K
+[    0.442311] workingset: timestamp_bits=30 max_order=16 bucket_order=0
+[    0.497197] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 254)
+[    0.497827] io scheduler mq-deadline registered
+[    0.498260] io scheduler kyber registered
+[    0.863943] NET: Registered protocol family 10
+[    0.869801] Segment Routing with IPv6
+[    0.870713] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    0.875543] NET: Registered protocol family 17
+[    0.880356] Freeing unused kernel memory: 164K
+[    0.880786] Kernel memory protection not selected by kernel config.
+[    0.881380] Run /init as init process
+Starting syslogd: OK
+Starting klogd: OK
+Running sysctl: OK
+Saving random seed: [    1.502669] random: dd: uninitialized urandom read (512 bytes read)
+OK
+Starting network: OK
+
+Welcome to Buildroot
+buildroot login: root
+           _  _                     ___      _
+    o O O | \| |   __ _    __ __   | _ \    (_)     ___     __     __ __
+   o      | .` |  / _` |   \ \ /   |   /    | |    (_-&lt;    / _|    \ V /
+  TS__[O] |_|\_|  \__,_|   /_\_\   |_|_\   _|_|_   /__/_   \__|_   _\_/_
+ {======|_|&quot;&quot;&quot;&quot;&quot;|_|&quot;&quot;&quot;&quot;&quot;|_|&quot;&quot;&quot;&quot;&quot;|_|&quot;&quot;&quot;&quot;&quot;|_|&quot;&quot;&quot;&quot;&quot;|_|&quot;&quot;&quot;&quot;&quot;|_|&quot;&quot;&quot;&quot;&quot;|_|&quot;&quot;&quot;&quot;&quot;|
+./o--000&#39;&quot;`-0-0-&#39;&quot;`-0-0-&#39;&quot;`-0-0-&#39;&quot;`-0-0-&#39;&quot;`-0-0-&#39;&quot;`-0-0-&#39;&quot;`-0-0-&#39;&quot;`-0-0-&#39;
+login[65]: root login on &#39;console&#39;
+root@buildroot:~# cat /proc/cpuinfo
+processor   : 0
+hart        : 0
+isa     : rv32ima
+mmu     : sv32
+
+root@buildroot:~# echo 1+2+3*4 | bc
+15
+root@buildroot:~# micropython
+MicroPython v1.13 on 2022-01-26; linux version
+Use Ctrl-D to exit, Ctrl-E for paste mode
+&gt;&gt;&gt; 1+2+3
+6
+&gt;&gt;&gt; import math
+&gt;&gt;&gt; math.sin(math.pi/4)
+0.7071067811865475
+&gt;&gt;&gt; from sys import exit
+&gt;&gt;&gt; exit()
+root@buildroot:~# ls /
+bin      init     linuxrc  opt      run      tmp
+dev      lib      media    proc     sbin     usr
+etc      lib32    mnt      root     sys      var
+root@buildroot:~#
+</pre></div>
 </div>
 </div>
-<div class="section" id="links">
-<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
-<div class="line-block">
-<div class="line">SpinalHDL repository:</div>
-<div class="line"><a class="reference external" href="https://github.com/SpinalHDL/SpinalHDL">https://github.com/SpinalHDL/SpinalHDL</a></div>
+<div class="section" id="framework">
+<h1>Framework<a class="headerlink" href="#framework" title="Permalink to this headline">¶</a></h1>
+<p>The toplevel of NaxRiscv only contains a framework which can schedule a
+list plugins. The framework itself does not create any hardware.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">framework</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Framework</span><span class="p">(</span><span class="n">plugins</span><span class="p">())</span>
+</pre></div>
 </div>
-<div class="line-block">
-<div class="line">A short show case (PDF):</div>
-<div class="line"><a class="reference external" href="https://cdn.jsdelivr.net/gh/SpinalHDL/SpinalDoc&#64;master/presentation/en/motivation.pdf">motivation.pdf</a></div>
+<p>To give an overview of how much the design is split between plugins,
+here is the list of them for one functional CPU :</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">plugins</span> <span class="o">=</span> <span class="nc">ArrayBuffer</span><span class="p">[</span><span class="nc">Plugin</span><span class="p">]()</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">DocPlugin</span><span class="p">()</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">MmuPlugin</span><span class="p">(</span>
+  <span class="n">spec</span>    <span class="o">=</span> <span class="nc">MmuSpec</span><span class="p">.</span><span class="n">sv32</span><span class="p">,</span>
+  <span class="n">ioRange</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="mi">31</span> <span class="n">downto</span> <span class="mi">28</span><span class="p">)</span> <span class="o">===</span> <span class="mh">0x1</span>
+<span class="p">)</span>
+
+<span class="c1">//FETCH</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">FetchPlugin</span><span class="p">()</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">PcPlugin</span><span class="p">()</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">FetchCachePlugin</span><span class="p">(</span>
+  <span class="n">cacheSize</span> <span class="o">=</span> <span class="mi">4096</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span>
+  <span class="n">wayCount</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="n">injectionAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">memDataWidth</span> <span class="o">=</span> <span class="nc">Fetch</span><span class="p">.</span><span class="nc">FETCH_DATA_WIDTH</span><span class="p">,</span>
+  <span class="n">reducedBankWidth</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="n">hitsWithTranslationWays</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="n">translationStorageParameter</span> <span class="o">=</span> <span class="nc">MmuStorageParameter</span><span class="p">(</span>
+    <span class="n">levels</span>   <span class="o">=</span> <span class="nc">List</span><span class="p">(</span>
+      <span class="nc">MmuStorageLevel</span><span class="p">(</span>
+        <span class="n">id</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">ways</span>  <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="mi">32</span>
+      <span class="p">),</span>
+      <span class="nc">MmuStorageLevel</span><span class="p">(</span>
+        <span class="n">id</span>    <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">ways</span>  <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="mi">32</span>
+      <span class="p">)</span>
+    <span class="p">),</span>
+    <span class="n">priority</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="p">),</span>
+  <span class="n">translationPortParameter</span>  <span class="o">=</span> <span class="nc">MmuPortParameter</span><span class="p">(</span>
+    <span class="n">readAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">hitsAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">ctrlAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">rspAt</span>  <span class="o">=</span> <span class="mi">1</span>
+  <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">AlignerPlugin</span><span class="p">(</span><span class="n">inputAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">//FRONTEND</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">FrontendPlugin</span><span class="p">()</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">DecompressorPlugin</span><span class="p">()</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">DecoderPlugin</span><span class="p">()</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">RfTranslationPlugin</span><span class="p">()</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">RfDependencyPlugin</span><span class="p">()</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">RfAllocationPlugin</span><span class="p">(</span><span class="n">riscv</span><span class="p">.</span><span class="nc">IntRegFile</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">DispatchPlugin</span><span class="p">(</span>
+  <span class="n">slotCount</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="p">)</span>
+
+<span class="c1">//BRANCH PREDICTION</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">BranchContextPlugin</span><span class="p">(</span>
+  <span class="n">branchCount</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">HistoryPlugin</span><span class="p">(</span>
+  <span class="n">historyFetchBypass</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">DecoderPredictionPlugin</span><span class="p">()</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">BtbPlugin</span><span class="p">(</span>
+  <span class="n">entries</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
+  <span class="n">readAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">hitAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">jumpAt</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">GSharePlugin</span><span class="p">(</span>
+  <span class="n">memBytes</span> <span class="o">=</span> <span class="mi">4</span> <span class="nc">KiB</span><span class="p">,</span>
+  <span class="n">historyWidth</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span>
+  <span class="n">readAt</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="c1">//LOAD / STORE</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">LsuPlugin</span><span class="p">(</span>
+  <span class="n">lqSize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="n">sqSize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="n">loadToCacheBypass</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="n">lqToCachePipelined</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="n">hazardPedictionEntries</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
+  <span class="n">hazardPredictionTagWidth</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="n">hitPedictionEntries</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
+  <span class="n">translationStorageParameter</span> <span class="o">=</span> <span class="nc">MmuStorageParameter</span><span class="p">(</span>
+    <span class="n">levels</span>   <span class="o">=</span> <span class="nc">List</span><span class="p">(</span>
+      <span class="nc">MmuStorageLevel</span><span class="p">(</span>
+        <span class="n">id</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">ways</span>  <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="mi">32</span>
+      <span class="p">),</span>
+      <span class="nc">MmuStorageLevel</span><span class="p">(</span>
+        <span class="n">id</span>    <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">ways</span>  <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="mi">32</span>
+      <span class="p">)</span>
+    <span class="p">),</span>
+    <span class="n">priority</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="p">),</span>
+  <span class="n">loadTranslationParameter</span>  <span class="o">=</span> <span class="nc">MmuPortParameter</span><span class="p">(</span>
+    <span class="n">readAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">hitsAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">ctrlAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">rspAt</span>  <span class="o">=</span> <span class="mi">1</span>
+  <span class="p">),</span>
+  <span class="n">storeTranslationParameter</span> <span class="o">=</span> <span class="nc">MmuPortParameter</span><span class="p">(</span>
+    <span class="n">readAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">hitsAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">ctrlAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">rspAt</span>  <span class="o">=</span> <span class="mi">1</span>
+  <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">DataCachePlugin</span><span class="p">(</span>
+  <span class="n">memDataWidth</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span>
+  <span class="n">cacheSize</span>    <span class="o">=</span> <span class="mi">4096</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span>
+  <span class="n">wayCount</span>     <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="n">refillCount</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">writebackCount</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">tagsReadAsync</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="n">reducedBankWidth</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="n">loadRefillCheckEarly</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="p">)</span>
+
+<span class="c1">//MISC</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">RobPlugin</span><span class="p">(</span>
+  <span class="n">completionWithReg</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">CommitPlugin</span><span class="p">(</span>
+  <span class="n">ptrCommitRetimed</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">RegFilePlugin</span><span class="p">(</span>
+  <span class="n">spec</span> <span class="o">=</span> <span class="n">riscv</span><span class="p">.</span><span class="nc">IntRegFile</span><span class="p">,</span>
+  <span class="n">physicalDepth</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span>
+  <span class="n">bankCount</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">CommitDebugFilterPlugin</span><span class="p">(</span><span class="nc">List</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">CsrRamPlugin</span><span class="p">()</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">PrivilegedPlugin</span><span class="p">(</span><span class="nc">PrivilegedConfig</span><span class="p">.</span><span class="n">full</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">PerformanceCounterPlugin</span><span class="p">(</span>
+  <span class="n">additionalCounterCount</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="n">bufferWidth</span>            <span class="o">=</span> <span class="mi">6</span>
+<span class="p">)</span>
+
+<span class="c1">//EXECUTION UNITES</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">ExecutionUnitBase</span><span class="p">(</span><span class="s">&quot;EU0&quot;</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">SrcPlugin</span><span class="p">(</span><span class="s">&quot;EU0&quot;</span><span class="p">,</span> <span class="n">earlySrc</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">IntAluPlugin</span><span class="p">(</span><span class="s">&quot;EU0&quot;</span><span class="p">,</span> <span class="n">aluStage</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">ShiftPlugin</span><span class="p">(</span><span class="s">&quot;EU0&quot;</span> <span class="p">,</span> <span class="n">aluStage</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">ExecutionUnitBase</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">,</span> <span class="n">writebackCountMax</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">SrcPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">,</span> <span class="n">earlySrc</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">MulPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">,</span> <span class="n">writebackAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">staticLatency</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">DivPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">,</span> <span class="n">writebackAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">BranchPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">,</span> <span class="n">writebackAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">staticLatency</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">StorePlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">EnvCallPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">)(</span><span class="n">rescheduleAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">CsrAccessPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">)(</span>
+  <span class="n">decodeAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">readAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">writeAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">writebackAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">staticLatency</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="p">)</span>
+
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">ExecutionUnitBase</span><span class="p">(</span><span class="s">&quot;EU2&quot;</span><span class="p">,</span> <span class="n">writebackCountMax</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">SrcPlugin</span><span class="p">(</span><span class="s">&quot;EU2&quot;</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">LoadPlugin</span><span class="p">(</span><span class="s">&quot;EU2&quot;</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="line-block">
-<div class="line">Presentation of the language (PDF):</div>
-<div class="line"><a class="reference external" href="https://cdn.jsdelivr.net/gh/SpinalHDL/SpinalDoc&#64;master/presentation/en/presentation.pdf">presentation.pdf</a></div>
+<p>Each of those plugins may :</p>
+<ul class="simple">
+<li><p>Implement services used by other plugins (ex : provide jump
+interfaces, provide rescheduling interface, provide a pipeline
+skeleton)</p></li>
+<li><p>Use other plugins functionalities</p></li>
+<li><p>Create hardware</p></li>
+<li><p>Create early tasks (used to setup things between plugins)</p></li>
+<li><p>Create late tasks (used in general to create the required hardware)</p></li>
+</ul>
+<div class="section" id="plugin-tasks">
+<h2>Plugin tasks<a class="headerlink" href="#plugin-tasks" title="Permalink to this headline">¶</a></h2>
+<p>Here is can instance of dummy plugin creating two tasks (setup / logic):</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DummyPlugin</span><span class="p">()</span> <span class="k">extends</span> <span class="nc">Plugin</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="n">setup</span> <span class="o">=</span> <span class="n">create</span> <span class="n">early</span> <span class="k">new</span> <span class="nc">Area</span> <span class="p">{</span>
+    <span class="c1">//Here you can setup things with other plugins</span>
+    <span class="c1">//This code will always run before any late tasks</span>
+  <span class="p">}</span>
+
+  <span class="kd">val</span> <span class="n">logic</span> <span class="o">=</span> <span class="n">create</span> <span class="n">late</span> <span class="k">new</span> <span class="nc">Area</span> <span class="p">{</span>
+    <span class="c1">//Here you can (for instance) generate hardware</span>
+    <span class="c1">//This code will always start after any early task</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<div class="line-block">
-<div class="line">SBT base project:</div>
-<div class="line"><a class="reference external" href="https://github.com/SpinalHDL/SpinalTemplateSbt">https://github.com/SpinalHDL/SpinalTemplateSbt</a></div>
+<p>Note that create early and create late will execute their code into a
+new threads, which are scheduled by the Framework class.</p>
 </div>
-<div class="line-block">
-<div class="line">Jupyter bootcamp:</div>
-<div class="line"><a class="reference external" href="https://github.com/SpinalHDL/Spinal-bootcamp">https://github.com/SpinalHDL/Spinal-bootcamp</a></div>
+<div class="section" id="service-definition">
+<h2>Service definition<a class="headerlink" href="#service-definition" title="Permalink to this headline">¶</a></h2>
+<p>For instance, the JumpService, allowing other plugins to order jumps, is
+defined as following :</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">trait</span> <span class="nc">JumpService</span> <span class="k">extends</span> <span class="nc">Service</span><span class="p">{</span>
+  <span class="k">def</span> <span class="nf">createJumpInterface</span><span class="p">(</span><span class="n">priority</span> <span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Flow</span><span class="p">[</span><span class="nc">JumpCmd</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">JumpCmd</span><span class="p">(</span><span class="n">pcWidth</span> <span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="k">extends</span> <span class="nc">Bundle</span><span class="p">{</span>
+  <span class="kd">val</span> <span class="n">pc</span> <span class="o">=</span> <span class="nc">UInt</span><span class="p">(</span><span class="n">pcWidth</span> <span class="n">bits</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<div class="line-block">
-<div class="line">Workshop:</div>
-<div class="line"><a class="reference external" href="https://github.com/SpinalHDL/SpinalWorkshop">https://github.com/SpinalHDL/SpinalWorkshop</a></div>
 </div>
-<div class="line-block">
-<div class="line">VexRiscv CPU and SoC:</div>
-<div class="line"><a class="reference external" href="https://github.com/SpinalHDL/VexRiscv">https://github.com/SpinalHDL/VexRiscv</a></div>
+<div class="section" id="service-implementation">
+<h2>Service implementation<a class="headerlink" href="#service-implementation" title="Permalink to this headline">¶</a></h2>
+<p>The PcPlugin can implement the JumpService the following way :</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">case</span> <span class="k">class</span> <span class="nc">JumpSpec</span><span class="p">(</span><span class="n">interface</span> <span class="p">:</span>  <span class="nc">Flow</span><span class="p">[</span><span class="nc">JumpCmd</span><span class="p">],</span> <span class="n">priority</span> <span class="p">:</span> <span class="nc">Int</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">PcPlugin</span><span class="p">()</span> <span class="k">extends</span> <span class="nc">Plugin</span> <span class="k">with</span> <span class="nc">JumpService</span><span class="p">{</span>
+  <span class="kd">val</span> <span class="n">jumpsSpec</span> <span class="o">=</span> <span class="nc">ArrayBuffer</span><span class="p">[</span><span class="nc">JumpSpec</span><span class="p">]()</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">createJumpInterface</span><span class="p">(</span><span class="n">priority</span> <span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Flow</span><span class="p">[</span><span class="nc">JumpCmd</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="n">spec</span> <span class="o">=</span> <span class="nc">JumpSpec</span><span class="p">(</span><span class="nc">Flow</span><span class="p">(</span><span class="nc">JumpCmd</span><span class="p">(</span><span class="mi">32</span><span class="p">)),</span> <span class="n">priority</span><span class="p">)</span>
+    <span class="n">jumpsSpec</span> <span class="o">+=</span> <span class="n">spec</span>
+    <span class="k">return</span> <span class="n">spec</span><span class="p">.</span><span class="n">interface</span>
+  <span class="p">}</span>
+
+  <span class="kd">val</span> <span class="n">logic</span> <span class="o">=</span> <span class="n">create</span> <span class="n">late</span> <span class="k">new</span> <span class="nc">Area</span><span class="p">{</span>
+    <span class="c1">//Here, implement the PC logic and manage the jumpsSpec interfaces</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<div class="line-block">
-<div class="line">StackOverflow (tag: SpinalHDL) :</div>
-<div class="line"><a class="reference external" href="https://stackoverflow.com/">StackOverflow</a></div>
 </div>
-<div class="line-block">
-<div class="line">Google group:</div>
-<div class="line"><a class="reference external" href="https://groups.google.com/forum/#!forum/spinalhdl-hardware-description-language">https://groups.google.com/forum/#!forum/spinalhdl-hardware-description-language</a></div>
+<div class="section" id="service-usage">
+<h2>Service usage<a class="headerlink" href="#service-usage" title="Permalink to this headline">¶</a></h2>
+<p>Then another plugin can retrieve and use this service by :</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AnotherPlugin</span><span class="p">()</span> <span class="k">extends</span> <span class="nc">Plugin</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="n">setup</span> <span class="o">=</span> <span class="n">create</span> <span class="n">early</span> <span class="k">new</span> <span class="nc">Area</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="n">jump</span> <span class="o">=</span> <span class="n">getService</span><span class="p">[</span><span class="nc">JumpService</span><span class="p">].</span><span class="n">createJumpInterface</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="kd">val</span> <span class="n">logic</span> <span class="o">=</span> <span class="n">create</span> <span class="n">late</span> <span class="k">new</span> <span class="nc">Area</span> <span class="p">{</span>
+    <span class="n">setup</span><span class="p">.</span><span class="n">jump</span><span class="p">.</span><span class="n">valid</span> <span class="o">:=</span> <span class="o">???</span>
+    <span class="n">setup</span><span class="p">.</span><span class="n">jump</span><span class="p">.</span><span class="n">pc</span> <span class="o">:=</span> <span class="o">???</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<a class="reference external image-reference" href="https://gitter.im/SpinalHDL/SpinalHDL?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img alt="Join the chat at https://gitter.im/SpinalHDL/SpinalHDL" src="https://badges.gitter.im/SpinalHDL/SpinalHDL.svg" /></a>
-<a class="reference external image-reference" href="https://travis-ci.org/SpinalHDL/SpinalHDL"><img alt="Build Status" src="https://api.travis-ci.org/SpinalHDL/SpinalHDL.svg?branch=master" /></a>
+</div>
+<div class="section" id="service-pipeline-definition">
+<h2>Service Pipeline definition<a class="headerlink" href="#service-pipeline-definition" title="Permalink to this headline">¶</a></h2>
+<p>Some plugins may even create pipeline skeleton which can then be
+populated by other plugins. For instance :</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FetchPlugin</span><span class="p">()</span> <span class="k">extends</span> <span class="nc">Plugin</span> <span class="k">with</span> <span class="nc">LockedImpl</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">create</span> <span class="n">early</span> <span class="k">new</span> <span class="nc">Pipeline</span><span class="p">{</span>
+    <span class="kd">val</span> <span class="n">stagesCount</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="kd">val</span> <span class="n">stages</span> <span class="o">=</span> <span class="nc">Array</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="n">stagesCount</span><span class="p">)(</span><span class="n">newStage</span><span class="p">())</span>
+
+    <span class="k">import</span> <span class="nn">spinal</span><span class="p">.</span><span class="nn">lib</span><span class="p">.</span><span class="nn">pipeline</span><span class="p">.</span><span class="nc">Connection</span><span class="p">.</span><span class="n">_</span>
+    <span class="c1">//Connect every stage together</span>
+    <span class="k">for</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">stages</span><span class="p">.</span><span class="n">dropRight</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">stages</span><span class="p">.</span><span class="n">tail</span><span class="p">).</span><span class="n">zipped</span><span class="p">){</span>
+      <span class="n">connect</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">)(</span><span class="nc">M2S</span><span class="p">())</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kd">val</span> <span class="n">logic</span> <span class="o">=</span> <span class="n">create</span> <span class="n">late</span> <span class="k">new</span> <span class="nc">Area</span><span class="p">{</span>
+    <span class="n">lock</span><span class="p">.</span><span class="n">await</span><span class="p">()</span> <span class="c1">//Allow other plugins to make this blocking until they specified everything they wanted in the pipeline stages.</span>
+    <span class="n">pipeline</span><span class="p">.</span><span class="n">build</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="service-pipeline-usage">
+<h2>Service Pipeline usage<a class="headerlink" href="#service-pipeline-usage" title="Permalink to this headline">¶</a></h2>
+<p>For instance, the PcPlugin will want to introduce the PC value into the
+fetch pipeline :</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">object</span> <span class="nc">PcPlugin</span> <span class="k">extends</span> <span class="nc">AreaObject</span><span class="p">{</span>
+  <span class="kd">val</span> <span class="nc">FETCH_PC</span> <span class="o">=</span> <span class="nc">Stageable</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="mi">32</span> <span class="n">bits</span><span class="p">))</span>  <span class="c1">//Define the concept of a FETCH_PC signal being usable through a pipeline</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">PcPlugin</span><span class="p">()</span> <span class="k">extends</span> <span class="nc">Plugin</span> <span class="k">with</span> <span class="p">...{</span>
+
+  <span class="kd">val</span> <span class="n">setup</span> <span class="o">=</span> <span class="n">create</span> <span class="n">early</span> <span class="k">new</span> <span class="nc">Area</span><span class="p">{</span>
+    <span class="n">getService</span><span class="p">[</span><span class="nc">FetchPlugin</span><span class="p">].</span><span class="n">retain</span><span class="p">()</span> <span class="c1">//We need to hold the FetchPlugin logic task until we create all the associated accesses</span>
+  <span class="p">}</span>
+
+  <span class="kd">val</span> <span class="n">logic</span> <span class="o">=</span> <span class="n">create</span> <span class="n">late</span> <span class="k">new</span> <span class="nc">Area</span><span class="p">{</span>
+    <span class="kd">val</span> <span class="n">fetch</span> <span class="o">=</span> <span class="n">getService</span><span class="p">[</span><span class="nc">FetchPlugin</span><span class="p">]</span>
+    <span class="kd">val</span> <span class="n">firstStage</span> <span class="o">=</span> <span class="n">fetch</span><span class="p">.</span><span class="n">pipeline</span><span class="p">.</span><span class="n">stages</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">firstStage</span><span class="p">(</span><span class="nc">PcPlugin</span><span class="p">.</span><span class="nc">FETCH_PC</span><span class="p">)</span> <span class="o">:=</span> <span class="o">???</span>   <span class="c1">//Assign the FETCH_PC value in firstStage of the pipeline. Other plugins may access it down stream.</span>
+    <span class="n">fetch</span><span class="p">.</span><span class="n">release</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="execution-units">
+<h1>Execution units<a class="headerlink" href="#execution-units" title="Permalink to this headline">¶</a></h1>
+<p>You can spawn a execution unit by creating a new ExecutionUnitBase with
+a unique execution unit identifier :</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">ExecutionUnitBase</span><span class="p">(</span><span class="s">&quot;EU0&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then you can populate that execution unit by adding new
+ExecutionUnitElementSimple with the same identifier :</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">SrcPlugin</span><span class="p">(</span><span class="s">&quot;EU0&quot;</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">IntAluPlugin</span><span class="p">(</span><span class="s">&quot;EU0&quot;</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">ShiftPlugin</span><span class="p">(</span><span class="s">&quot;EU0&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here is the example of a execution unit handeling :</p>
+<ul class="simple">
+<li><p>mul/div</p></li>
+<li><p>jump/branches</p></li>
+<li><p>load/store</p></li>
+<li><p>CSR accesses</p></li>
+<li><p>ebreak/ecall/mret/wfi</p></li>
+</ul>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">ExecutionUnitBase</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">,</span> <span class="n">writebackCountMax</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">SrcPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">MulPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">,</span> <span class="n">writebackAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">staticLatency</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">DivPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">,</span> <span class="n">writebackAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">BranchPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">,</span> <span class="n">writebackAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">staticLatency</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">LoadPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">StorePlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">CsrAccessPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">)(</span>
+  <span class="n">decodeAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">readAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">writeAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">writebackAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">staticLatency</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="p">)</span>
+<span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">EnvCallPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">)(</span><span class="n">rescheduleAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="shiftplugin">
+<h2>ShiftPlugin<a class="headerlink" href="#shiftplugin" title="Permalink to this headline">¶</a></h2>
+<p>Here is the ShiftPlugin as a example of ExecutionUnitElementSimple
+plugin:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">object</span> <span class="nc">ShiftPlugin</span> <span class="k">extends</span> <span class="nc">AreaObject</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="nc">SIGNED</span> <span class="o">=</span> <span class="nc">Stageable</span><span class="p">(</span><span class="nc">Bool</span><span class="p">())</span>
+  <span class="kd">val</span> <span class="nc">LEFT</span> <span class="o">=</span> <span class="nc">Stageable</span><span class="p">(</span><span class="nc">Bool</span><span class="p">())</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ShiftPlugin</span><span class="p">(</span><span class="n">euId</span> <span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="n">staticLatency</span> <span class="p">:</span> <span class="nc">Boolean</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="n">aluStage</span> <span class="p">:</span> <span class="nc">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">extends</span> <span class="nc">ExecutionUnitElementSimple</span><span class="p">(</span><span class="n">euId</span><span class="p">,</span> <span class="n">staticLatency</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">import</span> <span class="nc">ShiftPlugin</span><span class="p">.</span><span class="n">_</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">euWritebackAt</span> <span class="o">=</span> <span class="n">aluStage</span>
+
+  <span class="k">override</span> <span class="kd">val</span> <span class="n">setup</span> <span class="o">=</span> <span class="n">create</span> <span class="n">early</span> <span class="k">new</span> <span class="nc">Setup</span><span class="p">{</span>
+    <span class="k">import</span> <span class="nc">SrcKeys</span><span class="p">.</span><span class="n">_</span>
+
+    <span class="n">add</span><span class="p">(</span><span class="nc">Rvi</span><span class="p">.</span><span class="nc">SLL</span> <span class="p">,</span> <span class="nc">List</span><span class="p">(</span><span class="nc">SRC1</span><span class="p">.</span><span class="nc">RF</span><span class="p">,</span> <span class="nc">SRC2</span><span class="p">.</span><span class="nc">RF</span><span class="p">),</span> <span class="nc">DecodeList</span><span class="p">(</span><span class="nc">LEFT</span> <span class="o">-&gt;</span> <span class="nc">True</span><span class="p">,</span>  <span class="nc">SIGNED</span> <span class="o">-&gt;</span> <span class="nc">False</span><span class="p">))</span>
+    <span class="n">add</span><span class="p">(</span><span class="nc">Rvi</span><span class="p">.</span><span class="nc">SRL</span> <span class="p">,</span> <span class="nc">List</span><span class="p">(</span><span class="nc">SRC1</span><span class="p">.</span><span class="nc">RF</span><span class="p">,</span> <span class="nc">SRC2</span><span class="p">.</span><span class="nc">RF</span><span class="p">),</span> <span class="nc">DecodeList</span><span class="p">(</span><span class="nc">LEFT</span> <span class="o">-&gt;</span> <span class="nc">False</span><span class="p">,</span> <span class="nc">SIGNED</span> <span class="o">-&gt;</span> <span class="nc">False</span><span class="p">))</span>
+    <span class="n">add</span><span class="p">(</span><span class="nc">Rvi</span><span class="p">.</span><span class="nc">SRA</span> <span class="p">,</span> <span class="nc">List</span><span class="p">(</span><span class="nc">SRC1</span><span class="p">.</span><span class="nc">RF</span><span class="p">,</span> <span class="nc">SRC2</span><span class="p">.</span><span class="nc">RF</span><span class="p">),</span> <span class="nc">DecodeList</span><span class="p">(</span><span class="nc">LEFT</span> <span class="o">-&gt;</span> <span class="nc">False</span><span class="p">,</span> <span class="nc">SIGNED</span> <span class="o">-&gt;</span> <span class="nc">True</span><span class="p">))</span>
+    <span class="n">add</span><span class="p">(</span><span class="nc">Rvi</span><span class="p">.</span><span class="nc">SLLI</span><span class="p">,</span> <span class="nc">List</span><span class="p">(</span><span class="nc">SRC1</span><span class="p">.</span><span class="nc">RF</span><span class="p">,</span> <span class="nc">SRC2</span><span class="p">.</span><span class="nc">I</span> <span class="p">),</span> <span class="nc">DecodeList</span><span class="p">(</span><span class="nc">LEFT</span> <span class="o">-&gt;</span> <span class="nc">True</span> <span class="p">,</span> <span class="nc">SIGNED</span> <span class="o">-&gt;</span> <span class="nc">False</span><span class="p">))</span>
+    <span class="n">add</span><span class="p">(</span><span class="nc">Rvi</span><span class="p">.</span><span class="nc">SRLI</span><span class="p">,</span> <span class="nc">List</span><span class="p">(</span><span class="nc">SRC1</span><span class="p">.</span><span class="nc">RF</span><span class="p">,</span> <span class="nc">SRC2</span><span class="p">.</span><span class="nc">I</span> <span class="p">),</span> <span class="nc">DecodeList</span><span class="p">(</span><span class="nc">LEFT</span> <span class="o">-&gt;</span> <span class="nc">False</span><span class="p">,</span> <span class="nc">SIGNED</span> <span class="o">-&gt;</span> <span class="nc">False</span><span class="p">))</span>
+    <span class="n">add</span><span class="p">(</span><span class="nc">Rvi</span><span class="p">.</span><span class="nc">SRAI</span><span class="p">,</span> <span class="nc">List</span><span class="p">(</span><span class="nc">SRC1</span><span class="p">.</span><span class="nc">RF</span><span class="p">,</span> <span class="nc">SRC2</span><span class="p">.</span><span class="nc">I</span> <span class="p">),</span> <span class="nc">DecodeList</span><span class="p">(</span><span class="nc">LEFT</span> <span class="o">-&gt;</span> <span class="nc">False</span><span class="p">,</span> <span class="nc">SIGNED</span> <span class="o">-&gt;</span> <span class="nc">True</span><span class="p">))</span>
+  <span class="p">}</span>
+
+  <span class="k">override</span> <span class="kd">val</span> <span class="n">logic</span> <span class="o">=</span> <span class="n">create</span> <span class="n">late</span> <span class="k">new</span> <span class="nc">Logic</span><span class="p">{</span>
+    <span class="kd">val</span> <span class="n">process</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ExecuteArea</span><span class="p">(</span><span class="n">aluStage</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">import</span> <span class="nn">stage</span><span class="p">.</span><span class="n">_</span>
+      <span class="kd">val</span> <span class="n">ss</span> <span class="o">=</span> <span class="nc">SrcStageables</span>
+
+      <span class="n">assert</span><span class="p">(</span><span class="nc">Global</span><span class="p">.</span><span class="nc">XLEN</span><span class="p">.</span><span class="n">get</span> <span class="o">==</span> <span class="mi">32</span><span class="p">)</span>
+      <span class="kd">val</span> <span class="n">amplitude</span>  <span class="o">=</span> <span class="n">ss</span><span class="p">.</span><span class="nc">SRC2</span><span class="p">(</span><span class="mi">4</span> <span class="n">downto</span> <span class="mi">0</span><span class="p">).</span><span class="n">asUInt</span>
+      <span class="kd">val</span> <span class="n">reversed</span>   <span class="o">=</span> <span class="nc">Mux</span><span class="p">[</span><span class="nc">SInt</span><span class="p">](</span><span class="nc">LEFT</span><span class="p">,</span> <span class="n">ss</span><span class="p">.</span><span class="nc">SRC1</span><span class="p">.</span><span class="n">reversed</span><span class="p">,</span> <span class="n">ss</span><span class="p">.</span><span class="nc">SRC1</span><span class="p">)</span>
+      <span class="kd">val</span> <span class="n">shifted</span> <span class="o">=</span> <span class="p">(</span><span class="nc">S</span><span class="p">((</span><span class="nc">SIGNED</span> <span class="n">&amp;</span> <span class="n">ss</span><span class="p">.</span><span class="nc">SRC1</span><span class="p">.</span><span class="n">msb</span><span class="p">)</span> <span class="o">##</span> <span class="n">reversed</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">amplitude</span><span class="p">).</span><span class="n">resize</span><span class="p">(</span><span class="nc">Global</span><span class="p">.</span><span class="nc">XLEN</span> <span class="n">bits</span><span class="p">)</span>
+      <span class="kd">val</span> <span class="n">patched</span> <span class="o">=</span> <span class="nc">LEFT</span> <span class="o">?</span> <span class="n">shifted</span><span class="p">.</span><span class="n">reversed</span> <span class="o">|</span> <span class="n">shifted</span>
+
+      <span class="n">wb</span><span class="p">.</span><span class="n">payload</span> <span class="o">:=</span> <span class="nc">B</span><span class="p">(</span><span class="n">patched</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -276,7 +827,7 @@ It also enables mixed designs where SpinalHDL components inter-operate with VHDL
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="NaxRiscv/index.html" class="btn btn-neutral float-right" title="About SpinalHDL" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="NaxRiscv/introduction/index.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
