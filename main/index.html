@@ -91,7 +91,11 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="NaxRiscv/introduction/index.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/introduction/naxriscv.html">NaxRiscv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/introduction/naxriscv.html">NaxRiscv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/introduction/naxriscv.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/introduction/naxriscv.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="NaxRiscv/introduction/pipeline.html">Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="NaxRiscv/introduction/hardware_description.html">Hardwared description</a></li>
 </ul>
@@ -107,6 +111,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="NaxRiscv/execution_units/index.html">Execution units</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="NaxRiscv/execution_units/IntAlu.html">Int</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/memory/index.html">Memory system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/memory/Lsu.html">Load store unite</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="NaxRiscv/backend/index.html">Backend</a><ul>
@@ -216,6 +224,10 @@
 <li class="toctree-l2"><a class="reference internal" href="NaxRiscv/execution_units/IntAlu.html">Int</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/memory/index.html">Memory system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/memory/Lsu.html">Load store unite</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="NaxRiscv/backend/index.html">Backend</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="NaxRiscv/backend/commit.html">Commit</a></li>
 </ul>
@@ -244,40 +256,42 @@
 <li><p>Out of order execution</p></li>
 <li><p>Superscalar (ex : 2 decode, 3 execution units, 2 retire)</p></li>
 <li><p>RV32IMASU (Linux and freertos works in simulation)</p></li>
-<li><p>Portable HDL, but target FPGA with distributed ram (Xilinx series 7
-is the reference used so far)</p></li>
+<li><p>Portable HDL, but target FPGA with distributed ram (Xilinx series 7 is the reference used so far)</p></li>
 <li><p>Target a (relatively) low area usage and high fmax (not the best IPC)</p></li>
-<li><p>Decentralized hardware elaboration (Empty toplevel parametrized with
-plugins)</p></li>
-<li><p>Frontend implemented around a pipelining framework to ease
-customisation</p></li>
+<li><p>Decentralized hardware elaboration (Empty toplevel parametrized with plugins)</p></li>
+<li><p>Frontend implemented around a pipelining framework to ease customisation</p></li>
 <li><p>Non-blocking Data cache with multiple refill and writeback slots</p></li>
 <li><p>BTB + GSHARE + RAS branch predictors</p></li>
 <li><p>Hardware refilled MMU</p></li>
-<li><p>Load to use latency of 3 cycles via the speculative cache hit
-predictor</p></li>
-<li><p>Pipeline visualisation via verilator simulation and Konata (gem5 file
-format)</p></li>
+<li><p>Load to use latency of 3 cycles via the speculative cache hit predictor</p></li>
+<li><p>Pipeline visualisation via verilator simulation and Konata (gem5 file format)</p></li>
 </ul>
 <p>To test the project, see the “Running Verilator simulation” section</p>
 </div>
 <div class="section" id="performance-area">
 <h1>Performance / Area<a class="headerlink" href="#performance-area" title="Permalink to this headline">¶</a></h1>
-<p>A few things to keep in mind : - it is still WIP - You can trade FMax
-IPC Area - There is better IPC nor FMAX nor Area configs</p>
-<p>For the following configuration : - RV32IMASU, dual issue,OoO, linux
-compatible - 64 bits fetch, 2 decode, 2 issue, 2 retire - Shared issue
-queue with 32 entries - 2 execution unit (1*Int/Shift,
-1*Branch/load/store/mul/div/csr/env) - LSU with 16 load queue, 16 store
-queue - Load hit predictor (3 cycles load to use delay) - Store to load
-bypass / hazard free predictor - I$ 16KB/4W, D$ 16KB/4W 2 refill 2
-writeback slots - MMU with ITLB 6 way/192 entries, DTLB 6 way/192
-entries - BTB 1 way/512 entries, GSHARE 1 way/4KB, RAS 32 entries</p>
-<p>Performance : - Dhrystone : 2.51 DMIPS/Mhz (-O3 -fno-common -fno-inline)
-- Coremark : 4.13 Coremark/Mhz (-O3 and so many more random flags) -
-Embench-iot : 1.33 baseline (-O2 -ffunction-sections)</p>
-<p>On Artix 7 speed grade 3 : - 13.0 KLUT, 9.3 KFF, 13 BRAM, 4 DSP - 143
-Mhz</p>
+<p>A few things to keep in mind :
+- it is still WIP
+- You can trade FMax IPC Area
+- There is better IPC nor FMAX nor Area configs</p>
+<p>For the following configuration :
+- RV32IMASU, dual issue,OoO, linux compatible
+- 64 bits fetch, 2 decode, 2 issue, 2 retire
+- Shared issue queue with 32 entries
+- 2 execution unit (1*Int/Shift, 1*Branch/load/store/mul/div/csr/env)
+- LSU with 16 load queue, 16 store queue
+- Load hit predictor (3 cycles load to use delay)
+- Store to load bypass / hazard free predictor
+- I$ 16KB/4W, D$ 16KB/4W 2 refill 2 writeback slots
+- MMU with ITLB 6 way/192 entries, DTLB 6 way/192 entries
+- BTB 1 way/512 entries, GSHARE 1 way/4KB, RAS 32 entries</p>
+<p>Performance :
+- Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
+- Coremark    : 4.22 Coremark/Mhz (-O3 and so many more random flags)
+- Embench-iot : 1.33 baseline     (-O2 -ffunction-sections)</p>
+<p>On Artix 7 speed grade 3 :
+- 13.1 KLUT, 9.3 KFF, 13 BRAM, 4 DSP
+- 145 Mhz</p>
 </div>
 <div class="section" id="running-verilator-simulation">
 <h1>Running Verilator simulation<a class="headerlink" href="#running-verilator-simulation" title="Permalink to this headline">¶</a></h1>

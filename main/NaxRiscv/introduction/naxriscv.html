@@ -92,7 +92,11 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Introduction</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">NaxRiscv</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">NaxRiscv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hardware_description.html">Hardwared description</a></li>
 </ul>
@@ -108,6 +112,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../execution_units/IntAlu.html">Int</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">Memory system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../memory/Lsu.html">Load store unite</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
@@ -200,6 +208,45 @@
             
   <div class="section" id="naxriscv">
 <h1>NaxRiscv<a class="headerlink" href="#naxriscv" title="Permalink to this headline">¶</a></h1>
+<p>NaxRiscv is a core currently characterised by :</p>
+<ul class="simple">
+<li><p>Out of order execution with register renaming</p></li>
+<li><p>Superscalar (ex : 2 decode, 3 execution units, 2 retire)</p></li>
+<li><p>RV32IMASU (Linux and freertos works in simulation)</p></li>
+<li><p>Portable HDL, but target FPGA with distributed ram (Xilinx series 7 is the reference used so far)</p></li>
+<li><p>Target a (relatively) low area usage and high fmax (not the best IPC)</p></li>
+<li><p>Decentralized hardware elaboration (Empty toplevel parametrized with plugins)</p></li>
+<li><p>Frontend implemented around a pipelining framework to ease customisation</p></li>
+<li><p>Non-blocking Data cache with multiple refill and writeback slots</p></li>
+<li><p>BTB + GSHARE + RAS branch predictors</p></li>
+<li><p>Hardware refilled MMU</p></li>
+<li><p>Load to use latency of 3 cycles via the speculative cache hit predictor</p></li>
+<li><p>Pipeline visualisation via verilator simulation and Konata (gem5 file format)</p></li>
+</ul>
+<div class="section" id="project-developpement-and-status">
+<h2>Project developpement and status<a class="headerlink" href="#project-developpement-and-status" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This project is free and open source</p></li>
+<li><p>It can run upstream buildroot/linux on hardware (ArtyA7-35T / Litex)</p></li>
+<li><p>It started in October 2021 without any funding</p></li>
+<li><p>Currently looking for funding to implement more features (RV64, FPU, SMP, …)</p></li>
+<li><p>Unfortunately the project started with a single crew (not by wish), contribution are welcome.</p></li>
+</ul>
+</div>
+<div class="section" id="why-a-ooo-core-targeting-fpga">
+<h2>Why a OoO core targeting FPGA<a class="headerlink" href="#why-a-ooo-core-targeting-fpga" title="Permalink to this headline">¶</a></h2>
+<p>There is a few reasons</p>
+<ul class="simple">
+<li><p>Improving single threaded performance.
+During the tests made with VexRiscv running linux, it was clear that even if the can multi core help, “most” applications aren’t made to take advantage of it.</p></li>
+<li><p>Hiding the memory latency (There isn’t much memory to have a big L2 cache on FPGA)</p></li>
+<li><p>To experiment with more advanced hardware description paradigms (scala / SpinalHDL)</p></li>
+<li><p>By personnal interest</p></li>
+</ul>
+<p>Also there wasn’t many OoO opensource softcore out there in the wild (Marocchino, RSD, OPA, ..).
+The bet was that it was possible to do better in some metrics, and hopfully being good enough to justify in some project
+the replacement of single issue / in order core softcore by providing better performances (at the cost of area).</p>
+</div>
 </div>
 
     <script type="text/javascript">
