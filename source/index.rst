@@ -11,6 +11,7 @@
    NaxRiscv/fetch/index
    NaxRiscv/frontend/index
    NaxRiscv/execution_units/index
+   NaxRiscv/memory/index
    NaxRiscv/backend/index
    NaxRiscv/simulation/index
    NaxRiscv/performance/index
@@ -24,44 +25,47 @@ An RISC-V core currently characterised by :
 -  Out of order execution
 -  Superscalar (ex : 2 decode, 3 execution units, 2 retire)
 -  RV32IMASU (Linux and freertos works in simulation)
--  Portable HDL, but target FPGA with distributed ram (Xilinx series 7
-   is the reference used so far)
+-  Portable HDL, but target FPGA with distributed ram (Xilinx series 7 is the reference used so far)
 -  Target a (relatively) low area usage and high fmax (not the best IPC)
--  Decentralized hardware elaboration (Empty toplevel parametrized with
-   plugins)
--  Frontend implemented around a pipelining framework to ease
-   customisation
+-  Decentralized hardware elaboration (Empty toplevel parametrized with plugins)
+-  Frontend implemented around a pipelining framework to ease customisation
 -  Non-blocking Data cache with multiple refill and writeback slots
 -  BTB + GSHARE + RAS branch predictors
 -  Hardware refilled MMU
--  Load to use latency of 3 cycles via the speculative cache hit
-   predictor
--  Pipeline visualisation via verilator simulation and Konata (gem5 file
-   format)
+-  Load to use latency of 3 cycles via the speculative cache hit predictor
+-  Pipeline visualisation via verilator simulation and Konata (gem5 file format)
 
 To test the project, see the “Running Verilator simulation” section
 
 Performance / Area
 ==================
 
-A few things to keep in mind : - it is still WIP - You can trade FMax
-IPC Area - There is better IPC nor FMAX nor Area configs
+A few things to keep in mind : 
+- it is still WIP
+- You can trade FMax IPC Area
+- There is better IPC nor FMAX nor Area configs  
 
-For the following configuration : - RV32IMASU, dual issue,OoO, linux
-compatible - 64 bits fetch, 2 decode, 2 issue, 2 retire - Shared issue
-queue with 32 entries - 2 execution unit (1*Int/Shift,
-1*Branch/load/store/mul/div/csr/env) - LSU with 16 load queue, 16 store
-queue - Load hit predictor (3 cycles load to use delay) - Store to load
-bypass / hazard free predictor - I$ 16KB/4W, D$ 16KB/4W 2 refill 2
-writeback slots - MMU with ITLB 6 way/192 entries, DTLB 6 way/192
-entries - BTB 1 way/512 entries, GSHARE 1 way/4KB, RAS 32 entries
+For the following configuration : 
+- RV32IMASU, dual issue,OoO, linux compatible
+- 64 bits fetch, 2 decode, 2 issue, 2 retire
+- Shared issue queue with 32 entries
+- 2 execution unit (1\*Int/Shift, 1\*Branch/load/store/mul/div/csr/env)
+- LSU with 16 load queue, 16 store queue
+- Load hit predictor (3 cycles load to use delay)
+- Store to load bypass / hazard free predictor
+- I$ 16KB/4W, D$ 16KB/4W 2 refill 2 writeback slots
+- MMU with ITLB 6 way/192 entries, DTLB 6 way/192 entries
+- BTB 1 way/512 entries, GSHARE 1 way/4KB, RAS 32 entries
 
-Performance : - Dhrystone : 2.51 DMIPS/Mhz (-O3 -fno-common -fno-inline)
-- Coremark : 4.13 Coremark/Mhz (-O3 and so many more random flags) -
-Embench-iot : 1.33 baseline (-O2 -ffunction-sections)
+Performance : 
+- Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
+- Coremark    : 4.22 Coremark/Mhz (-O3 and so many more random flags)
+- Embench-iot : 1.33 baseline     (-O2 -ffunction-sections)
 
-On Artix 7 speed grade 3 : - 13.0 KLUT, 9.3 KFF, 13 BRAM, 4 DSP - 143
-Mhz
+On Artix 7 speed grade 3 :
+- 13.1 KLUT, 9.3 KFF, 13 BRAM, 4 DSP
+- 145 Mhz
+
 
 Running Verilator simulation
 ============================
