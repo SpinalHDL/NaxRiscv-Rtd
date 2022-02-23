@@ -2,10 +2,10 @@
 Simulation
 ===============
 
-.. toctree::
-   debug
-   lockstep
-   konata
+
+.. include::   debug.rst
+.. include::   lockstep.rst
+.. include::   konata.rst
 
 .. role:: raw-html-m2r(raw)
    :format: html
