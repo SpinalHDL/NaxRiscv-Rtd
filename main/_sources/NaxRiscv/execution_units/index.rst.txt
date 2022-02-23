@@ -2,8 +2,7 @@
 Execution units
 ===============
 
-.. toctree::
-   IntAlu
+.. include::  IntAlu.rst
 
 .. role:: raw-html-m2r(raw)
    :format: html

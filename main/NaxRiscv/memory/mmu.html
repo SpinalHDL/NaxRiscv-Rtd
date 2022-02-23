@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Load store unite &mdash; NaxRiscv  documentation</title>
+  <title>MMU &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -43,9 +43,7 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Backend" href="../backend/index.html" />
-    <link rel="prev" title="Memory system" href="index.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,51 +88,53 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../introduction/naxriscv.html">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/naxriscv.html#project-developpement-and-status">Project developpement and status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/naxriscv.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../introduction/pipeline.html">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../introduction/hardware_description.html">Hardwared description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#pipeline">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#hardwared-description">Hardwared description</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fetch/index.html">Fetch</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../fetch/pc.html">PC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../fetch/fetchCache.html">I$</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fetch/index.html#pc">PC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fetch/index.html#i">I$</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../frontend/index.html">Frontend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../frontend/Decoder.html">Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#decoder">Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#dispatch-issue">Dispatch / Issue</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../execution_units/IntAlu.html">Int</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../execution_units/index.html#int">Int</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Memory system</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Load store unite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Memory system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#load-store-unite">Load store unite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mmu">MMU</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../backend/commit.html">Commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#commit">Commit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation/index.html">Simulation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../simulation/debug.html">Debug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../simulation/lockstep.html">Lock-step</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../simulation/konata.html">Konata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#debug">Debug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#lock-step">Lock-step</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#konata">Konata</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../performance/index.html">Performance</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../framework/index.html">Framework</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../framework/framework.html">Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../framework/plugin.html">Plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../framework/pipeline.html">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html#id1">Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html#plugin">Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html#pipeline">Pipeline</a></li>
 </ul>
 </li>
 </ul>
@@ -185,15 +185,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="index.html">Memory system</a> &raquo;</li>
-        
-      <li>Load store unite</li>
+      <li>MMU</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/NaxRiscv/memory/Lsu.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/NaxRiscv/memory/mmu.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -206,9 +204,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="load-store-unite">
-<h1>Load store unite<a class="headerlink" href="#load-store-unite" title="Permalink to this headline">¶</a></h1>
-<img alt="../../_images/load_pipeline.svg" src="../../_images/load_pipeline.svg" /><img alt="../../_images/store_pipeline.svg" src="../../_images/store_pipeline.svg" /></div>
+  <div class="section" id="mmu">
+<h1>MMU<a class="headerlink" href="#mmu" title="Permalink to this headline">¶</a></h1>
+<p>The MMU implementation is characterised by :</p>
+<ul class="simple">
+<li><p><strong>2D organisation</strong> : For each level of the pages table a parameterable number of direct mapped ways of translation cache can be specified.</p></li>
+<li><p><strong>Hardware refilled</strong> : Because that’s cheap</p></li>
+<li><p><strong>Caches direct hit</strong> : Allows the instruction cache to check his way tags directly against the MMU TLB storage in order to improve timings (at the cost of area)</p></li>
+</ul>
+<p>For RV32, the default configuration is to have :
+- 4 ways * 64 entries of level 0 (4KB pages) TLB
+- 2 ways * 64 entries of level 1 (4MB pages) TLB</p>
+<p>The area of the TLB cache is keept low by inferring each way into a distributed ram.</p>
+<p>Here is a few illustrations of the MMU design</p>
+<img alt="../../_images/mmu_general.png" src="../../_images/mmu_general.png" />
+<img alt="../../_images/mmu_translation.png" src="../../_images/mmu_translation.png" />
+</div>
 
     <script type="text/javascript">
         function init() {
@@ -221,10 +232,6 @@
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../backend/index.html" class="btn btn-neutral float-right" title="Backend" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="index.html" class="btn btn-neutral float-left" title="Memory system" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 
@@ -260,7 +267,7 @@
   <div class="rst-other-versions">
     <dl>
       <dt>Branches</dt>
-      <dd><a href="Lsu.html">main</a></dd>
+      <dd><a href="mmu.html">main</a></dd>
     </dl>
   </div>
 </div>

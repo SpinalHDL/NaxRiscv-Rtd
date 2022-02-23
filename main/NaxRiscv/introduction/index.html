@@ -44,7 +44,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="NaxRiscv" href="naxriscv.html" />
+    <link rel="next" title="Fetch" href="../fetch/index.html" />
     <link rel="prev" title="NaxRiscv" href="../../index.html" /> 
 </head>
 
@@ -92,49 +92,51 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="naxriscv.html">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="naxriscv.html#project-developpement-and-status">Project developpement and status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="naxriscv.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#naxriscv">NaxRiscv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hardware_description.html">Hardwared description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pipeline">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardwared-description">Hardwared description</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fetch/index.html">Fetch</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../fetch/pc.html">PC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../fetch/fetchCache.html">I$</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fetch/index.html#pc">PC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fetch/index.html#i">I$</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../frontend/index.html">Frontend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../frontend/Decoder.html">Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#decoder">Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#dispatch-issue">Dispatch / Issue</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../execution_units/IntAlu.html">Int</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../execution_units/index.html#int">Int</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../memory/index.html">Memory system</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../memory/Lsu.html">Load store unite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/index.html#load-store-unite">Load store unite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/index.html#mmu">MMU</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../backend/commit.html">Commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#commit">Commit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation/index.html">Simulation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../simulation/debug.html">Debug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../simulation/lockstep.html">Lock-step</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../simulation/konata.html">Konata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#debug">Debug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#lock-step">Lock-step</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#konata">Konata</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../performance/index.html">Performance</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../framework/index.html">Framework</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../framework/framework.html">Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../framework/plugin.html">Plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../framework/pipeline.html">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html#id1">Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html#plugin">Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html#pipeline">Pipeline</a></li>
 </ul>
 </li>
 </ul>
@@ -206,16 +208,70 @@
             
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="naxriscv.html">NaxRiscv</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="naxriscv.html#project-developpement-and-status">Project developpement and status</a></li>
-<li class="toctree-l2"><a class="reference internal" href="naxriscv.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
+<div class="section" id="naxriscv">
+<h2>NaxRiscv<a class="headerlink" href="#naxriscv" title="Permalink to this headline">¶</a></h2>
+<p>NaxRiscv is a core currently characterised by :</p>
+<ul class="simple">
+<li><p>Out of order execution with register renaming</p></li>
+<li><p>Superscalar (ex : 2 decode, 3 execution units, 2 retire)</p></li>
+<li><p>RV32IMASU (Linux and freertos works in simulation)</p></li>
+<li><p>Portable HDL, but target FPGA with distributed ram (Xilinx series 7 is the reference used so far)</p></li>
+<li><p>Target a (relatively) low area usage and high fmax (not the best IPC)</p></li>
+<li><p>Decentralized hardware elaboration (Empty toplevel parametrized with plugins)</p></li>
+<li><p>Frontend implemented around a pipelining framework to ease customisation</p></li>
+<li><p>Non-blocking Data cache with multiple refill and writeback slots</p></li>
+<li><p>BTB + GSHARE + RAS branch predictors</p></li>
+<li><p>Hardware refilled MMU</p></li>
+<li><p>Load to use latency of 3 cycles via the speculative cache hit predictor</p></li>
+<li><p>Pipeline visualisation via verilator simulation and Konata (gem5 file format)</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hardware_description.html">Hardwared description</a></li>
+<div class="section" id="project-developpement-and-status">
+<h3>Project developpement and status<a class="headerlink" href="#project-developpement-and-status" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>This project is free and open source</p></li>
+<li><p>It can run upstream buildroot/linux on hardware (ArtyA7-35T / Litex)</p></li>
+<li><p>It started in October 2021 without any funding</p></li>
+<li><p>Currently looking for funding to implement more features (RV64, FPU, SMP, …)</p></li>
+<li><p>Unfortunately the project started with a single crew (not by wish), contribution are welcome.</p></li>
 </ul>
+</div>
+<div class="section" id="why-a-ooo-core-targeting-fpga">
+<h3>Why a OoO core targeting FPGA<a class="headerlink" href="#why-a-ooo-core-targeting-fpga" title="Permalink to this headline">¶</a></h3>
+<p>There is a few reasons</p>
+<ul class="simple">
+<li><p>Improving single threaded performance.
+During the tests made with VexRiscv running linux, it was clear that even if the can multi core help, “most” applications aren’t made to take advantage of it.</p></li>
+<li><p>Hiding the memory latency (There isn’t much memory to have a big L2 cache on FPGA)</p></li>
+<li><p>To experiment with more advanced hardware description paradigms (scala / SpinalHDL)</p></li>
+<li><p>By personnal interest</p></li>
+</ul>
+<p>Also there wasn’t many OoO opensource softcore out there in the wild (Marocchino, RSD, OPA, ..).
+The bet was that it was possible to do better in some metrics, and hopfully being good enough to justify in some project
+the replacement of single issue / in order core softcore by providing better performances (at the cost of area).</p>
+</div>
+</div>
+<div class="section" id="pipeline">
+<h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h2>
+<p>NaxRiscv is composed of multiple pipelines :</p>
+<ul class="simple">
+<li><p><strong>Fetch</strong> : Which provide the raw data for a given PC, provide a first level of branch prediction and do the PC memory translation</p></li>
+<li><p><strong>Frontend</strong> : Which align, decode the fetch raw data, provide a second level of branch prediction, then allocates and rename the ressources required for the instruction</p></li>
+<li><p><strong>Execution units</strong> : Which get the ressources required for a given instruction (ex RF, PC, ..), execute it, write its result back and notify completion.</p></li>
+<li><p><strong>LSU load</strong> : Which read the data cache, translate the memory address, check for older store depedencies and eventualy bypass a store value.</p></li>
+<li><p><strong>LSU store</strong> : Which translate the memory address and check for younger load having notified completion while having a depedency with the given store</p></li>
+<li><p><strong>LSU writeback</strong> : Which will write commited store into the data cache</p></li>
+</ul>
+<p>But it should also be noticed that there is a few state machines :</p>
+<ul class="simple">
+<li><p><strong>LSU Atomic</strong> : Which sequencialy execute SC/AMO operations once they are the next in line for commit.</p></li>
+<li><p><strong>MMU refill</strong> : Which walk the page tables to refill the TLB</p></li>
+<li><p><strong>Privileged</strong> : Which will check and update the CSR required for trap and privilege switches (mret, sret)</p></li>
+</ul>
+<p>Here is a general architectural diagram :</p>
+<img alt="../../_images/pipeline_simple.png" src="../../_images/pipeline_simple.png" />
+</div>
+<div class="section" id="hardwared-description">
+<h2>Hardwared description<a class="headerlink" href="#hardwared-description" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -231,7 +287,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="naxriscv.html" class="btn btn-neutral float-right" title="NaxRiscv" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../fetch/index.html" class="btn btn-neutral float-right" title="Fetch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="../../index.html" class="btn btn-neutral float-left" title="NaxRiscv" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

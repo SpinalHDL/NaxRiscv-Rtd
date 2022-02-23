@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Pipeline &mdash; NaxRiscv  documentation</title>
+  <title>Dispatch / Issue &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -104,9 +104,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../fetch/index.html#i">I$</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../frontend/index.html">Frontend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#decoder">Decoder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#dispatch-issue">Dispatch / Issue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Frontend</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#decoder">Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#dispatch-issue">Dispatch / Issue</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a><ul>
@@ -131,10 +131,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../performance/index.html">Performance</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Framework</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#id1">Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#plugin">Plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#pipeline">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../framework/index.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html#id1">Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html#plugin">Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html#pipeline">Pipeline</a></li>
 </ul>
 </li>
 </ul>
@@ -185,13 +185,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Pipeline</li>
+      <li>Dispatch / Issue</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/NaxRiscv/framework/pipeline.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/NaxRiscv/frontend/dispatch.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -204,8 +204,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pipeline">
-<h1>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="dispatch-issue">
+<h1>Dispatch / Issue<a class="headerlink" href="#dispatch-issue" title="Permalink to this headline">¶</a></h1>
+<p>Here is a few specific points about the current implementation :</p>
+<ul class="simple">
+<li><p><strong>Unified design</strong> : Mostly to save area / having the most usage of each entries</p></li>
+<li><p><strong>2D queue</strong> : The entries arranged in C=decodeCount columns L=slotCount/decodeCount rows</p></li>
+<li><p><strong>Row push</strong> : When something is pushed in the queue, a whole row is “consumed”, even if the row isn’t fully used</p></li>
+<li><p><strong>No compression</strong> : There is no compression for empty rows. The while queue is shifted by one row on each push. It allows a better inferation of the matrix FF and a smaller/faster ROB ID wake logic.</p></li>
+<li><p><strong>Matrix based</strong> : The storage of which instruction depend on what is done as a half matrix</p></li>
+<li><p><strong>Older first</strong> : If multiple instruction can be dispatched at once on a given execution unit, the older one is selected</p></li>
+<li><p><strong>Wake by ROB ID</strong> : For dynamic wakes, the ROB ID is used as identifier (not the physical register file ID)</p></li>
+</ul>
+<p>So, overall, a 32 slots queue seems a limite to not go beyond to preserve the timings. Also, with the current design, the area occupancy of the queue doesn’t seems to be a big deal compared to the CPU as a whole.</p>
+<p>Here are a few illustrations :</p>
+<img alt="../../_images/iq_push_pop.png" src="../../_images/iq_push_pop.png" />
+<img alt="../../_images/iq_wake_logic_nc.png" src="../../_images/iq_wake_logic_nc.png" />
+<img alt="../../_images/iq_wake_logic_storage.png" src="../../_images/iq_wake_logic_storage.png" />
+<img alt="../../_images/iq_issue_logic.png" src="../../_images/iq_issue_logic.png" />
 </div>
 
     <script type="text/javascript">
@@ -254,7 +270,7 @@
   <div class="rst-other-versions">
     <dl>
       <dt>Branches</dt>
-      <dd><a href="pipeline.html">main</a></dd>
+      <dd><a href="dispatch.html">main</a></dd>
     </dl>
   </div>
 </div>

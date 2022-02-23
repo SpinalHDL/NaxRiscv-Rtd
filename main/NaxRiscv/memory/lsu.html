@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Pipeline &mdash; NaxRiscv  documentation</title>
+  <title>Load store unite &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -113,9 +113,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../execution_units/index.html#int">Int</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">Memory system</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../memory/index.html#load-store-unite">Load store unite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../memory/index.html#mmu">MMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Memory system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#load-store-unite">Load store unite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mmu">MMU</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
@@ -131,10 +131,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../performance/index.html">Performance</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Framework</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#id1">Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#plugin">Plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#pipeline">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../framework/index.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html#id1">Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html#plugin">Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html#pipeline">Pipeline</a></li>
 </ul>
 </li>
 </ul>
@@ -185,13 +185,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Pipeline</li>
+      <li>Load store unite</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/NaxRiscv/framework/pipeline.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/NaxRiscv/memory/lsu.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -204,8 +204,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pipeline">
-<h1>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="load-store-unite">
+<h1>Load store unite<a class="headerlink" href="#load-store-unite" title="Permalink to this headline">¶</a></h1>
+<p>The LSU implementation is characterised by :</p>
+<ul class="simple">
+<li><p><strong>LQ / SQ</strong> : Usualy, 16 of each</p></li>
+<li><p><strong>Store Address / Data</strong> : For store, only the address is provided through the issue queue / AGU, while there is some logic from the SQ to fetch the store value directly from the register file.</p></li>
+<li><p><strong>Load Hit speculation</strong> : In order to reduce the load to use latency (to 3 cycles instead of 6), there is a cache hit predictor, speculatively waking up depending instructions</p></li>
+<li><p><strong>Load from AGU</strong> : To reduce the load latency, if the LQ has nothing for the load pipeline, then the AGU can directly provide its fresh calculation without passing by the LQ registers</p></li>
+<li><p><strong>Store to load bypass</strong> : If a given load depend on a single store of the same size, then the load pipeline may bypass the store value instead of waiting for the store writeback</p></li>
+<li><p><strong>Parallel memory translation</strong> : For loads, to reduce the latency, the memory translation run in parallel of the cache read.</p></li>
+</ul>
+<p>Here is a few illustrations of the load and store pipeline :</p>
+<img alt="../../_images/load_pipeline.png" src="../../_images/load_pipeline.png" />
+<img alt="../../_images/store_pipeline.png" src="../../_images/store_pipeline.png" />
 </div>
 
     <script type="text/javascript">
@@ -254,7 +266,7 @@
   <div class="rst-other-versions">
     <dl>
       <dt>Branches</dt>
-      <dd><a href="pipeline.html">main</a></dd>
+      <dd><a href="lsu.html">main</a></dd>
     </dl>
   </div>
 </div>
