@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Commit &mdash; NaxRiscv  documentation</title>
+  <title>Physical register allocation &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -99,12 +99,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#hardwared-description">Hardwared description</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../frontend/index.html">Frontend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#decoder">Decoder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#physical-register-allocation">Physical register allocation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#architectural-to-physical">Architectural to physical</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#physical-to-rob-id">Physical to ROB ID</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#dispatch-issue">Dispatch / Issue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Frontend</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#decoder">Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#physical-register-allocation">Physical register allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#architectural-to-physical">Architectural to physical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#physical-to-rob-id">Physical to ROB ID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#dispatch-issue">Dispatch / Issue</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a><ul>
@@ -122,8 +122,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../branch_prediction/index.html#jump-branch-circular-buffer">Jump/branch circular buffer</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Backend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#commit">Commit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#commit">Commit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation/index.html">Simulation</a><ul>
@@ -189,13 +189,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Commit</li>
+      <li>Physical register allocation</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/NaxRiscv/backend/commit.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/NaxRiscv/frontend/allocation_rename.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -208,8 +208,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="commit">
-<h1>Commit<a class="headerlink" href="#commit" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="physical-register-allocation">
+<h1>Physical register allocation<a class="headerlink" href="#physical-register-allocation" title="Permalink to this headline">¶</a></h1>
+<p>This is done by implementing a circular buffer containing the indexes of unallocated physical register. This fit well in FPGA with distributed ram.</p>
+</div>
+<div class="section" id="architectural-to-physical">
+<h1>Architectural to physical<a class="headerlink" href="#architectural-to-physical" title="Permalink to this headline">¶</a></h1>
+<p>The translation from architectural register file to physical is done by implementing three tables :</p>
+<ul class="simple">
+<li><p><strong>Speculative mapping</strong> : Translate from architectural to physical, updated after the instruction decoding, implemented in distributed ram</p></li>
+<li><p><strong>Commited mapping</strong> : Translate from architectural to physical, updated after the instruction commit, implemented in distributed ram</p></li>
+<li><p><strong>Location</strong> : Translate from architectural to which mapping should be used (speculative or commited), implemented as register (need to be cleared on branch missprediction)</p></li>
+</ul>
+<p>This allows to revert the state of the translation instantly when the pipeline did a wrong branch prediction.</p>
+<img alt="../../_images/rf_translation.png" src="../../_images/rf_translation.png" />
+</div>
+<div class="section" id="physical-to-rob-id">
+<h1>Physical to ROB ID<a class="headerlink" href="#physical-to-rob-id" title="Permalink to this headline">¶</a></h1>
+<p>Once the physical register file of the depedencies is calculated, they are translated into the ROB ID on which it depends. This is done by two things :</p>
+<ul class="simple">
+<li><p><strong>ROB Mapping</strong> : A distributed ram which translate from physical to ROB ID</p></li>
+<li><p><strong>Busy</strong> : Which specify if the given ROB ID is still executing. It is set when a instruction is dispatched, cleared when the a instruction complete.</p></li>
+</ul>
 </div>
 
     <script type="text/javascript">

@@ -45,7 +45,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Execution units" href="../execution_units/index.html" />
-    <link rel="prev" title="Fetch" href="../fetch/index.html" /> 
+    <link rel="prev" title="Introduction" href="../introduction/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -101,13 +101,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#hardwared-description">Hardwared description</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../fetch/index.html">Fetch</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../fetch/index.html#pc">PC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../fetch/index.html#i">I$</a></li>
-</ul>
-</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Frontend</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#decoder">Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#physical-register-allocation">Physical register allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architectural-to-physical">Architectural to physical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#physical-to-rob-id">Physical to ROB ID</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dispatch-issue">Dispatch / Issue</a></li>
 </ul>
 </li>
@@ -216,6 +214,30 @@
 <h1>Frontend<a class="headerlink" href="#frontend" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="decoder">
 <h2>Decoder<a class="headerlink" href="#decoder" title="Permalink to this headline">¶</a></h2>
+<p>Nothing particular.</p>
+</div>
+<div class="section" id="physical-register-allocation">
+<h2>Physical register allocation<a class="headerlink" href="#physical-register-allocation" title="Permalink to this headline">¶</a></h2>
+<p>This is done by implementing a circular buffer containing the indexes of unallocated physical register. This fit well in FPGA with distributed ram.</p>
+</div>
+<div class="section" id="architectural-to-physical">
+<h2>Architectural to physical<a class="headerlink" href="#architectural-to-physical" title="Permalink to this headline">¶</a></h2>
+<p>The translation from architectural register file to physical is done by implementing three tables :</p>
+<ul class="simple">
+<li><p><strong>Speculative mapping</strong> : Translate from architectural to physical, updated after the instruction decoding, implemented in distributed ram</p></li>
+<li><p><strong>Commited mapping</strong> : Translate from architectural to physical, updated after the instruction commit, implemented in distributed ram</p></li>
+<li><p><strong>Location</strong> : Translate from architectural to which mapping should be used (speculative or commited), implemented as register (need to be cleared on branch missprediction)</p></li>
+</ul>
+<p>This allows to revert the state of the translation instantly when the pipeline did a wrong branch prediction.</p>
+<img alt="../../_images/rf_translation.png" src="../../_images/rf_translation.png" />
+</div>
+<div class="section" id="physical-to-rob-id">
+<h2>Physical to ROB ID<a class="headerlink" href="#physical-to-rob-id" title="Permalink to this headline">¶</a></h2>
+<p>Once the physical register file of the depedencies is calculated, they are translated into the ROB ID on which it depends. This is done by two things :</p>
+<ul class="simple">
+<li><p><strong>ROB Mapping</strong> : A distributed ram which translate from physical to ROB ID</p></li>
+<li><p><strong>Busy</strong> : Which specify if the given ROB ID is still executing. It is set when a instruction is dispatched, cleared when the a instruction complete.</p></li>
+</ul>
 </div>
 <div class="section" id="dispatch-issue">
 <h2>Dispatch / Issue<a class="headerlink" href="#dispatch-issue" title="Permalink to this headline">¶</a></h2>
@@ -251,7 +273,7 @@
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="../execution_units/index.html" class="btn btn-neutral float-right" title="Execution units" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../fetch/index.html" class="btn btn-neutral float-left" title="Fetch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../introduction/index.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
@@ -279,19 +301,6 @@
 
   </div>
   
-<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    <span class="fa fa-book"> Other Versions</span>
-    v: main
-    <span class="fa fa-caret-down"></span>
-  </span>
-  <div class="rst-other-versions">
-    <dl>
-      <dt>Branches</dt>
-      <dd><a href="index.html">main</a></dd>
-    </dl>
-  </div>
-</div>
 
   <script type="text/javascript">
       jQuery(function () {
