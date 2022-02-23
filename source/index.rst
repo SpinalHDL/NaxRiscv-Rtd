@@ -37,34 +37,6 @@ An RISC-V core currently characterised by :
 
 To test the project, see the “Running Verilator simulation” section
 
-Performance / Area
-==================
-
-A few things to keep in mind : 
-- it is still WIP
-- You can trade FMax IPC Area
-- There is better IPC nor FMAX nor Area configs  
-
-For the following configuration : 
-- RV32IMASU, dual issue,OoO, linux compatible
-- 64 bits fetch, 2 decode, 2 issue, 2 retire
-- Shared issue queue with 32 entries
-- 2 execution unit (1\*Int/Shift, 1\*Branch/load/store/mul/div/csr/env)
-- LSU with 16 load queue, 16 store queue
-- Load hit predictor (3 cycles load to use delay)
-- Store to load bypass / hazard free predictor
-- I$ 16KB/4W, D$ 16KB/4W 2 refill 2 writeback slots
-- MMU with ITLB 6 way/192 entries, DTLB 6 way/192 entries
-- BTB 1 way/512 entries, GSHARE 1 way/4KB, RAS 32 entries
-
-Performance : 
-- Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
-- Coremark    : 4.22 Coremark/Mhz (-O3 and so many more random flags)
-- Embench-iot : 1.33 baseline     (-O2 -ffunction-sections)
-
-On Artix 7 speed grade 3 :
-- 13.1 KLUT, 9.3 KFF, 13 BRAM, 4 DSP
-- 145 Mhz
 
 
 Running Verilator simulation
