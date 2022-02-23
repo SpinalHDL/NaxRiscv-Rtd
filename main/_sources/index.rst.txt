@@ -12,6 +12,7 @@
    NaxRiscv/frontend/index
    NaxRiscv/execution_units/index
    NaxRiscv/memory/index
+   NaxRiscv/branch_prediction/index
    NaxRiscv/backend/index
    NaxRiscv/simulation/index
    NaxRiscv/performance/index

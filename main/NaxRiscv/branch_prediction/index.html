@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Pipeline &mdash; NaxRiscv  documentation</title>
+  <title>Branch prediction &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -43,7 +43,9 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Backend" href="../backend/index.html" />
+    <link rel="prev" title="Memory system" href="../memory/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,15 +90,15 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="index.html#project-developpement-and-status">Project developpement and status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#pipeline">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#hardwared-description">Hardwared description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#pipeline">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#hardwared-description">Hardwared description</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fetch/index.html">Fetch</a><ul>
@@ -118,10 +120,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../memory/index.html#mmu">MMU</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../branch_prediction/index.html">Branch prediction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../branch_prediction/index.html#fetch-prediction">Fetch prediction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../branch_prediction/index.html#decode-prediction">Decode prediction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../branch_prediction/index.html#jump-branch-circular-buffer">Jump/branch circular buffer</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Branch prediction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#fetch-prediction">Fetch prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#decode-prediction">Decode prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jump-branch-circular-buffer">Jump/branch circular buffer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
@@ -191,13 +193,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Pipeline</li>
+      <li>Branch prediction</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/NaxRiscv/introduction/pipeline.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/NaxRiscv/branch_prediction/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -210,25 +212,49 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pipeline">
-<h1>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h1>
-<p>NaxRiscv is composed of multiple pipelines :</p>
+  <div class="section" id="branch-prediction">
+<h1>Branch prediction<a class="headerlink" href="#branch-prediction" title="Permalink to this headline">¶</a></h1>
+<p>Currently the branch prediction is implemented at two places in the pipeline :</p>
 <ul class="simple">
-<li><p><strong>Fetch</strong> : Which provide the raw data for a given PC, provide a first level of branch prediction and do the PC memory translation</p></li>
-<li><p><strong>Frontend</strong> : Which align, decode the fetch raw data, provide a second level of branch prediction, then allocates and rename the ressources required for the instruction</p></li>
-<li><p><strong>Execution units</strong> : Which get the ressources required for a given instruction (ex RF, PC, ..), execute it, write its result back and notify completion.</p></li>
-<li><p><strong>LSU load</strong> : Which read the data cache, translate the memory address, check for older store depedencies and eventualy bypass a store value.</p></li>
-<li><p><strong>LSU store</strong> : Which translate the memory address and check for younger load having notified completion while having a depedency with the given store</p></li>
-<li><p><strong>LSU writeback</strong> : Which will write commited store into the data cache</p></li>
+<li><p><strong>Fetch prediction</strong> : Which is composed of the BTB and GShare predictors</p></li>
+<li><p><strong>Decode prediction</strong> : Which can use the RAS prediction, and in the case there was no BTB prediction it can do static jumps and gshare branch predictions</p></li>
 </ul>
-<p>But it should also be noticed that there is a few state machines :</p>
+<p>Here is a illustration of the branch prediction pipeline :</p>
+<img alt="../../_images/branch_prediction.png" src="../../_images/branch_prediction.png" />
+<div class="section" id="fetch-prediction">
+<h2>Fetch prediction<a class="headerlink" href="#fetch-prediction" title="Permalink to this headline">¶</a></h2>
+<p>In the fetch stages, the BTB predict a few things for a given fetch word :
+- The target PC
+- The nature of the instruction (if it is a branch of not)
+- Which slice of the word is the last part of the instruction (a slice is 4 byte without RVC, 2 bytes with RVC)</p>
+<p>Using that prediction, and eventualy using the GShare prediction, it will apply a prediction.</p>
+</div>
+<div class="section" id="decode-prediction">
+<h2>Decode prediction<a class="headerlink" href="#decode-prediction" title="Permalink to this headline">¶</a></h2>
+<p>As the instruction is fetched, there is quite a few more informations which can be used to improve the prediction at that stage.</p>
+<p>If the fetch BTB prediction didn’t toke jump/branch then the decode prediction may :</p>
 <ul class="simple">
-<li><p><strong>LSU Atomic</strong> : Which sequencialy execute SC/AMO operations once they are the next in line for commit.</p></li>
-<li><p><strong>MMU refill</strong> : Which walk the page tables to refill the TLB</p></li>
-<li><p><strong>Privileged</strong> : Which will check and update the CSR required for trap and privilege switches (mret, sret)</p></li>
+<li><p>Do nothing</p></li>
+<li><p>Apply static jumps (call, j)</p></li>
+<li><p>Apply branch for which there was a GShare prediction</p></li>
+<li><p>Apply the RAS prediction if the instruction is a return (ret)</p></li>
 </ul>
-<p>Here is a general architectural diagram :</p>
-<img alt="../../_images/pipeline_simple.png" src="../../_images/pipeline_simple.png" />
+<p>If the fetch BTB toke a jump/branch then the decode prediction may :</p>
+<ul class="simple">
+<li><p>Undo the jump/branch if the instruction wasn’t a jump/branch</p></li>
+<li><p>Correct the prediction if the RAS provide another value</p></li>
+<li><p>Assume the prediction target was correct (Calculating the branch target and then comparing it to the predicted PC is too much combinatorial path)</p></li>
+</ul>
+<p>Then the result of the prediction is stored into a jump/branch circular buffer which will later be used by the execute units branch logic for an eventual correction.</p>
+</div>
+<div class="section" id="jump-branch-circular-buffer">
+<h2>Jump/branch circular buffer<a class="headerlink" href="#jump-branch-circular-buffer" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Push</strong> During the decode prediction</p></li>
+<li><p><strong>Read</strong> During the execute units branch execution to eventualy correct a miss predicted branch</p></li>
+<li><p><strong>Pop</strong> After the instruction commit, which also trigger the branch predictors learning</p></li>
+</ul>
+</div>
 </div>
 
     <script type="text/javascript">
@@ -242,6 +268,10 @@
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../backend/index.html" class="btn btn-neutral float-right" title="Backend" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../memory/index.html" class="btn btn-neutral float-left" title="Memory system" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
@@ -277,7 +307,7 @@
   <div class="rst-other-versions">
     <dl>
       <dt>Branches</dt>
-      <dd><a href="pipeline.html">main</a></dd>
+      <dd><a href="index.html">main</a></dd>
     </dl>
   </div>
 </div>
