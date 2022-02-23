@@ -133,7 +133,9 @@
 <li class="toctree-l2"><a class="reference internal" href="NaxRiscv/simulation/index.html#konata">Konata</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/performance/index.html">Performance</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/performance/index.html">Performance and Area</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/performance/index.html#performance">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/performance/index.html#notes">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="NaxRiscv/framework/index.html">Framework</a><ul>
@@ -250,7 +252,9 @@
 <li class="toctree-l2"><a class="reference internal" href="NaxRiscv/simulation/index.html#konata">Konata</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/performance/index.html">Performance</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/performance/index.html">Performance and Area</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/performance/index.html#performance">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/performance/index.html#notes">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="NaxRiscv/framework/index.html">Framework</a><ul>
@@ -279,31 +283,6 @@
 <li><p>Pipeline visualisation via verilator simulation and Konata (gem5 file format)</p></li>
 </ul>
 <p>To test the project, see the “Running Verilator simulation” section</p>
-</div>
-<div class="section" id="performance-area">
-<h1>Performance / Area<a class="headerlink" href="#performance-area" title="Permalink to this headline">¶</a></h1>
-<p>A few things to keep in mind :
-- it is still WIP
-- You can trade FMax IPC Area
-- There is better IPC nor FMAX nor Area configs</p>
-<p>For the following configuration :
-- RV32IMASU, dual issue,OoO, linux compatible
-- 64 bits fetch, 2 decode, 2 issue, 2 retire
-- Shared issue queue with 32 entries
-- 2 execution unit (1*Int/Shift, 1*Branch/load/store/mul/div/csr/env)
-- LSU with 16 load queue, 16 store queue
-- Load hit predictor (3 cycles load to use delay)
-- Store to load bypass / hazard free predictor
-- I$ 16KB/4W, D$ 16KB/4W 2 refill 2 writeback slots
-- MMU with ITLB 6 way/192 entries, DTLB 6 way/192 entries
-- BTB 1 way/512 entries, GSHARE 1 way/4KB, RAS 32 entries</p>
-<p>Performance :
-- Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
-- Coremark    : 4.22 Coremark/Mhz (-O3 and so many more random flags)
-- Embench-iot : 1.33 baseline     (-O2 -ffunction-sections)</p>
-<p>On Artix 7 speed grade 3 :
-- 13.1 KLUT, 9.3 KFF, 13 BRAM, 4 DSP
-- 145 Mhz</p>
 </div>
 <div class="section" id="running-verilator-simulation">
 <h1>Running Verilator simulation<a class="headerlink" href="#running-verilator-simulation" title="Permalink to this headline">¶</a></h1>

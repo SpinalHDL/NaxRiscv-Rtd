@@ -43,3 +43,5 @@ There is a few reasons
 Also there wasn't many OoO opensource softcore out there in the wild (Marocchino, RSD, OPA, ..). 
 The bet was that it was possible to do better in some metrics, and hopfully being good enough to justify in some project
 the replacement of single issue / in order core softcore by providing better performances (at the cost of area).
+
+
