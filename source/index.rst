@@ -8,7 +8,6 @@
    :maxdepth: 2
 
    NaxRiscv/introduction/index
-   NaxRiscv/fetch/index
    NaxRiscv/frontend/index
    NaxRiscv/execution_units/index
    NaxRiscv/memory/index

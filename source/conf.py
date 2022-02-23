@@ -41,7 +41,6 @@ release = ''
 extensions = [
     'sphinx.ext.githubpages',
     'sphinxcontrib.wavedrom',
-    'sphinx_multiversion',
     'sphinx.ext.imgconverter',
 ]
 
