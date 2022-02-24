@@ -11,6 +11,7 @@ The MMU implementation is characterised by :
 - **Caches direct hit** : Allows the instruction cache to check his way tags directly against the MMU TLB storage in order to improve timings (at the cost of area)
 
 For RV32, the default configuration is to have :
+
 - 4 ways * 64 entries of level 0 (4KB pages) TLB
 - 2 ways * 64 entries of level 1 (4MB pages) TLB
 

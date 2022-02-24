@@ -234,9 +234,11 @@
 <li><p><strong>Hardware refilled</strong> : Because that’s cheap</p></li>
 <li><p><strong>Caches direct hit</strong> : Allows the instruction cache to check his way tags directly against the MMU TLB storage in order to improve timings (at the cost of area)</p></li>
 </ul>
-<p>For RV32, the default configuration is to have :
-- 4 ways * 64 entries of level 0 (4KB pages) TLB
-- 2 ways * 64 entries of level 1 (4MB pages) TLB</p>
+<p>For RV32, the default configuration is to have :</p>
+<ul class="simple">
+<li><p>4 ways * 64 entries of level 0 (4KB pages) TLB</p></li>
+<li><p>2 ways * 64 entries of level 1 (4MB pages) TLB</p></li>
+</ul>
 <p>The area of the TLB cache is keept low by inferring each way into a distributed ram.</p>
 <p>Here is a few illustrations of the MMU design</p>
 <img alt="../../_images/mmu_general.png" src="../../_images/mmu_general.png" />
