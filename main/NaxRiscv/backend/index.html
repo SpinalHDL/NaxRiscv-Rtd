@@ -109,10 +109,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#dispatch-issue">Dispatch / Issue</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../execution_units/index.html#int">Int</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../memory/index.html">Memory system</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../memory/index.html#load-store-unite">Load store unite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../memory/index.html#mmu">MMU</a></li>
@@ -126,12 +123,12 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Backend</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#commit">Commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#register-file">Register file</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation/index.html">Simulation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#debug">Debug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#lock-step">Lock-step</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#konata">Konata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#spike">Spike</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../performance/index.html">Performance and Area</a><ul>
@@ -216,6 +213,20 @@
 <h1>Backend<a class="headerlink" href="#backend" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="commit">
 <h2>Commit<a class="headerlink" href="#commit" title="Permalink to this headline">¶</a></h2>
+<p>The commit logic is mostly composed :</p>
+<ul class="simple">
+<li><p><strong>Reschedule status</strong> Which specify the older ROB ID on which a jump / trap is pending.</p></li>
+<li><p><strong>Commit Logic</strong> Which wait for the older instruction completion before commiting it, and eventualy applying some reschedule.</p></li>
+</ul>
+<img alt="../../_images/commit.png" src="../../_images/commit.png" />
+</div>
+<div class="section" id="register-file">
+<h2>Register file<a class="headerlink" href="#register-file" title="Permalink to this headline">¶</a></h2>
+<p>Currently, the register file is infered into simple dual ports distributed ram :</p>
+<ul class="simple">
+<li><p>Multiple write ports are emulated by using xors</p></li>
+<li><p>Multiple read ports are emulated by duplicating the register file</p></li>
+</ul>
 </div>
 </div>
 

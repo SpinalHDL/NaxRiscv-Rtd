@@ -109,10 +109,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#dispatch-issue">Dispatch / Issue</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Execution units</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#int">Int</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Execution units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../memory/index.html">Memory system</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../memory/index.html#load-store-unite">Load store unite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../memory/index.html#mmu">MMU</a></li>
@@ -126,12 +123,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../backend/index.html#commit">Commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#register-file">Register file</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation/index.html">Simulation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#debug">Debug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#lock-step">Lock-step</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#konata">Konata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#spike">Spike</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../performance/index.html">Performance and Area</a><ul>
@@ -214,9 +211,13 @@
             
   <div class="section" id="execution-units">
 <h1>Execution units<a class="headerlink" href="#execution-units" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="int">
-<h2>Int<a class="headerlink" href="#int" title="Permalink to this headline">¶</a></h2>
-</div>
+<p>The main caracteristic of a execution unit is the way in which it will wake up the instruction which depend on it.</p>
+<ul class="simple">
+<li><p><strong>Static wake</strong> : For EU  with fixed latency (no stall), a static wake can be asked to the issue queue. This can reduce the completion-to-use delay by two cycle</p></li>
+<li><p><strong>Dynamic wake</strong> : For EU with variable (which can stall), the EU is responsible to send a wakes commands to the issue queue.</p></li>
+</ul>
+<p>Here is an illustration with two EU (one with static wake, one with dynamic wake) interracting with the issue queue to wake up dependent instructions</p>
+<img alt="../../_images/eu_wakes.png" src="../../_images/eu_wakes.png" />
 </div>
 
     <script type="text/javascript">

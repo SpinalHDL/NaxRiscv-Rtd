@@ -109,10 +109,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#dispatch-issue">Dispatch / Issue</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../execution_units/index.html#int">Int</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../memory/index.html">Memory system</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../memory/index.html#load-store-unite">Load store unite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../memory/index.html#mmu">MMU</a></li>
@@ -126,12 +123,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../backend/index.html#commit">Commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#register-file">Register file</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Simulation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#debug">Debug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lock-step">Lock-step</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#konata">Konata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spike">Spike</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../performance/index.html">Performance and Area</a><ul>
@@ -214,14 +211,19 @@
             
   <div class="section" id="simulation">
 <h1>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="debug">
-<h2>Debug<a class="headerlink" href="#debug" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>You can find some documentation about how to use the simulator directly in <a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md">https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md</a></p>
+<p>Also note that the simulator support Gem5 / Konata traces which can show the execution of instruction through the different stage of the CPU.</p>
+<p>Here is a trace of the NaxRiscv going though a linked list until it find a node with some specific values.</p>
+<img alt="../../_images/konata.png" src="../../_images/konata.png" />
 </div>
-<div class="section" id="lock-step">
-<h2>Lock-step<a class="headerlink" href="#lock-step" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="konata">
-<h2>Konata<a class="headerlink" href="#konata" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="spike">
+<h2>Spike<a class="headerlink" href="#spike" title="Permalink to this headline">¶</a></h2>
+<p>The simulator is running Spike (RISC-V ISA simulator) in parallel to the DUT in a lock-step manner to ensure the DUT isn’t diverging.</p>
+<p>It is done by compiling Spike as a shared object, which is then interfaced in the Verilator simulation.</p>
+<p>See the following git issue for more discution for this usage of Spike :</p>
+<p><a class="reference external" href="https://github.com/riscv-software-src/riscv-isa-sim/issues/911">https://github.com/riscv-software-src/riscv-isa-sim/issues/911</a></p>
 </div>
 </div>
 

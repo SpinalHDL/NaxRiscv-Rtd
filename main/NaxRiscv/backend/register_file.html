@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Lock-step &mdash; NaxRiscv  documentation</title>
+  <title>Register file &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -107,10 +107,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#dispatch-issue">Dispatch / Issue</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../execution_units/index.html#int">Int</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../memory/index.html">Memory system</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../memory/index.html#load-store-unite">Load store unite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../memory/index.html#mmu">MMU</a></li>
@@ -122,14 +119,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../branch_prediction/index.html#jump-branch-circular-buffer">Jump/branch circular buffer</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#commit">Commit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Backend</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#commit">Commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#register-file">Register file</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Simulation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#debug">Debug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#lock-step">Lock-step</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#konata">Konata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../simulation/index.html">Simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html#spike">Spike</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../performance/index.html">Performance and Area</a><ul>
@@ -191,13 +188,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Lock-step</li>
+      <li>Register file</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/NaxRiscv/simulation/lockstep.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/NaxRiscv/backend/register_file.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -210,8 +207,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="lock-step">
-<h1>Lock-step<a class="headerlink" href="#lock-step" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="register-file">
+<h1>Register file<a class="headerlink" href="#register-file" title="Permalink to this headline">¶</a></h1>
+<p>Currently, the register file is infered into simple dual ports distributed ram :</p>
+<ul class="simple">
+<li><p>Multiple write ports are emulated by using xors</p></li>
+<li><p>Multiple read ports are emulated by duplicating the register file</p></li>
+</ul>
 </div>
 
     <script type="text/javascript">
