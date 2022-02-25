@@ -15,7 +15,7 @@
    NaxRiscv/backend/index
    NaxRiscv/simulation/index
    NaxRiscv/performance/index
-   NaxRiscv/framework/index
+   NaxRiscv/abstraction/index
 
 NaxRiscv
 ========
@@ -206,170 +206,170 @@ here is the list of them for one functional CPU :
 
 .. code:: scala
 
-       val plugins = ArrayBuffer[Plugin]()
-       plugins += new DocPlugin()
-       plugins += new MmuPlugin(
-         spec    = MmuSpec.sv32,
-         ioRange = _(31 downto 28) === 0x1
-       )
+   val plugins = ArrayBuffer[Plugin]()
+   plugins += new DocPlugin()
+   plugins += new MmuPlugin(
+	 spec    = MmuSpec.sv32,
+	 ioRange = _(31 downto 28) === 0x1
+   )
 
-       //FETCH
-       plugins += new FetchPlugin()
-       plugins += new PcPlugin()
-       plugins += new FetchCachePlugin(
-         cacheSize = 4096*4,
-         wayCount = 4,
-         injectionAt = 2,
-         memDataWidth = Fetch.FETCH_DATA_WIDTH,
-         reducedBankWidth = false,
-         hitsWithTranslationWays = true,
-         translationStorageParameter = MmuStorageParameter(
-           levels   = List(
-             MmuStorageLevel(
-               id    = 0,
-               ways  = 4,
-               depth = 32
-             ),
-             MmuStorageLevel(
-               id    = 1,
-               ways  = 2,
-               depth = 32
-             )
-           ),
-           priority = 0
-         ),
-         translationPortParameter  = MmuPortParameter(
-           readAt = 0,
-           hitsAt = 1,
-           ctrlAt = 1,
-           rspAt  = 1
-         )
-       )
-       plugins += new AlignerPlugin(inputAt = 2)
+   //FETCH
+   plugins += new FetchPlugin()
+   plugins += new PcPlugin()
+   plugins += new FetchCachePlugin(
+	 cacheSize = 4096*4,
+	 wayCount = 4,
+	 injectionAt = 2,
+	 memDataWidth = Fetch.FETCH_DATA_WIDTH,
+	 reducedBankWidth = false,
+	 hitsWithTranslationWays = true,
+	 translationStorageParameter = MmuStorageParameter(
+	   levels   = List(
+		 MmuStorageLevel(
+		   id    = 0,
+		   ways  = 4,
+		   depth = 32
+		 ),
+		 MmuStorageLevel(
+		   id    = 1,
+		   ways  = 2,
+		   depth = 32
+		 )
+	   ),
+	   priority = 0
+	 ),
+	 translationPortParameter  = MmuPortParameter(
+	   readAt = 0,
+	   hitsAt = 1,
+	   ctrlAt = 1,
+	   rspAt  = 1
+	 )
+   )
+   plugins += new AlignerPlugin(inputAt = 2)
 
-       //FRONTEND
-       plugins += new FrontendPlugin()
-       plugins += new DecompressorPlugin()
-       plugins += new DecoderPlugin()
-       plugins += new RfTranslationPlugin()
-       plugins += new RfDependencyPlugin()
-       plugins += new RfAllocationPlugin(riscv.IntRegFile)
-       plugins += new DispatchPlugin(
-         slotCount = 32
-       )
+   //FRONTEND
+   plugins += new FrontendPlugin()
+   plugins += new DecompressorPlugin()
+   plugins += new DecoderPlugin()
+   plugins += new RfTranslationPlugin()
+   plugins += new RfDependencyPlugin()
+   plugins += new RfAllocationPlugin(riscv.IntRegFile)
+   plugins += new DispatchPlugin(
+	 slotCount = 32
+   )
 
-       //BRANCH PREDICTION
-       plugins += new BranchContextPlugin(
-         branchCount = 16
-       )
-       plugins += new HistoryPlugin(
-         historyFetchBypass = true
-       )
-       plugins += new DecoderPredictionPlugin()
-       plugins += new BtbPlugin(
-         entries = 512,
-         readAt = 0,
-         hitAt = 1,
-         jumpAt = 1
-       )
-       plugins += new GSharePlugin(
-         memBytes = 4 KiB,
-         historyWidth = 24,
-         readAt = 0
-       )
+   //BRANCH PREDICTION
+   plugins += new BranchContextPlugin(
+	 branchCount = 16
+   )
+   plugins += new HistoryPlugin(
+	 historyFetchBypass = true
+   )
+   plugins += new DecoderPredictionPlugin()
+   plugins += new BtbPlugin(
+	 entries = 512,
+	 readAt = 0,
+	 hitAt = 1,
+	 jumpAt = 1
+   )
+   plugins += new GSharePlugin(
+	 memBytes = 4 KiB,
+	 historyWidth = 24,
+	 readAt = 0
+   )
 
-       //LOAD / STORE
-       plugins += new LsuPlugin(
-         lqSize = 16,
-         sqSize = 16,
-         loadToCacheBypass = true,
-         lqToCachePipelined = true,
-         hazardPedictionEntries = 512,
-         hazardPredictionTagWidth = 16,
-         hitPedictionEntries = 1024,
-         translationStorageParameter = MmuStorageParameter(
-           levels   = List(
-             MmuStorageLevel(
-               id    = 0,
-               ways  = 4,
-               depth = 32
-             ),
-             MmuStorageLevel(
-               id    = 1,
-               ways  = 2,
-               depth = 32
-             )
-           ),
-           priority = 1
-         ),
-         loadTranslationParameter  = MmuPortParameter(
-           readAt = 0,
-           hitsAt = 1,
-           ctrlAt = 1,
-           rspAt  = 1
-         ),
-         storeTranslationParameter = MmuPortParameter(
-           readAt = 1,
-           hitsAt = 1,
-           ctrlAt = 1,
-           rspAt  = 1
-         )
-       )
-       plugins += new DataCachePlugin(
-         memDataWidth = 64,
-         cacheSize    = 4096*4,
-         wayCount     = 4,
-         refillCount = 2,
-         writebackCount = 2,
-         tagsReadAsync = true,
-         reducedBankWidth = false,
-         loadRefillCheckEarly = false
-       )
+   //LOAD / STORE
+   plugins += new LsuPlugin(
+	 lqSize = 16,
+	 sqSize = 16,
+	 loadToCacheBypass = true,
+	 lqToCachePipelined = true,
+	 hazardPedictionEntries = 512,
+	 hazardPredictionTagWidth = 16,
+	 hitPedictionEntries = 1024,
+	 translationStorageParameter = MmuStorageParameter(
+	   levels   = List(
+		 MmuStorageLevel(
+		   id    = 0,
+		   ways  = 4,
+		   depth = 32
+		 ),
+		 MmuStorageLevel(
+		   id    = 1,
+		   ways  = 2,
+		   depth = 32
+		 )
+	   ),
+	   priority = 1
+	 ),
+	 loadTranslationParameter  = MmuPortParameter(
+	   readAt = 0,
+	   hitsAt = 1,
+	   ctrlAt = 1,
+	   rspAt  = 1
+	 ),
+	 storeTranslationParameter = MmuPortParameter(
+	   readAt = 1,
+	   hitsAt = 1,
+	   ctrlAt = 1,
+	   rspAt  = 1
+	 )
+   )
+   plugins += new DataCachePlugin(
+	 memDataWidth = 64,
+	 cacheSize    = 4096*4,
+	 wayCount     = 4,
+	 refillCount = 2,
+	 writebackCount = 2,
+	 tagsReadAsync = true,
+	 reducedBankWidth = false,
+	 loadRefillCheckEarly = false
+   )
 
-       //MISC
-       plugins += new RobPlugin(
-         completionWithReg = false
-       )
-       plugins += new CommitPlugin(
-         ptrCommitRetimed = true
-       )
-       plugins += new RegFilePlugin(
-         spec = riscv.IntRegFile,
-         physicalDepth = 64,
-         bankCount = 1
-       )
-       plugins += new CommitDebugFilterPlugin(List(4, 8, 12))
-       plugins += new CsrRamPlugin()
-       plugins += new PrivilegedPlugin(PrivilegedConfig.full)
-       plugins += new PerformanceCounterPlugin(
-         additionalCounterCount = 4,
-         bufferWidth            = 6
-       )
+   //MISC
+   plugins += new RobPlugin(
+	 completionWithReg = false
+   )
+   plugins += new CommitPlugin(
+	 ptrCommitRetimed = true
+   )
+   plugins += new RegFilePlugin(
+	 spec = riscv.IntRegFile,
+	 physicalDepth = 64,
+	 bankCount = 1
+   )
+   plugins += new CommitDebugFilterPlugin(List(4, 8, 12))
+   plugins += new CsrRamPlugin()
+   plugins += new PrivilegedPlugin(PrivilegedConfig.full)
+   plugins += new PerformanceCounterPlugin(
+	 additionalCounterCount = 4,
+	 bufferWidth            = 6
+   )
 
-       //EXECUTION UNITES
-       plugins += new ExecutionUnitBase("EU0")
-       plugins += new SrcPlugin("EU0", earlySrc = true)
-       plugins += new IntAluPlugin("EU0", aluStage = 0)
-       plugins += new ShiftPlugin("EU0" , aluStage = 0)
+   //EXECUTION UNITES
+   plugins += new ExecutionUnitBase("EU0")
+   plugins += new SrcPlugin("EU0", earlySrc = true)
+   plugins += new IntAluPlugin("EU0", aluStage = 0)
+   plugins += new ShiftPlugin("EU0" , aluStage = 0)
 
-       plugins += new ExecutionUnitBase("EU1", writebackCountMax = 1)
-       plugins += new SrcPlugin("EU1", earlySrc = true)
-       plugins += new MulPlugin("EU1", writebackAt = 2, staticLatency = false)
-       plugins += new DivPlugin("EU1", writebackAt = 2)
-       plugins += new BranchPlugin("EU1", writebackAt = 2, staticLatency = false)
-       plugins += new StorePlugin("EU1")
-       plugins += new EnvCallPlugin("EU1")(rescheduleAt = 2)
-       plugins += new CsrAccessPlugin("EU1")(
-         decodeAt = 0,
-         readAt = 1,
-         writeAt = 2,
-         writebackAt = 2,
-         staticLatency = false
-       )
+   plugins += new ExecutionUnitBase("EU1", writebackCountMax = 1)
+   plugins += new SrcPlugin("EU1", earlySrc = true)
+   plugins += new MulPlugin("EU1", writebackAt = 2, staticLatency = false)
+   plugins += new DivPlugin("EU1", writebackAt = 2)
+   plugins += new BranchPlugin("EU1", writebackAt = 2, staticLatency = false)
+   plugins += new StorePlugin("EU1")
+   plugins += new EnvCallPlugin("EU1")(rescheduleAt = 2)
+   plugins += new CsrAccessPlugin("EU1")(
+	 decodeAt = 0,
+	 readAt = 1,
+	 writeAt = 2,
+	 writebackAt = 2,
+	 staticLatency = false
+   )
 
-       plugins += new ExecutionUnitBase("EU2", writebackCountMax = 0)
-       plugins += new SrcPlugin("EU2")
-       plugins += new LoadPlugin("EU2")
+   plugins += new ExecutionUnitBase("EU2", writebackCountMax = 0)
+   plugins += new SrcPlugin("EU2")
+   plugins += new LoadPlugin("EU2")
 
 Each of those plugins may :
 

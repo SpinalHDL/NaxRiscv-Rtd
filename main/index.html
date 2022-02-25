@@ -135,10 +135,21 @@
 <li class="toctree-l2"><a class="reference internal" href="NaxRiscv/performance/index.html#notes">Notes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/framework/index.html">Framework</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/framework/index.html#id1">Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/framework/index.html#plugin">Plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/framework/index.html#pipeline">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/abstraction/index.html">Abstractions / HDL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/abstraction/index.html#framework">Framework</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/abstraction/index.html#plugin-tasks">Plugin tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/abstraction/index.html#service-definition">Service definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/abstraction/index.html#service-implementation">Service implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/abstraction/index.html#service-usage">Service usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/abstraction/index.html#service-pipeline-definition">Service Pipeline definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/abstraction/index.html#service-pipeline-usage">Service Pipeline usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/abstraction/index.html#execution-units">Execution units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NaxRiscv/abstraction/index.html#shiftplugin">ShiftPlugin</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/abstraction/index.html#pipeline">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/abstraction/index.html#state-machine-api">State machine API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/abstraction/index.html#automated-multiport-memory-transformation">Automated multiport memory transformation</a></li>
 </ul>
 </li>
 </ul>
@@ -251,10 +262,11 @@
 <li class="toctree-l2"><a class="reference internal" href="NaxRiscv/performance/index.html#notes">Notes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/framework/index.html">Framework</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/framework/index.html#id1">Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/framework/index.html#plugin">Plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/framework/index.html#pipeline">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NaxRiscv/abstraction/index.html">Abstractions / HDL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/abstraction/index.html#framework">Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/abstraction/index.html#pipeline">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/abstraction/index.html#state-machine-api">State machine API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NaxRiscv/abstraction/index.html#automated-multiport-memory-transformation">Automated multiport memory transformation</a></li>
 </ul>
 </li>
 </ul>
@@ -439,41 +451,41 @@ here is the list of them for one functional CPU :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">plugins</span> <span class="o">=</span> <span class="nc">ArrayBuffer</span><span class="p">[</span><span class="nc">Plugin</span><span class="p">]()</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">DocPlugin</span><span class="p">()</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">MmuPlugin</span><span class="p">(</span>
-  <span class="n">spec</span>    <span class="o">=</span> <span class="nc">MmuSpec</span><span class="p">.</span><span class="n">sv32</span><span class="p">,</span>
-  <span class="n">ioRange</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="mi">31</span> <span class="n">downto</span> <span class="mi">28</span><span class="p">)</span> <span class="o">===</span> <span class="mh">0x1</span>
+      <span class="n">spec</span>    <span class="o">=</span> <span class="nc">MmuSpec</span><span class="p">.</span><span class="n">sv32</span><span class="p">,</span>
+      <span class="n">ioRange</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="mi">31</span> <span class="n">downto</span> <span class="mi">28</span><span class="p">)</span> <span class="o">===</span> <span class="mh">0x1</span>
 <span class="p">)</span>
 
 <span class="c1">//FETCH</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">FetchPlugin</span><span class="p">()</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">PcPlugin</span><span class="p">()</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">FetchCachePlugin</span><span class="p">(</span>
-  <span class="n">cacheSize</span> <span class="o">=</span> <span class="mi">4096</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span>
-  <span class="n">wayCount</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
-  <span class="n">injectionAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="n">memDataWidth</span> <span class="o">=</span> <span class="nc">Fetch</span><span class="p">.</span><span class="nc">FETCH_DATA_WIDTH</span><span class="p">,</span>
-  <span class="n">reducedBankWidth</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="n">hitsWithTranslationWays</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="n">translationStorageParameter</span> <span class="o">=</span> <span class="nc">MmuStorageParameter</span><span class="p">(</span>
-    <span class="n">levels</span>   <span class="o">=</span> <span class="nc">List</span><span class="p">(</span>
-      <span class="nc">MmuStorageLevel</span><span class="p">(</span>
-        <span class="n">id</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="n">ways</span>  <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
-        <span class="n">depth</span> <span class="o">=</span> <span class="mi">32</span>
+      <span class="n">cacheSize</span> <span class="o">=</span> <span class="mi">4096</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span>
+      <span class="n">wayCount</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="n">injectionAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="n">memDataWidth</span> <span class="o">=</span> <span class="nc">Fetch</span><span class="p">.</span><span class="nc">FETCH_DATA_WIDTH</span><span class="p">,</span>
+      <span class="n">reducedBankWidth</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="n">hitsWithTranslationWays</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="n">translationStorageParameter</span> <span class="o">=</span> <span class="nc">MmuStorageParameter</span><span class="p">(</span>
+        <span class="n">levels</span>   <span class="o">=</span> <span class="nc">List</span><span class="p">(</span>
+              <span class="nc">MmuStorageLevel</span><span class="p">(</span>
+                <span class="n">id</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="n">ways</span>  <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="n">depth</span> <span class="o">=</span> <span class="mi">32</span>
+              <span class="p">),</span>
+              <span class="nc">MmuStorageLevel</span><span class="p">(</span>
+                <span class="n">id</span>    <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">ways</span>  <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="n">depth</span> <span class="o">=</span> <span class="mi">32</span>
+              <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">priority</span> <span class="o">=</span> <span class="mi">0</span>
       <span class="p">),</span>
-      <span class="nc">MmuStorageLevel</span><span class="p">(</span>
-        <span class="n">id</span>    <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="n">ways</span>  <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="n">depth</span> <span class="o">=</span> <span class="mi">32</span>
+      <span class="n">translationPortParameter</span>  <span class="o">=</span> <span class="nc">MmuPortParameter</span><span class="p">(</span>
+        <span class="n">readAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">hitsAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">ctrlAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">rspAt</span>  <span class="o">=</span> <span class="mi">1</span>
       <span class="p">)</span>
-    <span class="p">),</span>
-    <span class="n">priority</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="p">),</span>
-  <span class="n">translationPortParameter</span>  <span class="o">=</span> <span class="nc">MmuPortParameter</span><span class="p">(</span>
-    <span class="n">readAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">hitsAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">ctrlAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">rspAt</span>  <span class="o">=</span> <span class="mi">1</span>
-  <span class="p">)</span>
 <span class="p">)</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">AlignerPlugin</span><span class="p">(</span><span class="n">inputAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
 
@@ -485,95 +497,95 @@ here is the list of them for one functional CPU :</p>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">RfDependencyPlugin</span><span class="p">()</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">RfAllocationPlugin</span><span class="p">(</span><span class="n">riscv</span><span class="p">.</span><span class="nc">IntRegFile</span><span class="p">)</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">DispatchPlugin</span><span class="p">(</span>
-  <span class="n">slotCount</span> <span class="o">=</span> <span class="mi">32</span>
+      <span class="n">slotCount</span> <span class="o">=</span> <span class="mi">32</span>
 <span class="p">)</span>
 
 <span class="c1">//BRANCH PREDICTION</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">BranchContextPlugin</span><span class="p">(</span>
-  <span class="n">branchCount</span> <span class="o">=</span> <span class="mi">16</span>
+      <span class="n">branchCount</span> <span class="o">=</span> <span class="mi">16</span>
 <span class="p">)</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">HistoryPlugin</span><span class="p">(</span>
-  <span class="n">historyFetchBypass</span> <span class="o">=</span> <span class="kc">true</span>
+      <span class="n">historyFetchBypass</span> <span class="o">=</span> <span class="kc">true</span>
 <span class="p">)</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">DecoderPredictionPlugin</span><span class="p">()</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">BtbPlugin</span><span class="p">(</span>
-  <span class="n">entries</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
-  <span class="n">readAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="n">hitAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="n">jumpAt</span> <span class="o">=</span> <span class="mi">1</span>
+      <span class="n">entries</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
+      <span class="n">readAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">hitAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="n">jumpAt</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="p">)</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">GSharePlugin</span><span class="p">(</span>
-  <span class="n">memBytes</span> <span class="o">=</span> <span class="mi">4</span> <span class="nc">KiB</span><span class="p">,</span>
-  <span class="n">historyWidth</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span>
-  <span class="n">readAt</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">memBytes</span> <span class="o">=</span> <span class="mi">4</span> <span class="nc">KiB</span><span class="p">,</span>
+      <span class="n">historyWidth</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="n">readAt</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="p">)</span>
 
 <span class="c1">//LOAD / STORE</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">LsuPlugin</span><span class="p">(</span>
-  <span class="n">lqSize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
-  <span class="n">sqSize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
-  <span class="n">loadToCacheBypass</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="n">lqToCachePipelined</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="n">hazardPedictionEntries</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
-  <span class="n">hazardPredictionTagWidth</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
-  <span class="n">hitPedictionEntries</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
-  <span class="n">translationStorageParameter</span> <span class="o">=</span> <span class="nc">MmuStorageParameter</span><span class="p">(</span>
-    <span class="n">levels</span>   <span class="o">=</span> <span class="nc">List</span><span class="p">(</span>
-      <span class="nc">MmuStorageLevel</span><span class="p">(</span>
-        <span class="n">id</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="n">ways</span>  <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
-        <span class="n">depth</span> <span class="o">=</span> <span class="mi">32</span>
+      <span class="n">lqSize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="n">sqSize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="n">loadToCacheBypass</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="n">lqToCachePipelined</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="n">hazardPedictionEntries</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
+      <span class="n">hazardPredictionTagWidth</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="n">hitPedictionEntries</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
+      <span class="n">translationStorageParameter</span> <span class="o">=</span> <span class="nc">MmuStorageParameter</span><span class="p">(</span>
+        <span class="n">levels</span>   <span class="o">=</span> <span class="nc">List</span><span class="p">(</span>
+              <span class="nc">MmuStorageLevel</span><span class="p">(</span>
+                <span class="n">id</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="n">ways</span>  <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="n">depth</span> <span class="o">=</span> <span class="mi">32</span>
+              <span class="p">),</span>
+              <span class="nc">MmuStorageLevel</span><span class="p">(</span>
+                <span class="n">id</span>    <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">ways</span>  <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="n">depth</span> <span class="o">=</span> <span class="mi">32</span>
+              <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">priority</span> <span class="o">=</span> <span class="mi">1</span>
       <span class="p">),</span>
-      <span class="nc">MmuStorageLevel</span><span class="p">(</span>
-        <span class="n">id</span>    <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="n">ways</span>  <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="n">depth</span> <span class="o">=</span> <span class="mi">32</span>
+      <span class="n">loadTranslationParameter</span>  <span class="o">=</span> <span class="nc">MmuPortParameter</span><span class="p">(</span>
+        <span class="n">readAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">hitsAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">ctrlAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">rspAt</span>  <span class="o">=</span> <span class="mi">1</span>
+      <span class="p">),</span>
+      <span class="n">storeTranslationParameter</span> <span class="o">=</span> <span class="nc">MmuPortParameter</span><span class="p">(</span>
+        <span class="n">readAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">hitsAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">ctrlAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">rspAt</span>  <span class="o">=</span> <span class="mi">1</span>
       <span class="p">)</span>
-    <span class="p">),</span>
-    <span class="n">priority</span> <span class="o">=</span> <span class="mi">1</span>
-  <span class="p">),</span>
-  <span class="n">loadTranslationParameter</span>  <span class="o">=</span> <span class="nc">MmuPortParameter</span><span class="p">(</span>
-    <span class="n">readAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">hitsAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">ctrlAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">rspAt</span>  <span class="o">=</span> <span class="mi">1</span>
-  <span class="p">),</span>
-  <span class="n">storeTranslationParameter</span> <span class="o">=</span> <span class="nc">MmuPortParameter</span><span class="p">(</span>
-    <span class="n">readAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">hitsAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">ctrlAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">rspAt</span>  <span class="o">=</span> <span class="mi">1</span>
-  <span class="p">)</span>
 <span class="p">)</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">DataCachePlugin</span><span class="p">(</span>
-  <span class="n">memDataWidth</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span>
-  <span class="n">cacheSize</span>    <span class="o">=</span> <span class="mi">4096</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span>
-  <span class="n">wayCount</span>     <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
-  <span class="n">refillCount</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="n">writebackCount</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="n">tagsReadAsync</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="n">reducedBankWidth</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="n">loadRefillCheckEarly</span> <span class="o">=</span> <span class="kc">false</span>
+      <span class="n">memDataWidth</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span>
+      <span class="n">cacheSize</span>    <span class="o">=</span> <span class="mi">4096</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span>
+      <span class="n">wayCount</span>     <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="n">refillCount</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="n">writebackCount</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="n">tagsReadAsync</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="n">reducedBankWidth</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="n">loadRefillCheckEarly</span> <span class="o">=</span> <span class="kc">false</span>
 <span class="p">)</span>
 
 <span class="c1">//MISC</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">RobPlugin</span><span class="p">(</span>
-  <span class="n">completionWithReg</span> <span class="o">=</span> <span class="kc">false</span>
+      <span class="n">completionWithReg</span> <span class="o">=</span> <span class="kc">false</span>
 <span class="p">)</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">CommitPlugin</span><span class="p">(</span>
-  <span class="n">ptrCommitRetimed</span> <span class="o">=</span> <span class="kc">true</span>
+      <span class="n">ptrCommitRetimed</span> <span class="o">=</span> <span class="kc">true</span>
 <span class="p">)</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">RegFilePlugin</span><span class="p">(</span>
-  <span class="n">spec</span> <span class="o">=</span> <span class="n">riscv</span><span class="p">.</span><span class="nc">IntRegFile</span><span class="p">,</span>
-  <span class="n">physicalDepth</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span>
-  <span class="n">bankCount</span> <span class="o">=</span> <span class="mi">1</span>
+      <span class="n">spec</span> <span class="o">=</span> <span class="n">riscv</span><span class="p">.</span><span class="nc">IntRegFile</span><span class="p">,</span>
+      <span class="n">physicalDepth</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span>
+      <span class="n">bankCount</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="p">)</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">CommitDebugFilterPlugin</span><span class="p">(</span><span class="nc">List</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">CsrRamPlugin</span><span class="p">()</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">PrivilegedPlugin</span><span class="p">(</span><span class="nc">PrivilegedConfig</span><span class="p">.</span><span class="n">full</span><span class="p">)</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">PerformanceCounterPlugin</span><span class="p">(</span>
-  <span class="n">additionalCounterCount</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
-  <span class="n">bufferWidth</span>            <span class="o">=</span> <span class="mi">6</span>
+      <span class="n">additionalCounterCount</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="n">bufferWidth</span>            <span class="o">=</span> <span class="mi">6</span>
 <span class="p">)</span>
 
 <span class="c1">//EXECUTION UNITES</span>
@@ -590,11 +602,11 @@ here is the list of them for one functional CPU :</p>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">StorePlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">)</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">EnvCallPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">)(</span><span class="n">rescheduleAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">CsrAccessPlugin</span><span class="p">(</span><span class="s">&quot;EU1&quot;</span><span class="p">)(</span>
-  <span class="n">decodeAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="n">readAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="n">writeAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="n">writebackAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="n">staticLatency</span> <span class="o">=</span> <span class="kc">false</span>
+      <span class="n">decodeAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">readAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="n">writeAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="n">writebackAt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="n">staticLatency</span> <span class="o">=</span> <span class="kc">false</span>
 <span class="p">)</span>
 
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">ExecutionUnitBase</span><span class="p">(</span><span class="s">&quot;EU2&quot;</span><span class="p">,</span> <span class="n">writebackCountMax</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
