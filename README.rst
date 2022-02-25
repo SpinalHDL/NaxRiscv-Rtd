@@ -1,6 +1,10 @@
-===========
-SpinalDoc
-===========
+=============
+NaxRiscv-RTD
+=============
+
+The documentation is hosted here : 
+
+https://spinalhdl.github.io/NaxRiscv-Rtd/
 
 How to build this documentation
 ===============================
