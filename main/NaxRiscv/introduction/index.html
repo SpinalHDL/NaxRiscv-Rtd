@@ -98,7 +98,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#pipeline">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#hardwared-description">Hardwared description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-description">Hardware description</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../frontend/index.html">Frontend</a><ul>
@@ -284,8 +284,20 @@ the replacement of single issue / in order core softcore by providing better per
 <p>Here is a general architectural diagram :</p>
 <img alt="../../_images/pipeline_simple.png" src="../../_images/pipeline_simple.png" />
 </div>
-<div class="section" id="hardwared-description">
-<h2>Hardwared description<a class="headerlink" href="#hardwared-description" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hardware-description">
+<h2>Hardware description<a class="headerlink" href="#hardware-description" title="Permalink to this headline">¶</a></h2>
+<p>NaxRiscv was designed using SpinalHDL (A Scala hardware description library).
+One goal of the implementation was to explore new hardware elaboration paradigmes as :</p>
+<ul class="simple">
+<li><p>Automatic pipelining framework</p></li>
+<li><p>Distributed hardware elaboration</p></li>
+<li><p>Software paradigmes applied to hardware elaboration (ex : software interface)</p></li>
+</ul>
+<p>A few notes about it :</p>
+<ul class="simple">
+<li><p>You can get generate the Verilog or the VHDL from it.</p></li>
+<li><p>A whole chapter (<a class="reference internal" href="../abstraction/index.html#abstraction-hdl"><span class="std std-ref">Abstractions / HDL</span></a>) of the doc is dedicated to explore the different paradigmes used</p></li>
+</ul>
 </div>
 </div>
 
