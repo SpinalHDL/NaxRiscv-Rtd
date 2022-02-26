@@ -4,7 +4,7 @@ NaxRiscv-RTD
 
 The documentation is hosted here : 
 
-https://spinalhdl.github.io/NaxRiscv-Rtd/
+https://spinalhdl.github.io/NaxRiscv-Rtd/main/NaxRiscv/introduction/index.html
 
 How to build this documentation
 ===============================
