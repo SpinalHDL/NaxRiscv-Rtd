@@ -12,8 +12,8 @@ The MMU implementation is characterised by :
 
 For RV32, the default configuration is to have :
 
-- 4 ways * 64 entries of level 0 (4KB pages) TLB
-- 2 ways * 64 entries of level 1 (4MB pages) TLB
+- 4 ways * 32 entries of level 0 (4KB pages) TLB
+- 2 ways * 32 entries of level 1 (4MB pages) TLB
 
 The area of the TLB cache is keept low by inferring each way into a distributed ram.
 
