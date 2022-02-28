@@ -4,7 +4,7 @@
 How to use
 ================
 
-There is currently two setuped way you can use to try NaxRiscv
+There is currently two way you can try NaxRiscv :
 
 - **Simulation** : Via verilator (https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md)
 - **Hardware** : Via the Litex integration (https://github.com/SpinalHDL/NaxRiscv#running-on-hardware)
