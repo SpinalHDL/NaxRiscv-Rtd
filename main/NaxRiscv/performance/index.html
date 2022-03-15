@@ -133,7 +133,8 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Performance and Area</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#performance">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rv32">RV32</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rv64">RV64</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
@@ -223,8 +224,8 @@
             
   <div class="section" id="performance-and-area">
 <h1>Performance and Area<a class="headerlink" href="#performance-and-area" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="performance">
-<h2>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rv32">
+<h2>RV32<a class="headerlink" href="#rv32" title="Permalink to this headline">¶</a></h2>
 <p>A few things to keep in mind :</p>
 <ul class="simple">
 <li><p>You can trade FMax IPC Area</p></li>
@@ -233,27 +234,16 @@
 <p>For the following configuration :</p>
 <ul class="simple">
 <li><p>RV32IMASU, dual issue,OoO, linux compatible</p></li>
-<li><p>64 bits fetch, 2 decode, 2 issue, 2 retire</p></li>
+<li><p>64 bits fetch, 2 decode, 3 issue, 2 retire</p></li>
 <li><p>Shared issue queue with 32 entries</p></li>
 <li><p>Renaming with 64 physical registers</p></li>
-<li><p>2 execution unit (1*Int/Shift, 1*Branch/load/store/mul/div/csr/env)</p></li>
+<li><p>3 execution unit (2*Int/Shift, 1*Branch/load/store/mul/div/csr/env)</p></li>
 <li><p>LSU with 16 load queue, 16 store queue</p></li>
 <li><p>Load hit predictor (3 cycles load to use delay)</p></li>
 <li><p>Store to load bypass / hazard free predictor</p></li>
 <li><p>I$ 16KB/4W, D$ 16KB/4W 2 refill 2 writeback slots</p></li>
 <li><p>MMU with ITLB 6 way/192 entries, DTLB 6 way/192 entries</p></li>
 <li><p>BTB 1 way/512 entries, GSHARE 1 way/4KB, RAS 32 entries</p></li>
-</ul>
-<p>Performance :</p>
-<ul class="simple">
-<li><p>Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)</p></li>
-<li><p>Coremark    : 4.22 Coremark/Mhz (-O3 and so many more random flags)</p></li>
-<li><p>Embench-iot : 1.33 baseline     (-O2 -ffunction-sections)</p></li>
-</ul>
-<p>On Artix 7 speed grade 3 :</p>
-<ul class="simple">
-<li><p>13.1 KLUT, 9.3 KFF, 13 BRAM, 4 DSP</p></li>
-<li><p>145 Mhz</p></li>
 </ul>
 <p>Performance :</p>
 <ul class="simple">
@@ -266,16 +256,56 @@
 <li><p>15.0 KLUT, 9.5 KFF, 13 BRAM, 4 DSP</p></li>
 <li><p>145 Mhz</p></li>
 </ul>
+<p>Reducing the number of int ALU to a single one will produce :</p>
+<p>Performance :</p>
+<ul class="simple">
+<li><p>Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)</p></li>
+<li><p>Coremark    : 4.22 Coremark/Mhz (-O3 and so many more random flags)</p></li>
+<li><p>Embench-iot : 1.33 baseline     (-O2 -ffunction-sections)</p></li>
+</ul>
+<p>On Artix 7 speed grade 3 :</p>
+<ul class="simple">
+<li><p>13.1 KLUT, 9.3 KFF, 13 BRAM, 4 DSP</p></li>
+<li><p>145 Mhz</p></li>
+</ul>
 <p>To go further, increasing the GSHARE storage or implementing something as TAGE should help.</p>
 <p>Here are a pipeline representation of the two above configurations :</p>
 <img alt="../../_images/pipeline_simple.png" src="../../_images/pipeline_simple.png" />
 <p>Also notes that the NaxRiscv simulator support gem5 / konata logs, allowing to visualise the execution flow.</p>
 </div>
+<div class="section" id="rv64">
+<h2>RV64<a class="headerlink" href="#rv64" title="Permalink to this headline">¶</a></h2>
+<p>In a similar configuration than the above RV32 (2*Int/Shift, 1*Branch/load/store/mul/div/csr/env)</p>
+<p>Performance :</p>
+<ul class="simple">
+<li><p>Dhrystone   : 2.54 DMIPS/Mhz    (-O3 -fno-common -fno-inline)</p></li>
+<li><p>Coremark    : 4.75 Coremark/Mhz (-O3 and so many more random flags)</p></li>
+<li><p>Embench-iot : 1.70 baseline     (-O2 -ffunction-sections)</p></li>
+</ul>
+<p>On Artix 7 speed grade 3 :</p>
+<ul class="simple">
+<li><p>20.6 KLUT, 11.8 KFF, 12.5 BRAM, 16 DSP</p></li>
+<li><p>128 Mhz</p></li>
+</ul>
+<p>As you can see above, the frequancy take quite a hit (from the 64 bits). It seems it is mostly due to the register file doubeling in size, stretching the design quite a bit.</p>
+<p>One workaround to that is to relax the ALU -&gt; writeback path by moving the register file write one cycle futher (2 cycle ALU instead of 1) improve the fmax for some IPC tradeoff :</p>
+<p>Performance :</p>
+<ul class="simple">
+<li><p>Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)</p></li>
+<li><p>Coremark    : 4.12 Coremark/Mhz (-O3 and so many more random flags)</p></li>
+<li><p>Embench-iot : 1.60 baseline     (-O2 -ffunction-sections)</p></li>
+</ul>
+<p>On Artix 7 speed grade 3 :</p>
+<ul class="simple">
+<li><p>20.3 KLUT, 12.2 KFF, 12.5 BRAM, 16 DSP</p></li>
+<li><p>139 Mhz</p></li>
+</ul>
+</div>
 <div class="section" id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <p>Here is a few notes collected durring the developpement :</p>
 <ul class="simple">
-<li><p>An out of order CPU without branch prediction is will perform realy bad ^^</p></li>
+<li><p>An out of order CPU without branch prediction is performing realy bad ^^</p></li>
 <li><p>Avoiding store having to wait for the store data in the IQ can realy help avoiding bad load speculation.</p></li>
 <li><p>Some tests were made with two cycle latency ALU (in prevision of RV64 timing relaxation) seems to show “little” impact on the overall performances (~15%, need to verify on more benchmarks)</p></li>
 <li><p>Adding more and more execution units seems to goerealy fast into diminushing returns lands</p></li>
