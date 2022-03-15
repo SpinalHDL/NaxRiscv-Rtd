@@ -9,8 +9,8 @@ Performance and Area
 ====================
 
 
-Performance
-===============
+RV32
+=========================
 
 A few things to keep in mind : 
 
@@ -20,27 +20,16 @@ A few things to keep in mind :
 For the following configuration : 
 
 - RV32IMASU, dual issue,OoO, linux compatible
-- 64 bits fetch, 2 decode, 2 issue, 2 retire
+- 64 bits fetch, 2 decode, 3 issue, 2 retire
 - Shared issue queue with 32 entries
 - Renaming with 64 physical registers
-- 2 execution unit (1\*Int/Shift, 1\*Branch/load/store/mul/div/csr/env)
+- 3 execution unit (2\*Int/Shift, 1\*Branch/load/store/mul/div/csr/env)
 - LSU with 16 load queue, 16 store queue
 - Load hit predictor (3 cycles load to use delay)
 - Store to load bypass / hazard free predictor
 - I$ 16KB/4W, D$ 16KB/4W 2 refill 2 writeback slots
 - MMU with ITLB 6 way/192 entries, DTLB 6 way/192 entries
 - BTB 1 way/512 entries, GSHARE 1 way/4KB, RAS 32 entries
-
-Performance : 
-
-- Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
-- Coremark    : 4.22 Coremark/Mhz (-O3 and so many more random flags)
-- Embench-iot : 1.33 baseline     (-O2 -ffunction-sections)
-
-On Artix 7 speed grade 3 :
-
-- 13.1 KLUT, 9.3 KFF, 13 BRAM, 4 DSP
-- 145 Mhz
 
 Performance :
 
@@ -53,6 +42,21 @@ On Artix 7 speed grade 3 :
 - 15.0 KLUT, 9.5 KFF, 13 BRAM, 4 DSP
 - 145 Mhz
 
+Reducing the number of int ALU to a single one will produce :
+
+
+Performance : 
+
+- Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
+- Coremark    : 4.22 Coremark/Mhz (-O3 and so many more random flags)
+- Embench-iot : 1.33 baseline     (-O2 -ffunction-sections)
+
+On Artix 7 speed grade 3 :
+
+- 13.1 KLUT, 9.3 KFF, 13 BRAM, 4 DSP
+- 145 Mhz
+
+
 To go further, increasing the GSHARE storage or implementing something as TAGE should help.
 
 Here are a pipeline representation of the two above configurations : 
@@ -62,12 +66,44 @@ Here are a pipeline representation of the two above configurations :
 Also notes that the NaxRiscv simulator support gem5 / konata logs, allowing to visualise the execution flow.
 
 
+RV64
+=========================
+
+In a similar configuration than the above RV32 (2\*Int/Shift, 1\*Branch/load/store/mul/div/csr/env)
+
+Performance : 
+
+- Dhrystone   : 2.54 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
+- Coremark    : 4.75 Coremark/Mhz (-O3 and so many more random flags)
+- Embench-iot : 1.70 baseline     (-O2 -ffunction-sections)
+
+On Artix 7 speed grade 3 :
+
+- 20.6 KLUT, 11.8 KFF, 12.5 BRAM, 16 DSP
+- 128 Mhz
+
+As you can see above, the frequancy take quite a hit (from the 64 bits). It seems it is mostly due to the register file doubeling in size, stretching the design quite a bit.
+
+One workaround to that is to relax the ALU -> writeback path by moving the register file write one cycle futher (2 cycle ALU instead of 1) improve the fmax for some IPC tradeoff :
+
+Performance : 
+
+- Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
+- Coremark    : 4.12 Coremark/Mhz (-O3 and so many more random flags)
+- Embench-iot : 1.60 baseline     (-O2 -ffunction-sections)
+
+On Artix 7 speed grade 3 :
+
+- 20.3 KLUT, 12.2 KFF, 12.5 BRAM, 16 DSP
+- 139 Mhz
+
+
 Notes
 ===============
 
 Here is a few notes collected durring the developpement : 
 
-- An out of order CPU without branch prediction is will perform realy bad ^^
+- An out of order CPU without branch prediction is performing realy bad ^^
 - Avoiding store having to wait for the store data in the IQ can realy help avoiding bad load speculation.
 - Some tests were made with two cycle latency ALU (in prevision of RV64 timing relaxation) seems to show "little" impact on the overall performances (~15%, need to verify on more benchmarks)
 - Adding more and more execution units seems to goerealy fast into diminushing returns lands
