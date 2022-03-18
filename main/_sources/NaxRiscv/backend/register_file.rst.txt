@@ -6,8 +6,8 @@ Register file
 
 Currently, the register file is infered into simple dual ports distributed ram : 
 
-- Multiple write ports are emulated by using xors
-- Multiple read ports are emulated by duplicating the register file
+- Each write port will create its own bank
+- Each read port will read each bank, and mux the correct one using a distributed-ram-xor-based LVT (live value table)
 
 
 

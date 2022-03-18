@@ -253,20 +253,20 @@
 </ul>
 <p>On Artix 7 speed grade 3 :</p>
 <ul class="simple">
-<li><p>15.0 KLUT, 9.5 KFF, 13 BRAM, 4 DSP</p></li>
+<li><p>14.6 KLUT, 9.8 KFF, 12.5 BRAM, 4 DSP</p></li>
 <li><p>145 Mhz</p></li>
 </ul>
 <p>Reducing the number of int ALU to a single one will produce :</p>
 <p>Performance :</p>
 <ul class="simple">
-<li><p>Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)</p></li>
-<li><p>Coremark    : 4.22 Coremark/Mhz (-O3 and so many more random flags)</p></li>
+<li><p>Dhrystone   : 2.54 DMIPS/Mhz    (-O3 -fno-common -fno-inline)</p></li>
+<li><p>Coremark    : 4.19 Coremark/Mhz (-O3 and so many more random flags)</p></li>
 <li><p>Embench-iot : 1.33 baseline     (-O2 -ffunction-sections)</p></li>
 </ul>
 <p>On Artix 7 speed grade 3 :</p>
 <ul class="simple">
-<li><p>13.1 KLUT, 9.3 KFF, 13 BRAM, 4 DSP</p></li>
-<li><p>145 Mhz</p></li>
+<li><p>13.2 KLUT, 9.7 KFF, 12.5 BRAM, 4 DSP</p></li>
+<li><p>148 Mhz</p></li>
 </ul>
 <p>To go further, increasing the GSHARE storage or implementing something as TAGE should help.</p>
 <p>Here are a pipeline representation of the two above configurations :</p>
@@ -284,22 +284,10 @@
 </ul>
 <p>On Artix 7 speed grade 3 :</p>
 <ul class="simple">
-<li><p>20.6 KLUT, 11.8 KFF, 12.5 BRAM, 16 DSP</p></li>
-<li><p>128 Mhz</p></li>
+<li><p>19.5 KLUT, 12.0 KFF, 12.5 BRAM, 16 DSP</p></li>
+<li><p>140 Mhz</p></li>
 </ul>
-<p>As you can see above, the frequancy take quite a hit (from the 64 bits). It seems it is mostly due to the register file doubeling in size, stretching the design quite a bit.</p>
-<p>One workaround to that is to relax the ALU -&gt; writeback path by moving the register file write one cycle futher (2 cycle ALU instead of 1) improve the fmax for some IPC tradeoff :</p>
-<p>Performance :</p>
-<ul class="simple">
-<li><p>Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)</p></li>
-<li><p>Coremark    : 4.12 Coremark/Mhz (-O3 and so many more random flags)</p></li>
-<li><p>Embench-iot : 1.60 baseline     (-O2 -ffunction-sections)</p></li>
-</ul>
-<p>On Artix 7 speed grade 3 :</p>
-<ul class="simple">
-<li><p>20.3 KLUT, 12.2 KFF, 12.5 BRAM, 16 DSP</p></li>
-<li><p>139 Mhz</p></li>
-</ul>
+<p>So overall, the RV64 support do not has too much of an impact compared to RV32, mostly because the current critical path are in the addresses and control paths, which stays relatively similar between the two (39 bits for RV64, 32 bits for RV32).</p>
 </div>
 <div class="section" id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>

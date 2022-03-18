@@ -237,8 +237,8 @@
 <h2>Register file<a class="headerlink" href="#register-file" title="Permalink to this headline">¶</a></h2>
 <p>Currently, the register file is infered into simple dual ports distributed ram :</p>
 <ul class="simple">
-<li><p>Multiple write ports are emulated by using xors</p></li>
-<li><p>Multiple read ports are emulated by duplicating the register file</p></li>
+<li><p>Each write port will create its own bank</p></li>
+<li><p>Each read port will read each bank, and mux the correct one using a distributed-ram-xor-based LVT (live value table)</p></li>
 </ul>
 </div>
 </div>

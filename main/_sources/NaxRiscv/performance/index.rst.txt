@@ -39,7 +39,7 @@ Performance :
 
 On Artix 7 speed grade 3 :
 
-- 15.0 KLUT, 9.5 KFF, 13 BRAM, 4 DSP
+- 14.6 KLUT, 9.8 KFF, 12.5 BRAM, 4 DSP
 - 145 Mhz
 
 Reducing the number of int ALU to a single one will produce :
@@ -47,14 +47,14 @@ Reducing the number of int ALU to a single one will produce :
 
 Performance : 
 
-- Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
-- Coremark    : 4.22 Coremark/Mhz (-O3 and so many more random flags)
+- Dhrystone   : 2.54 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
+- Coremark    : 4.19 Coremark/Mhz (-O3 and so many more random flags)
 - Embench-iot : 1.33 baseline     (-O2 -ffunction-sections)
 
 On Artix 7 speed grade 3 :
 
-- 13.1 KLUT, 9.3 KFF, 13 BRAM, 4 DSP
-- 145 Mhz
+- 13.2 KLUT, 9.7 KFF, 12.5 BRAM, 4 DSP
+- 148 Mhz
 
 
 To go further, increasing the GSHARE storage or implementing something as TAGE should help.
@@ -79,23 +79,11 @@ Performance :
 
 On Artix 7 speed grade 3 :
 
-- 20.6 KLUT, 11.8 KFF, 12.5 BRAM, 16 DSP
-- 128 Mhz
+- 19.5 KLUT, 12.0 KFF, 12.5 BRAM, 16 DSP
+- 140 Mhz
 
-As you can see above, the frequancy take quite a hit (from the 64 bits). It seems it is mostly due to the register file doubeling in size, stretching the design quite a bit.
+So overall, the RV64 support do not has too much of an impact compared to RV32, mostly because the current critical path are in the addresses and control paths, which stays relatively similar between the two (39 bits for RV64, 32 bits for RV32).
 
-One workaround to that is to relax the ALU -> writeback path by moving the register file write one cycle futher (2 cycle ALU instead of 1) improve the fmax for some IPC tradeoff :
-
-Performance : 
-
-- Dhrystone   : 2.51 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
-- Coremark    : 4.12 Coremark/Mhz (-O3 and so many more random flags)
-- Embench-iot : 1.60 baseline     (-O2 -ffunction-sections)
-
-On Artix 7 speed grade 3 :
-
-- 20.3 KLUT, 12.2 KFF, 12.5 BRAM, 16 DSP
-- 139 Mhz
 
 
 Notes
