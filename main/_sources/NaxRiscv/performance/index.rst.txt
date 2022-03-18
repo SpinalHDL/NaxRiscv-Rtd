@@ -74,7 +74,7 @@ In a similar configuration than the above RV32 (2\*Int/Shift, 1\*Branch/load/sto
 Performance : 
 
 - Dhrystone   : 2.54 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
-- Coremark    : 4.75 Coremark/Mhz (-O3 and so many more random flags)
+- Coremark    : 4.75 Coremark/Mhz (-O3, u32 as s32 and so many more random flags)
 - Embench-iot : 1.70 baseline     (-O2 -ffunction-sections)
 
 On Artix 7 speed grade 3 :
