@@ -25,8 +25,7 @@ Project developpement and status
 
 - This project is free and open source
 - It can run upstream buildroot/linux on hardware (ArtyA7-35T / Litex)
-- It started in October 2021 without any funding
-- Currently looking for funding to implement more features (FPU, SMP, ...)
+- It started in October 2021, got some funding from NLnet later on.
 - Unfortunately the project started with a single crew (not by wish), contribution are welcome.
 
 Why a OoO core targeting FPGA
