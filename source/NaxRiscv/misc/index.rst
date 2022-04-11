@@ -1,9 +1,8 @@
 ===============
-Fetch
+Misc
 ===============
 
-.. include::  pc.rst
-.. include::  fetchCache.rst
+.. include:: jtag.rst
 
 .. role:: raw-html-m2r(raw)
    :format: html
