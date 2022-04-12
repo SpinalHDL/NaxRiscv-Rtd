@@ -11,8 +11,11 @@ Here is an illustration with two EU (one with static wake, one with dynamic wake
 
 .. image:: /asset/image/eu_wakes.png
 
+.. include:: custom.rst
+
 
 .. role:: raw-html-m2r(raw)
    :format: html
+
 
 
