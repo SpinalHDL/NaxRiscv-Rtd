@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Execution units &mdash; NaxRiscv  documentation</title>
+  <title>Custom instruction &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -43,9 +43,7 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Memory system" href="../memory/index.html" />
-    <link rel="prev" title="Frontend" href="../frontend/index.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,7 +88,7 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-developpement-and-status">Project developpement and status</a></li>
@@ -110,9 +108,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#dispatch-issue">Dispatch / Issue</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Execution units</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#custom-instruction">Custom instruction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#simd-add">SIMD add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Execution units</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#custom-instruction">Custom instruction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#simd-add">SIMD add</a></li>
 </ul>
 </li>
 </ul>
@@ -213,13 +211,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Execution units</li>
+      <li>Custom instruction</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/NaxRiscv/execution_units/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/NaxRiscv/execution_units/custom.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -232,20 +230,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="execution-units">
-<h1>Execution units<a class="headerlink" href="#execution-units" title="Permalink to this headline">¶</a></h1>
-<p>The main caracteristic of a execution unit is the way in which it will wake up the instruction which depend on it.</p>
-<ul class="simple">
-<li><p><strong>Static wake</strong> : For EU  with fixed latency (no stall), a static wake can be asked to the issue queue. This can reduce the completion-to-use delay by two cycle</p></li>
-<li><p><strong>Dynamic wake</strong> : For EU with variable (which can stall), the EU is responsible to send a wakes commands to the issue queue.</p></li>
-</ul>
-<p>Here is an illustration with two EU (one with static wake, one with dynamic wake) interracting with the issue queue to wake up dependent instructions</p>
-<img alt="../../_images/eu_wakes.png" src="../../_images/eu_wakes.png" />
-<div class="section" id="custom-instruction">
-<h2>Custom instruction<a class="headerlink" href="#custom-instruction" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="custom-instruction">
+<h1>Custom instruction<a class="headerlink" href="#custom-instruction" title="Permalink to this headline">¶</a></h1>
 <p>There is multiple ways you can add custom instruction into NaxRiscv, the following chapter will provide some demo.</p>
 <div class="section" id="simd-add">
-<h3>SIMD add<a class="headerlink" href="#simd-add" title="Permalink to this headline">¶</a></h3>
+<h2>SIMD add<a class="headerlink" href="#simd-add" title="Permalink to this headline">¶</a></h2>
 <p>Let’s define a plugin which will implement a SIMD add (4x8bits adder), working on the integer register file.</p>
 <p>The plugin will be based on the ExecutionUnitElementSimple which make implementing ALU plugins simpler. Such plugin can then be used to compose a given execution unit (hosted by a ExecutionUnitBase).</p>
 <p>For instance the Plugin configuration could be :</p>
@@ -407,7 +396,6 @@ But you can take a look in the IntAluPlugin, ShiftPlugin, DivPlugin, MulPlugin a
 <p>Also, you don’t have to use the ExecutionUnitElementSimple base class, you can have more fondamental accesses, as the LoadPlugin, StorePlugin, EnvCallPlugin.</p>
 </div>
 </div>
-</div>
 
     <script type="text/javascript">
         function init() {
@@ -420,10 +408,6 @@ But you can take a look in the IntAluPlugin, ShiftPlugin, DivPlugin, MulPlugin a
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../memory/index.html" class="btn btn-neutral float-right" title="Memory system" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../frontend/index.html" class="btn btn-neutral float-left" title="Frontend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 
