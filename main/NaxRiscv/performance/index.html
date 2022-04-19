@@ -112,7 +112,15 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../execution_units/index.html#custom-instruction">Custom instruction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../execution_units/index.html#simd-add">SIMD add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../execution_units/index.html#simd-add">SIMD add</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../execution_units/index.html#plugin-implementation">Plugin implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../execution_units/index.html#naxriscv-generation">NaxRiscv generation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../execution_units/index.html#software-test">Software test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../execution_units/index.html#simulation">Simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../execution_units/index.html#conclusion">Conclusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../execution_units/index.html#hardcore-way">Hardcore way</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -247,17 +255,17 @@
 <li><p>64 bits fetch, 2 decode, 3 issue, 2 retire</p></li>
 <li><p>Shared issue queue with 32 entries</p></li>
 <li><p>Renaming with 64 physical registers</p></li>
-<li><p>3 execution unit (2*Int/Shift, 1*Branch/load/store/mul/div/csr/env)</p></li>
+<li><p>3 execution unit (2*Int/Shift/branch, 1*load/store/mul/div/csr/env)</p></li>
 <li><p>LSU with 16 load queue, 16 store queue</p></li>
 <li><p>Load hit predictor (3 cycles load to use delay)</p></li>
-<li><p>Store to load bypass / hazard free predictor</p></li>
+<li><p>Store to load bypass</p></li>
 <li><p>I$ 16KB/4W, D$ 16KB/4W 2 refill 2 writeback slots</p></li>
 <li><p>MMU with ITLB 6 way/192 entries, DTLB 6 way/192 entries</p></li>
 <li><p>BTB 1 way/512 entries, GSHARE 1 way/4KB, RAS 32 entries</p></li>
 </ul>
 <p>Performance :</p>
 <ul class="simple">
-<li><p>Dhrystone   : 2.59 DMIPS/Mhz    1.42 IPC (-O3 -fno-common -fno-inline)</p></li>
+<li><p>Dhrystone   : 2.64 DMIPS/Mhz    1.48 IPC (-O3 -fno-common -fno-inline, 318 instruction per iteration)</p></li>
 <li><p>Coremark    : 4.70 Coremark/Mhz 1.19 IPC (-O3 and so many more random flags)</p></li>
 <li><p>Embench-iot : 1.55 baseline     1.32 IPC (-O2 -ffunction-sections)</p></li>
 </ul>
@@ -266,7 +274,7 @@
 <li><p>14.6 KLUT, 9.8 KFF, 12.5 BRAM, 4 DSP</p></li>
 <li><p>145 Mhz</p></li>
 </ul>
-<p>Reducing the number of int ALU to a single one will produce :</p>
+<p>Reducing the number of int ALU to a single one and moving the branch to the shared pipeline will produce :</p>
 <p>Performance :</p>
 <ul class="simple">
 <li><p>Dhrystone   : 2.54 DMIPS/Mhz    (-O3 -fno-common -fno-inline)</p></li>
@@ -285,7 +293,7 @@
 </div>
 <div class="section" id="rv64">
 <h2>RV64<a class="headerlink" href="#rv64" title="Permalink to this headline">¶</a></h2>
-<p>In a similar configuration than the above RV32 (2*Int/Shift, 1*Branch/load/store/mul/div/csr/env)</p>
+<p>In a similar configuration than the above RV32 (2*Int/Shift/Branch, 1*/load/store/mul/div/csr/env)</p>
 <p>Performance :</p>
 <ul class="simple">
 <li><p>Dhrystone   : 2.54 DMIPS/Mhz    (-O3 -fno-common -fno-inline)</p></li>

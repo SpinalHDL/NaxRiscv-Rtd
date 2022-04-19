@@ -6,7 +6,7 @@ Custom instruction
 There is multiple ways you can add custom instruction into NaxRiscv, the following chapter will provide some demo.
 
 SIMD add
-^^^^^^^^^^
+-----------
 
 Let's define a plugin which will implement a SIMD add (4x8bits adder), working on the integer register file.
 
@@ -24,7 +24,11 @@ For instance the Plugin configuration could be :
     plugins += new ShiftPlugin("ALU0" , aluStage = 0)
     plugins += new SimdAddPlugin("ALU0") // <- We will implement this plugin
 
-Here is a example how this plugin could be implemented (https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L36): 
+Plugin implementation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Here is a example how this plugin could be implemented : 
+(https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L36)
 
 .. code:: scala
 
@@ -95,9 +99,12 @@ Here is a example how this plugin could be implemented (https://github.com/Spina
         }
       }
     }
+
+NaxRiscv generation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    
     
-    
-Then, to generate a NaxRiscv with this new plugin, we could run the following App (https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L71): 
+Then, to generate a NaxRiscv with this new plugin, we could run the following App : 
+(https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L71) 
 
 .. code:: scala
 
@@ -137,8 +144,10 @@ To run this App, you can go to the NaxRiscv directory and run :
 
     sbt "runMain naxriscv.execute.SimdAddNaxGen"
     
+Software test
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    
     
-Then let's write some assembly test code (https://github.com/SpinalHDL/NaxSoftware/tree/849679c70b238ceee021bdfd18eb2e9809e7bdd0/baremetal/simdAdd): 
+Then let's write some assembly test code : (https://github.com/SpinalHDL/NaxSoftware/tree/849679c70b238ceee021bdfd18eb2e9809e7bdd0/baremetal/simdAdd) 
 
 .. code:: shell
 
@@ -175,6 +184,9 @@ Compile it with
 
     make clean rv32im
     
+Simulation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    
+    
 And the run a simulation in src/test/cpp/naxriscv (You will have to setup things as described in its readme first)
 
 .. code:: shell
@@ -184,10 +196,69 @@ And the run a simulation in src/test/cpp/naxriscv (You will have to setup things
     
 Which will output us the value 2224666 in the shell :D
 
+Conclusion
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 So overall this example didn't introduced how to specify some additional decoding, nor how to define multi-cycle ALU. (TODO). 
 But you can take a look in the IntAluPlugin, ShiftPlugin, DivPlugin, MulPlugin and BranchPlugin which are doing those things using the same ExecutionUnitElementSimple base class.
 
 Also, you don't have to use the ExecutionUnitElementSimple base class, you can have more fondamental accesses, as the LoadPlugin, StorePlugin, EnvCallPlugin.
+
+Hardcore way
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Note, here is a example of the same instruction, but implemented without the ExecutionUnitElementSimple facilities :
+(https://github.com/SpinalHDL/NaxRiscv/blob/72b80e3345ecc3a25ca913f2b741e919a3f4c970/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L100)
+
+.. code:: scala
+
+    object SimdAddRawPlugin{
+      val SEL = Stageable(Bool()) //Will be used to identify when we are executing a ADD4
+      val ADD4 = IntRegFile.TypeR(M"0000000----------000-----0001011")
+    }
+
+    class SimdAddRawPlugin(euId : String) extends Plugin {
+      import SimdAddRawPlugin._
+      val setup = create early new Area{
+        val eu = findService[ExecutionUnitBase](_.euId == euId)
+        eu.retain() //We don't want the EU to generate itself before we are done with it
+
+        //Specify all the ADD4 requirements
+        eu.addMicroOp(ADD4)
+        eu.setStaticCompletion(ADD4, 0)
+        eu.setStaticWake(ADD4, 0)
+        eu.setDecodingDefault(SEL, False)
+        eu.addDecoding(ADD4, SEL, True)
+
+        //IntFormatPlugin provide a shared point to write into the register file with some optional carry extensions
+        val intFormat = findService[IntFormatPlugin](_.euId == euId)
+        val writeback = intFormat.access(stageId = 0, writeLatency = 0)
+      }
+
+      val logic = create late new Area{
+        val eu = setup.eu
+        val writeback = setup.writeback
+        val stage = eu.getExecute(0)
+
+        //Get the RISC-V RS1/RS2 values from the register file
+        val rs1 = stage(eu(IntRegFile, RS1)).asUInt
+        val rs2 = stage(eu(IntRegFile, RS2)).asUInt
+
+        //Do some computation
+        val rd = UInt(32 bits)
+        rd( 7 downto  0) := rs1( 7 downto  0) + rs2( 7 downto  0)
+        rd(16 downto  8) := rs1(16 downto  8) + rs2(16 downto  8)
+        rd(23 downto 16) := rs1(23 downto 16) + rs2(23 downto 16)
+        rd(31 downto 24) := rs1(31 downto 24) + rs2(31 downto 24)
+
+        //Provide the computation value for the writeback
+        writeback.valid   := stage(SEL)
+        writeback.payload := rd.asBits
+
+        //Now the EU has every requirements set for the generation (from this plugin perspective)
+        eu.release()
+      }
+    }
     
     
 

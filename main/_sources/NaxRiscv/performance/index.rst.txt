@@ -23,17 +23,17 @@ For the following configuration :
 - 64 bits fetch, 2 decode, 3 issue, 2 retire
 - Shared issue queue with 32 entries
 - Renaming with 64 physical registers
-- 3 execution unit (2\*Int/Shift, 1\*Branch/load/store/mul/div/csr/env)
+- 3 execution unit (2\*Int/Shift/branch, 1\*load/store/mul/div/csr/env)
 - LSU with 16 load queue, 16 store queue
 - Load hit predictor (3 cycles load to use delay)
-- Store to load bypass / hazard free predictor
+- Store to load bypass
 - I$ 16KB/4W, D$ 16KB/4W 2 refill 2 writeback slots
 - MMU with ITLB 6 way/192 entries, DTLB 6 way/192 entries
 - BTB 1 way/512 entries, GSHARE 1 way/4KB, RAS 32 entries
 
 Performance :
 
-- Dhrystone   : 2.59 DMIPS/Mhz    1.42 IPC (-O3 -fno-common -fno-inline)
+- Dhrystone   : 2.64 DMIPS/Mhz    1.48 IPC (-O3 -fno-common -fno-inline, 318 instruction per iteration)
 - Coremark    : 4.70 Coremark/Mhz 1.19 IPC (-O3 and so many more random flags)
 - Embench-iot : 1.55 baseline     1.32 IPC (-O2 -ffunction-sections)
 
@@ -42,7 +42,7 @@ On Artix 7 speed grade 3 :
 - 14.6 KLUT, 9.8 KFF, 12.5 BRAM, 4 DSP
 - 145 Mhz
 
-Reducing the number of int ALU to a single one will produce :
+Reducing the number of int ALU to a single one and moving the branch to the shared pipeline will produce :
 
 
 Performance : 
@@ -69,7 +69,7 @@ Also notes that the NaxRiscv simulator support gem5 / konata logs, allowing to v
 RV64
 =========================
 
-In a similar configuration than the above RV32 (2\*Int/Shift, 1\*Branch/load/store/mul/div/csr/env)
+In a similar configuration than the above RV32 (2\*Int/Shift/Branch, 1\*/load/store/mul/div/csr/env)
 
 Performance : 
 

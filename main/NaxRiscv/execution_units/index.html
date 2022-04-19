@@ -112,7 +112,15 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Execution units</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#custom-instruction">Custom instruction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#simd-add">SIMD add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simd-add">SIMD add</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#plugin-implementation">Plugin implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#naxriscv-generation">NaxRiscv generation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#software-test">Software test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulation">Simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardcore-way">Hardcore way</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -258,7 +266,10 @@
 <span class="n">plugins</span> <span class="o">+=</span> <span class="k">new</span> <span class="nc">SimdAddPlugin</span><span class="p">(</span><span class="s">&quot;ALU0&quot;</span><span class="p">)</span> <span class="c1">// &lt;- We will implement this plugin</span>
 </pre></div>
 </div>
-<p>Here is a example how this plugin could be implemented (<a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L36">https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L36</a>):</p>
+<div class="section" id="plugin-implementation">
+<h4>Plugin implementation<a class="headerlink" href="#plugin-implementation" title="Permalink to this headline">¶</a></h4>
+<p>Here is a example how this plugin could be implemented :
+(<a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L36">https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L36</a>)</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">package</span> <span class="nn">naxriscv</span><span class="p">.</span><span class="n">execute</span>
 
 <span class="k">import</span> <span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
@@ -328,7 +339,11 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Then, to generate a NaxRiscv with this new plugin, we could run the following App (<a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L71">https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L71</a>):</p>
+</div>
+<div class="section" id="naxriscv-generation">
+<h4>NaxRiscv generation<a class="headerlink" href="#naxriscv-generation" title="Permalink to this headline">¶</a></h4>
+<p>Then, to generate a NaxRiscv with this new plugin, we could run the following App :
+(<a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L71">https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L71</a>)</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">object</span> <span class="nc">SimdAddNaxGen</span> <span class="k">extends</span> <span class="nc">App</span><span class="p">{</span>
   <span class="k">import</span> <span class="nn">naxriscv</span><span class="p">.</span><span class="nn">compatibility</span><span class="p">.</span><span class="n">_</span>
   <span class="k">import</span> <span class="nn">naxriscv</span><span class="p">.</span><span class="nn">utilities</span><span class="p">.</span><span class="n">_</span>
@@ -363,7 +378,10 @@
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sbt <span class="s2">&quot;runMain naxriscv.execute.SimdAddNaxGen&quot;</span>
 </pre></div>
 </div>
-<p>Then let’s write some assembly test code (<a class="reference external" href="https://github.com/SpinalHDL/NaxSoftware/tree/849679c70b238ceee021bdfd18eb2e9809e7bdd0/baremetal/simdAdd">https://github.com/SpinalHDL/NaxSoftware/tree/849679c70b238ceee021bdfd18eb2e9809e7bdd0/baremetal/simdAdd</a>):</p>
+</div>
+<div class="section" id="software-test">
+<h4>Software test<a class="headerlink" href="#software-test" title="Permalink to this headline">¶</a></h4>
+<p>Then let’s write some assembly test code : (<a class="reference external" href="https://github.com/SpinalHDL/NaxSoftware/tree/849679c70b238ceee021bdfd18eb2e9809e7bdd0/baremetal/simdAdd">https://github.com/SpinalHDL/NaxSoftware/tree/849679c70b238ceee021bdfd18eb2e9809e7bdd0/baremetal/simdAdd</a>)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>.globl _start
 _start:
 
@@ -396,15 +414,76 @@ fail:
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make clean rv32im
 </pre></div>
 </div>
+</div>
+<div class="section" id="simulation">
+<h4>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h4>
 <p>And the run a simulation in src/test/cpp/naxriscv (You will have to setup things as described in its readme first)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make clean compile
 ./obj_dir/VNaxRiscv --load-elf ../../../../ext/NaxSoftware/baremetal/simdAdd/build/rv32im/simdAdd.elf --spike-disable --pass-symbol pass --fail-symbol fail --trace
 </pre></div>
 </div>
 <p>Which will output us the value 2224666 in the shell :D</p>
+</div>
+<div class="section" id="conclusion">
+<h4>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h4>
 <p>So overall this example didn’t introduced how to specify some additional decoding, nor how to define multi-cycle ALU. (TODO).
 But you can take a look in the IntAluPlugin, ShiftPlugin, DivPlugin, MulPlugin and BranchPlugin which are doing those things using the same ExecutionUnitElementSimple base class.</p>
 <p>Also, you don’t have to use the ExecutionUnitElementSimple base class, you can have more fondamental accesses, as the LoadPlugin, StorePlugin, EnvCallPlugin.</p>
+</div>
+<div class="section" id="hardcore-way">
+<h4>Hardcore way<a class="headerlink" href="#hardcore-way" title="Permalink to this headline">¶</a></h4>
+<p>Note, here is a example of the same instruction, but implemented without the ExecutionUnitElementSimple facilities :
+(<a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/72b80e3345ecc3a25ca913f2b741e919a3f4c970/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L100">https://github.com/SpinalHDL/NaxRiscv/blob/72b80e3345ecc3a25ca913f2b741e919a3f4c970/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L100</a>)</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">object</span> <span class="nc">SimdAddRawPlugin</span><span class="p">{</span>
+  <span class="kd">val</span> <span class="nc">SEL</span> <span class="o">=</span> <span class="nc">Stageable</span><span class="p">(</span><span class="nc">Bool</span><span class="p">())</span> <span class="c1">//Will be used to identify when we are executing a ADD4</span>
+  <span class="kd">val</span> <span class="nc">ADD4</span> <span class="o">=</span> <span class="nc">IntRegFile</span><span class="p">.</span><span class="nc">TypeR</span><span class="p">(</span><span class="nc">M</span><span class="s">&quot;0000000----------000-----0001011&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">SimdAddRawPlugin</span><span class="p">(</span><span class="n">euId</span> <span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="k">extends</span> <span class="nc">Plugin</span> <span class="p">{</span>
+  <span class="k">import</span> <span class="nc">SimdAddRawPlugin</span><span class="p">.</span><span class="n">_</span>
+  <span class="kd">val</span> <span class="n">setup</span> <span class="o">=</span> <span class="n">create</span> <span class="n">early</span> <span class="k">new</span> <span class="nc">Area</span><span class="p">{</span>
+    <span class="kd">val</span> <span class="n">eu</span> <span class="o">=</span> <span class="n">findService</span><span class="p">[</span><span class="nc">ExecutionUnitBase</span><span class="p">](</span><span class="n">_</span><span class="p">.</span><span class="n">euId</span> <span class="o">==</span> <span class="n">euId</span><span class="p">)</span>
+    <span class="n">eu</span><span class="p">.</span><span class="n">retain</span><span class="p">()</span> <span class="c1">//We don&#39;t want the EU to generate itself before we are done with it</span>
+
+    <span class="c1">//Specify all the ADD4 requirements</span>
+    <span class="n">eu</span><span class="p">.</span><span class="n">addMicroOp</span><span class="p">(</span><span class="nc">ADD4</span><span class="p">)</span>
+    <span class="n">eu</span><span class="p">.</span><span class="n">setStaticCompletion</span><span class="p">(</span><span class="nc">ADD4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">eu</span><span class="p">.</span><span class="n">setStaticWake</span><span class="p">(</span><span class="nc">ADD4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">eu</span><span class="p">.</span><span class="n">setDecodingDefault</span><span class="p">(</span><span class="nc">SEL</span><span class="p">,</span> <span class="nc">False</span><span class="p">)</span>
+    <span class="n">eu</span><span class="p">.</span><span class="n">addDecoding</span><span class="p">(</span><span class="nc">ADD4</span><span class="p">,</span> <span class="nc">SEL</span><span class="p">,</span> <span class="nc">True</span><span class="p">)</span>
+
+    <span class="c1">//IntFormatPlugin provide a shared point to write into the register file with some optional carry extensions</span>
+    <span class="kd">val</span> <span class="n">intFormat</span> <span class="o">=</span> <span class="n">findService</span><span class="p">[</span><span class="nc">IntFormatPlugin</span><span class="p">](</span><span class="n">_</span><span class="p">.</span><span class="n">euId</span> <span class="o">==</span> <span class="n">euId</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="n">writeback</span> <span class="o">=</span> <span class="n">intFormat</span><span class="p">.</span><span class="n">access</span><span class="p">(</span><span class="n">stageId</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">writeLatency</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="kd">val</span> <span class="n">logic</span> <span class="o">=</span> <span class="n">create</span> <span class="n">late</span> <span class="k">new</span> <span class="nc">Area</span><span class="p">{</span>
+    <span class="kd">val</span> <span class="n">eu</span> <span class="o">=</span> <span class="n">setup</span><span class="p">.</span><span class="n">eu</span>
+    <span class="kd">val</span> <span class="n">writeback</span> <span class="o">=</span> <span class="n">setup</span><span class="p">.</span><span class="n">writeback</span>
+    <span class="kd">val</span> <span class="n">stage</span> <span class="o">=</span> <span class="n">eu</span><span class="p">.</span><span class="n">getExecute</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1">//Get the RISC-V RS1/RS2 values from the register file</span>
+    <span class="kd">val</span> <span class="n">rs1</span> <span class="o">=</span> <span class="n">stage</span><span class="p">(</span><span class="n">eu</span><span class="p">(</span><span class="nc">IntRegFile</span><span class="p">,</span> <span class="nc">RS1</span><span class="p">)).</span><span class="n">asUInt</span>
+    <span class="kd">val</span> <span class="n">rs2</span> <span class="o">=</span> <span class="n">stage</span><span class="p">(</span><span class="n">eu</span><span class="p">(</span><span class="nc">IntRegFile</span><span class="p">,</span> <span class="nc">RS2</span><span class="p">)).</span><span class="n">asUInt</span>
+
+    <span class="c1">//Do some computation</span>
+    <span class="kd">val</span> <span class="n">rd</span> <span class="o">=</span> <span class="nc">UInt</span><span class="p">(</span><span class="mi">32</span> <span class="n">bits</span><span class="p">)</span>
+    <span class="n">rd</span><span class="p">(</span> <span class="mi">7</span> <span class="n">downto</span>  <span class="mi">0</span><span class="p">)</span> <span class="o">:=</span> <span class="n">rs1</span><span class="p">(</span> <span class="mi">7</span> <span class="n">downto</span>  <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">rs2</span><span class="p">(</span> <span class="mi">7</span> <span class="n">downto</span>  <span class="mi">0</span><span class="p">)</span>
+    <span class="n">rd</span><span class="p">(</span><span class="mi">16</span> <span class="n">downto</span>  <span class="mi">8</span><span class="p">)</span> <span class="o">:=</span> <span class="n">rs1</span><span class="p">(</span><span class="mi">16</span> <span class="n">downto</span>  <span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">rs2</span><span class="p">(</span><span class="mi">16</span> <span class="n">downto</span>  <span class="mi">8</span><span class="p">)</span>
+    <span class="n">rd</span><span class="p">(</span><span class="mi">23</span> <span class="n">downto</span> <span class="mi">16</span><span class="p">)</span> <span class="o">:=</span> <span class="n">rs1</span><span class="p">(</span><span class="mi">23</span> <span class="n">downto</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="n">rs2</span><span class="p">(</span><span class="mi">23</span> <span class="n">downto</span> <span class="mi">16</span><span class="p">)</span>
+    <span class="n">rd</span><span class="p">(</span><span class="mi">31</span> <span class="n">downto</span> <span class="mi">24</span><span class="p">)</span> <span class="o">:=</span> <span class="n">rs1</span><span class="p">(</span><span class="mi">31</span> <span class="n">downto</span> <span class="mi">24</span><span class="p">)</span> <span class="o">+</span> <span class="n">rs2</span><span class="p">(</span><span class="mi">31</span> <span class="n">downto</span> <span class="mi">24</span><span class="p">)</span>
+
+    <span class="c1">//Provide the computation value for the writeback</span>
+    <span class="n">writeback</span><span class="p">.</span><span class="n">valid</span>   <span class="o">:=</span> <span class="n">stage</span><span class="p">(</span><span class="nc">SEL</span><span class="p">)</span>
+    <span class="n">writeback</span><span class="p">.</span><span class="n">payload</span> <span class="o">:=</span> <span class="n">rd</span><span class="p">.</span><span class="n">asBits</span>
+
+    <span class="c1">//Now the EU has every requirements set for the generation (from this plugin perspective)</span>
+    <span class="n">eu</span><span class="p">.</span><span class="n">release</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
