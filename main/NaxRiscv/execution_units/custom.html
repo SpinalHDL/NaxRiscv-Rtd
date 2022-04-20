@@ -436,8 +436,8 @@ But you can take a look in the IntAluPlugin, ShiftPlugin, DivPlugin, MulPlugin a
 
     <span class="c1">//Specify all the ADD4 requirements</span>
     <span class="n">eu</span><span class="p">.</span><span class="n">addMicroOp</span><span class="p">(</span><span class="nc">ADD4</span><span class="p">)</span>
-    <span class="n">eu</span><span class="p">.</span><span class="n">setStaticCompletion</span><span class="p">(</span><span class="nc">ADD4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">eu</span><span class="p">.</span><span class="n">setStaticWake</span><span class="p">(</span><span class="nc">ADD4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">eu</span><span class="p">.</span><span class="n">setCompletion</span><span class="p">(</span><span class="nc">ADD4</span><span class="p">,</span> <span class="n">stageId</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">eu</span><span class="p">.</span><span class="n">setStaticWake</span><span class="p">(</span><span class="nc">ADD4</span><span class="p">,</span> <span class="n">stageId</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">eu</span><span class="p">.</span><span class="n">setDecodingDefault</span><span class="p">(</span><span class="nc">SEL</span><span class="p">,</span> <span class="nc">False</span><span class="p">)</span>
     <span class="n">eu</span><span class="p">.</span><span class="n">addDecoding</span><span class="p">(</span><span class="nc">ADD4</span><span class="p">,</span> <span class="nc">SEL</span><span class="p">,</span> <span class="nc">True</span><span class="p">)</span>
 
@@ -449,7 +449,7 @@ But you can take a look in the IntAluPlugin, ShiftPlugin, DivPlugin, MulPlugin a
   <span class="kd">val</span> <span class="n">logic</span> <span class="o">=</span> <span class="n">create</span> <span class="n">late</span> <span class="k">new</span> <span class="nc">Area</span><span class="p">{</span>
     <span class="kd">val</span> <span class="n">eu</span> <span class="o">=</span> <span class="n">setup</span><span class="p">.</span><span class="n">eu</span>
     <span class="kd">val</span> <span class="n">writeback</span> <span class="o">=</span> <span class="n">setup</span><span class="p">.</span><span class="n">writeback</span>
-    <span class="kd">val</span> <span class="n">stage</span> <span class="o">=</span> <span class="n">eu</span><span class="p">.</span><span class="n">getExecute</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="n">stage</span> <span class="o">=</span> <span class="n">eu</span><span class="p">.</span><span class="n">getExecute</span><span class="p">(</span><span class="n">stageId</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="c1">//Get the RISC-V RS1/RS2 values from the register file</span>
     <span class="kd">val</span> <span class="n">rs1</span> <span class="o">=</span> <span class="n">stage</span><span class="p">(</span><span class="n">eu</span><span class="p">(</span><span class="nc">IntRegFile</span><span class="p">,</span> <span class="nc">RS1</span><span class="p">)).</span><span class="n">asUInt</span>

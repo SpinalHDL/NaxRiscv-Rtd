@@ -225,8 +225,8 @@ Note, here is a example of the same instruction, but implemented without the Exe
 
         //Specify all the ADD4 requirements
         eu.addMicroOp(ADD4)
-        eu.setStaticCompletion(ADD4, 0)
-        eu.setStaticWake(ADD4, 0)
+        eu.setCompletion(ADD4, stageId = 0)
+        eu.setStaticWake(ADD4, stageId = 0)
         eu.setDecodingDefault(SEL, False)
         eu.addDecoding(ADD4, SEL, True)
 
@@ -238,7 +238,7 @@ Note, here is a example of the same instruction, but implemented without the Exe
       val logic = create late new Area{
         val eu = setup.eu
         val writeback = setup.writeback
-        val stage = eu.getExecute(0)
+        val stage = eu.getExecute(stageId = 0)
 
         //Get the RISC-V RS1/RS2 values from the register file
         val rs1 = stage(eu(IntRegFile, RS1)).asUInt
