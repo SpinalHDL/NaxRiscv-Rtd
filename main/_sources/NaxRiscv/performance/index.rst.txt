@@ -2,8 +2,6 @@
    :format: html
 
 
-
-
 ====================
 Performance and Area
 ====================
@@ -35,7 +33,7 @@ Performance :
 
 - Dhrystone   : 2.64 DMIPS/Mhz    1.48 IPC (-O3 -fno-common -fno-inline, 318 instruction per iteration)
 - Coremark    : 4.70 Coremark/Mhz 1.19 IPC (-O3 and so many more random flags)
-- Embench-iot : 1.55 baseline     1.32 IPC (-O2 -ffunction-sections)
+- Embench-iot : 1.59 baseline     1.35 IPC (-O2 -mcmodel=medany -ffunction-sections)
 
 On Artix 7 speed grade 3 :
 
@@ -49,7 +47,7 @@ Performance :
 
 - Dhrystone   : 2.54 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
 - Coremark    : 4.19 Coremark/Mhz (-O3 and so many more random flags)
-- Embench-iot : 1.33 baseline     (-O2 -ffunction-sections)
+- Embench-iot : 1.39 baseline     (-O2 -mcmodel=medany -ffunction-sections)
 
 On Artix 7 speed grade 3 :
 
@@ -97,4 +95,16 @@ Here is a few notes collected durring the developpement :
 - Adding more and more execution units seems to goerealy fast into diminushing returns lands
 
 
+How to run the benchmark
+==============================
 
+First follow the steps in https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md#how-to-setup-things to get a functional simulator.
+
+Then dhrystone and coremark benchmark can be manualy run with : 
+
+.. code:: shell
+
+    obj_dir/VNaxRiscv --name dhrystone --output-dir output/nax/dhrystone --load-elf ../../../../ext/NaxSoftware/baremetal/dhrystone/build/rv32im/dhrystone.elf --start-symbol _start  --stats-print --stats-toggle-symbol sim_time
+    obj_dir/VNaxRiscv --name coremark --output-dir output/nax/coremark --load-elf ../../../../ext/NaxSoftware/baremetal/coremark/build/rv32im/coremark.elf --start-symbol _start --pass-symbol pass  --stats-print-all --stats-toggle-symbol sim_time
+
+To run embench, you have to clone https://github.com/SpinalHDL/embench-iot.git and then follow  the steps defined in config/riscv32/boards/naxriscv_sim/README.md

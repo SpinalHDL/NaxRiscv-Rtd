@@ -150,6 +150,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#rv32">RV32</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rv64">RV64</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-run-the-benchmark">How to run the benchmark</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../abstraction/index.html">Abstractions / HDL</a><ul>
@@ -267,7 +268,7 @@
 <ul class="simple">
 <li><p>Dhrystone   : 2.64 DMIPS/Mhz    1.48 IPC (-O3 -fno-common -fno-inline, 318 instruction per iteration)</p></li>
 <li><p>Coremark    : 4.70 Coremark/Mhz 1.19 IPC (-O3 and so many more random flags)</p></li>
-<li><p>Embench-iot : 1.55 baseline     1.32 IPC (-O2 -ffunction-sections)</p></li>
+<li><p>Embench-iot : 1.59 baseline     1.35 IPC (-O2 -mcmodel=medany -ffunction-sections)</p></li>
 </ul>
 <p>On Artix 7 speed grade 3 :</p>
 <ul class="simple">
@@ -279,7 +280,7 @@
 <ul class="simple">
 <li><p>Dhrystone   : 2.54 DMIPS/Mhz    (-O3 -fno-common -fno-inline)</p></li>
 <li><p>Coremark    : 4.19 Coremark/Mhz (-O3 and so many more random flags)</p></li>
-<li><p>Embench-iot : 1.33 baseline     (-O2 -ffunction-sections)</p></li>
+<li><p>Embench-iot : 1.39 baseline     (-O2 -mcmodel=medany -ffunction-sections)</p></li>
 </ul>
 <p>On Artix 7 speed grade 3 :</p>
 <ul class="simple">
@@ -316,6 +317,16 @@
 <li><p>Some tests were made with two cycle latency ALU (in prevision of RV64 timing relaxation) seems to show “little” impact on the overall performances (~15%, need to verify on more benchmarks)</p></li>
 <li><p>Adding more and more execution units seems to goerealy fast into diminushing returns lands</p></li>
 </ul>
+</div>
+<div class="section" id="how-to-run-the-benchmark">
+<h2>How to run the benchmark<a class="headerlink" href="#how-to-run-the-benchmark" title="Permalink to this headline">¶</a></h2>
+<p>First follow the steps in <a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md#how-to-setup-things">https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md#how-to-setup-things</a> to get a functional simulator.</p>
+<p>Then dhrystone and coremark benchmark can be manualy run with :</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>obj_dir/VNaxRiscv --name dhrystone --output-dir output/nax/dhrystone --load-elf ../../../../ext/NaxSoftware/baremetal/dhrystone/build/rv32im/dhrystone.elf --start-symbol _start  --stats-print --stats-toggle-symbol sim_time
+obj_dir/VNaxRiscv --name coremark --output-dir output/nax/coremark --load-elf ../../../../ext/NaxSoftware/baremetal/coremark/build/rv32im/coremark.elf --start-symbol _start --pass-symbol pass  --stats-print-all --stats-toggle-symbol sim_time
+</pre></div>
+</div>
+<p>To run embench, you have to clone <a class="reference external" href="https://github.com/SpinalHDL/embench-iot.git">https://github.com/SpinalHDL/embench-iot.git</a> and then follow  the steps defined in config/riscv32/boards/naxriscv_sim/README.md</p>
 </div>
 </div>
 
