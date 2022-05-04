@@ -44,4 +44,10 @@ Also there wasn't many OoO opensource softcore out there in the wild (Marocchino
 The bet was that it was possible to do better in some metrics, and hopfully being good enough to justify in some project
 the replacement of single issue / in order core softcore by providing better performances (at the cost of area).
 
+Additional ressources
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+RISC-V Week Paris 2022 slides:
+
+https://github.com/SpinalHDL/SpinalDoc/blob/master/presentation/en/nax_040522/slides_nax_040522.pdf
 
