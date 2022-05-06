@@ -32,8 +32,8 @@ For the following configuration :
 Performance :
 
 - Dhrystone   : 2.64 DMIPS/Mhz    1.48 IPC (-O3 -fno-common -fno-inline, 318 instruction per iteration)
-- Coremark    : 4.70 Coremark/Mhz 1.19 IPC (-O3 and so many more random flags)
-- Embench-iot : 1.59 baseline     1.35 IPC (-O2 -mcmodel=medany -ffunction-sections)
+- Coremark    : 4.85 Coremark/Mhz 1.23 IPC (-O3 and so many more random flags)
+- Embench-iot : 1.62 baseline     1.37 IPC (-O2 -mcmodel=medany -ffunction-sections)
 
 On Artix 7 speed grade 3 :
 
@@ -46,8 +46,8 @@ Reducing the number of int ALU to a single one and moving the branch to the shar
 Performance : 
 
 - Dhrystone   : 2.54 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
-- Coremark    : 4.19 Coremark/Mhz (-O3 and so many more random flags)
-- Embench-iot : 1.39 baseline     (-O2 -mcmodel=medany -ffunction-sections)
+- Coremark    : 4.32 Coremark/Mhz (-O3 and so many more random flags)
+- Embench-iot : 1.41 baseline     (-O2 -mcmodel=medany -ffunction-sections)
 
 On Artix 7 speed grade 3 :
 
@@ -71,9 +71,9 @@ In a similar configuration than the above RV32 (2\*Int/Shift/Branch, 1\*/load/st
 
 Performance : 
 
-- Dhrystone   : 2.54 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
-- Coremark    : 4.75 Coremark/Mhz (-O3, u32 as s32 and so many more random flags)
-- Embench-iot : 1.70 baseline     (-O2 -ffunction-sections)
+- Dhrystone   : 2.55 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
+- Coremark    : 4.83 Coremark/Mhz (-O3, u32 as s32 and so many more random flags)
+- Embench-iot : 1.73 baseline     (-O2 -ffunction-sections)
 
 On Artix 7 speed grade 3 :
 
