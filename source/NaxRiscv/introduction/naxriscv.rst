@@ -9,7 +9,7 @@ NaxRiscv is a core currently characterised by :
 
 - Out of order execution with register renaming
 - Superscalar (ex : 2 decode, 3 execution units, 2 retire)
-- (RV32 RV64)IMASU (Linux / Buildroot works on harwdare)
+- (RV32/RV64)IMAFDCSU (Linux / Buildroot works on harwdare)
 - Portable HDL, but target FPGA with distributed ram (Xilinx series 7 is the reference used so far)
 - Target a (relatively) low area usage and high fmax (not the best IPC)
 - Decentralized hardware elaboration (Empty toplevel parametrized with plugins)
