@@ -47,7 +47,8 @@ the replacement of single issue / in order core softcore by providing better per
 Additional ressources
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-RISC-V Week Paris 2022 slides:
+RISC-V Week Paris 2022 :
 
-https://github.com/SpinalHDL/SpinalDoc/blob/master/presentation/en/nax_040522/slides_nax_040522.pdf
+- Slides : https://github.com/SpinalHDL/SpinalDoc/blob/master/presentation/en/nax_040522/slides_nax_040522.pdf
+- Video : https://peertube.f-si.org/videos/watch/b2c577b1-977a-48b9-b395-244ebf3d1ef6
 
