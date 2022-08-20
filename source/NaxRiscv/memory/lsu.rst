@@ -4,9 +4,9 @@
 Load store unite
 ============================
 
-The LSU implementation is characterised by : 
+The LSU implementation is characterised by :
 
-- **LQ / SQ** : Usualy, 16 of each
+- **LQ / SQ** : Usually, 16 of each
 - **Store Address / Data** : For store, only the address is provided through the issue queue / AGU, while there is some logic from the SQ to fetch the store value directly from the register file.
 - **Load Hit speculation** : In order to reduce the load to use latency (to 3 cycles instead of 6), there is a cache hit predictor, speculatively waking up depending instructions
 - **Load from AGU** : To reduce the load latency, if the LQ has nothing for the load pipeline, then the AGU can directly provide its fresh calculation without passing by the LQ registers

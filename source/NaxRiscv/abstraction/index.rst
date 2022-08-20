@@ -9,14 +9,14 @@
 Abstractions / HDL
 ========================
 
-The NaxRiscv implementation take advantage of quite a few paradagm's advailable when using the SpinalHDL (A Scala hardware description library).
+The NaxRiscv implementation takes advantage of quite a few paradigms available when using the SpinalHDL (a Scala hardware description library).
 
 
 Framework
 ===================
 
-The toplevel of NaxRiscv is mostly a empty Component with a framework which can schedule a
-list plugins. The framework itself does not create any hardware.
+The toplevel of NaxRiscv is mostly an empty Component with a framework which can schedule a
+list of plugins. The framework itself does not create any hardware.
 
 Here is the NaxRiscv toplevel
 
@@ -239,22 +239,22 @@ Here is can instance of dummy plugin creating two tasks (setup / logic):
      }
    }
 
-Note that create early and create late will execute their code into a
+Note that create early and create late will execute their code in a
 new threads, which are scheduled by the Framework class.
 
 
 Service definition
 ------------------
 
-For instance, the JumpService, allowing other plugins to ask a hardware jump interface for later uses. such service can be defined as :
+For instance, the JumpService, providing a hardware jump interface to other plugins. Such a service can be defined as :
 
 .. code:: scala
 
    //Software interface (elaboration time)
    trait JumpService extends Service{
-     def createJumpInterface(priority : Int) : Flow[JumpCmd] 
+     def createJumpInterface(priority : Int) : Flow[JumpCmd]
    }
-   
+
    //Hardware payload of the interface
    case class JumpCmd(pcWidth : Int) extends Bundle{
      val pc = UInt(pcWidth bits)
@@ -270,7 +270,7 @@ Taking the previously shown JumpService, the PcPlugin could implement it the fol
    case class JumpSpec(interface :  Flow[JumpCmd], priority : Int)
    class PcPlugin() extends Plugin with JumpService{
      val jumpsSpec = ArrayBuffer[JumpSpec]()
-     
+
      override def createJumpInterface(priority : Int): Flow[JumpCmd] = {
        val spec = JumpSpec(Flow(JumpCmd(32)), priority)
        jumpsSpec += spec
@@ -293,7 +293,7 @@ Taking the previously shown JumpService, the PcPlugin could implement it the fol
 Service usage
 -------------
 
-Then another plugin could then retrieve and use this service by :
+Another plugin could then retrieve and use this service by :
 
 .. code:: scala
 
@@ -311,7 +311,7 @@ Then another plugin could then retrieve and use this service by :
 Service Pipeline definition
 ---------------------------
 
-Some plugins may even create pipeline skeleton which can then be
+Some plugins may even create a pipeline skeleton which can then be
 populated by other plugins. For instance :
 
 .. code:: scala
@@ -322,9 +322,9 @@ populated by other plugins. For instance :
        val stages = Array.fill(stagesCount)(newStage())
 
        import spinal.lib.pipeline.Connection._
-       //Connect every stage together 
+       //Connect every stage together
        for((m, s) <- (stages.dropRight(1), stages.tail).zipped){
-         connect(m, s)(M2S()) 
+         connect(m, s)(M2S())
        }
      }
 
@@ -356,7 +356,7 @@ fetch pipeline :
        val fetch = getService[FetchPlugin]
        val firstStage = fetch.pipeline.stages(0)
 
-       firstStage(PcPlugin.FETCH_PC) := ???   //Assign the FETCH_PC value in firstStage of the pipeline. Other plugins may access it down stream. 
+       firstStage(PcPlugin.FETCH_PC) := ???   //Assign the FETCH_PC value in firstStage of the pipeline. Other plugins may access it down stream.
        fetch.release()
      }
    }
@@ -364,7 +364,7 @@ fetch pipeline :
 Execution units
 ---------------------
 
-Another practical usage of those concept is made for the execution units. You can spawn a execution unit by creating a new ExecutionUnitBase with
+Implementation of the execution units is another practical use of this concept. You can spawn an execution unit by creating a new ExecutionUnitBase with
 a unique execution unit identifier :
 
 .. code:: scala
@@ -380,7 +380,7 @@ ExecutionUnitElementSimple with the same identifier :
        plugins += new IntAluPlugin("EU0")
        plugins += new ShiftPlugin("EU0")
 
-Here is the example of a execution unit handeling :
+Here is the example of an execution unit handling :
 
 -  mul/div
 -  jump/branches
@@ -409,7 +409,7 @@ Here is the example of a execution unit handeling :
 ShiftPlugin
 -----------
 
-Here is the ShiftPlugin as a example of ExecutionUnitElementSimple
+Here is the ShiftPlugin as an example of ExecutionUnitElementSimple
 plugin:
 
 .. code:: scala
@@ -454,9 +454,9 @@ plugin:
 Pipeline
 ===================
 
-To allow the definition of extendable/flexible pipelines, the Pipeline abstraction was put in place. This abstractions allow to define stages, arbitrations, connections and values connected through them.
+To allow the definition of extendable/flexible pipelines, the Pipeline abstraction was put into place. This abstraction allows to define stages, arbitrations, connections, and values connected through them.
 
-Here is a simple example : 
+Here is a simple example :
 
 .. code:: scala
 
@@ -475,20 +475,20 @@ Here is a simple example :
 		val PC = Stageable(UInt(32 bits)) //This isn't a hardware signal, but it is a "key" used to identify the concept of PC (program counter) in the whole pipeline.
 		fetch(PC) := xxx      //Assign xxx to the fetch(PC) value
 		yyy := writeback(PC)  //Assign the writeback(PC) value to yyy
-		
+
 		execute.haltWhen(execute(PC) === zzz) //Halt the pipeline at the execute stage when the eecute(PC) match zzz
-		
+
 		build()  //Generate all the required hardware. This will for instance pipeline the PC from the fetch stage to where it is needed (execute/writeback stage)
 	  }
-	  
-Based on that API, multiple plugins in the NaxRiscv CPU can compose / extends existing pipelines. 
-Also notes that some plugins maybe put in place as a squeleton pipeline for others plugin to work with. This was done for the FetchPlugin, FrontendPlugin and the ExecutionUnitBase.
 
-This API, combined with the concurrent hardware elaboration of the plugins also allows to have the number of stages in the pipeline to be adjusted depending the plugins needs, as it is done for the ExecutionUnitBase plugin.
+Based on that API, multiple plugins in the NaxRiscv CPU can compose / extend existing pipelines.
+Also notes that some plugins maybe put into place as a skeleton pipeline for other plugin to work with. This was done for the FetchPlugin, FrontendPlugin and the ExecutionUnitBase.
 
-To be more concret, execution units plugins using a ExecutionUnitBase as pipeline squeleton only have to refer to a given stage number for it to be dynamicaly created (if it wasn't already created before).
+This API, combined with the concurrent hardware elaboration of the plugins, also allows to adjust the number of stages in the pipeline depending on the plugins' needs, as it is done for the ExecutionUnitBase plugin.
 
-Another functionaly in the pipeline API is allows identifying pipeline elements with a secondary key. For instance, in the following example some logic which could be used to calculate the next PC of a branch in a pipelined way.
+To be more concrete, execution unit plugins using an ExecutionUnitBase as a pipeline skeleton only have to refer to a given stage number for it to be dynamically created (if it wasn't already created before).
+
+Another function of the pipeline API is that it allows identifying pipeline elements with a secondary key. For instance, in the following example some logic which could be used to calculate the next PC of a branch in a pipelined way.
 
 .. code:: scala
 
@@ -502,11 +502,11 @@ Another functionaly in the pipeline API is allows identifying pipeline elements 
 	} otherwise {
 	  stageB(PC, "NEXT") := stageB(PC, "WITHOUT_BRANCH")
 	}
-	
-But more generaly, this seconday key is used to access a "dimention" for instance, the pipeline being used to decode two instruction at the time : 
+
+But more generally, this secondary key is used to access a "dimension". For instance, the pipeline being used to decode two instruction at the time :
 
 .. code:: scala
-	
+
 	val OPCODE = Stageable(Bits(32 bits))
 	for(decodeIndex <- 0 until decodeCount){
 	   decodeStage(OPCODE, decodeIndex) := xxx   //Using the index of the decoding unit we are working on as a secondary key
@@ -515,7 +515,7 @@ But more generaly, this seconday key is used to access a "dimention" for instanc
 State machine API
 ===================
 
-Not something ground breaking, but in a few places, the SpinalHDL state machine API is used. Here is a short example of the API : 
+Not something ground breaking, but in a few places, the SpinalHDL state machine API is used. Here is a short example of the API :
 
 .. code:: scala
 
@@ -538,24 +538,24 @@ Not something ground breaking, but in a few places, the SpinalHDL state machine 
 
     stateC.whenIsActive (goto(stateA))
   }
-  
-Automated multiport memory transformation  
+
+Automated multiport memory transformation
 =========================================================
 
-In quite a few places in the design, there is memories which need multiple write ports. Such memories are most of the time not directly inferable by the FPGA synthesis tools. 
+In quite a few places in the design, there are memories which need multiple write ports. Such memories are not directly inferable by the FPGA synthesis tools most of the time.
 
-Still the NaxRiscv scala code define them all over the place, and to fill this gap, a custom SpinalHDL transformation phase was added to symplify them into groups of simple dual port ram with xor based glue.
+Still the NaxRiscv Scala code defines them all over the place, and to fill this gap, a custom SpinalHDL transformation phase was added to simplify them into groups of simple dual port ram with xor based glue.
 
-Here is how this transformation phase is added into the flow 
+Here is how this transformation phase is added into the flow :
 
 .. code:: scala
 
     val spinalConfig = SpinalConfig()
     spinalConfig.addTransformationPhase(new MultiPortWritesSymplifier)
     spinalConfig.generateVerilog(new NaxRiscv(xlen = 32, plugins))
-  
-  
-And here is how such transformation phase is defined :
+
+
+And here is how such a transformation phase is defined :
 
 .. code:: scala
 
