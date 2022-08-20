@@ -93,9 +93,9 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-development-and-status">Project development and status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-ressources">Additional ressources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#pipeline">Pipeline</a></li>
@@ -244,11 +244,11 @@
             
   <div class="section" id="abstractions-hdl">
 <span id="abstraction-hdl"></span><h1>Abstractions / HDL<a class="headerlink" href="#abstractions-hdl" title="Permalink to this headline">¶</a></h1>
-<p>The NaxRiscv implementation take advantage of quite a few paradagm’s advailable when using the SpinalHDL (A Scala hardware description library).</p>
+<p>The NaxRiscv implementation takes advantage of quite a few paradigms available when using the SpinalHDL (a Scala hardware description library).</p>
 <div class="section" id="framework">
 <h2>Framework<a class="headerlink" href="#framework" title="Permalink to this headline">¶</a></h2>
-<p>The toplevel of NaxRiscv is mostly a empty Component with a framework which can schedule a
-list plugins. The framework itself does not create any hardware.</p>
+<p>The toplevel of NaxRiscv is mostly an empty Component with a framework which can schedule a
+list of plugins. The framework itself does not create any hardware.</p>
 <p>Here is the NaxRiscv toplevel</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NaxRiscv</span><span class="p">(</span><span class="n">xlen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"></span>
 <span class="w">                           </span><span class="n">plugins</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">Seq</span><span class="p">[</span><span class="nc">Plugin</span><span class="p">])</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="p">{</span><span class="w"></span>
@@ -461,12 +461,12 @@ skeleton)</p></li>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Note that create early and create late will execute their code into a
+<p>Note that create early and create late will execute their code in a
 new threads, which are scheduled by the Framework class.</p>
 </div>
 <div class="section" id="service-definition">
 <h3>Service definition<a class="headerlink" href="#service-definition" title="Permalink to this headline">¶</a></h3>
-<p>For instance, the JumpService, allowing other plugins to ask a hardware jump interface for later uses. such service can be defined as :</p>
+<p>For instance, the JumpService, providing a hardware jump interface to other plugins. Such a service can be defined as :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">//Software interface (elaboration time)</span>
 <span class="k">trait</span><span class="w"> </span><span class="nc">JumpService</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Service</span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">createJumpInterface</span><span class="p">(</span><span class="n">priority</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">Flow</span><span class="p">[</span><span class="nc">JumpCmd</span><span class="p">]</span><span class="w"></span>
@@ -509,7 +509,7 @@ new threads, which are scheduled by the Framework class.</p>
 </div>
 <div class="section" id="service-usage">
 <h3>Service usage<a class="headerlink" href="#service-usage" title="Permalink to this headline">¶</a></h3>
-<p>Then another plugin could then retrieve and use this service by :</p>
+<p>Another plugin could then retrieve and use this service by :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AnotherPlugin</span><span class="p">()</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Plugin</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">setup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">early</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Area</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">jump</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getService</span><span class="p">[</span><span class="nc">JumpService</span><span class="p">].</span><span class="n">createJumpInterface</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span><span class="w"></span>
@@ -525,7 +525,7 @@ new threads, which are scheduled by the Framework class.</p>
 </div>
 <div class="section" id="service-pipeline-definition">
 <h3>Service Pipeline definition<a class="headerlink" href="#service-pipeline-definition" title="Permalink to this headline">¶</a></h3>
-<p>Some plugins may even create pipeline skeleton which can then be
+<p>Some plugins may even create a pipeline skeleton which can then be
 populated by other plugins. For instance :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FetchPlugin</span><span class="p">()</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Plugin</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="nc">LockedImpl</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">pipeline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">early</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Pipeline</span><span class="p">{</span><span class="w"></span>
@@ -574,7 +574,7 @@ fetch pipeline :</p>
 </div>
 <div class="section" id="execution-units">
 <h3>Execution units<a class="headerlink" href="#execution-units" title="Permalink to this headline">¶</a></h3>
-<p>Another practical usage of those concept is made for the execution units. You can spawn a execution unit by creating a new ExecutionUnitBase with
+<p>Implementation of the execution units is another practical use of this concept. You can spawn an execution unit by creating a new ExecutionUnitBase with
 a unique execution unit identifier :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">plugins</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">ExecutionUnitBase</span><span class="p">(</span><span class="s">&quot;EU0&quot;</span><span class="p">)</span><span class="w"></span>
 </pre></div>
@@ -586,7 +586,7 @@ ExecutionUnitElementSimple with the same identifier :</p>
 <span class="n">plugins</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">ShiftPlugin</span><span class="p">(</span><span class="s">&quot;EU0&quot;</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Here is the example of a execution unit handeling :</p>
+<p>Here is the example of an execution unit handling :</p>
 <ul class="simple">
 <li><p>mul/div</p></li>
 <li><p>jump/branches</p></li>
@@ -614,7 +614,7 @@ ExecutionUnitElementSimple with the same identifier :</p>
 </div>
 <div class="section" id="shiftplugin">
 <h3>ShiftPlugin<a class="headerlink" href="#shiftplugin" title="Permalink to this headline">¶</a></h3>
-<p>Here is the ShiftPlugin as a example of ExecutionUnitElementSimple
+<p>Here is the ShiftPlugin as an example of ExecutionUnitElementSimple
 plugin:</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">object</span><span class="w"> </span><span class="nc">ShiftPlugin</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">AreaObject</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="nc">SIGNED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Stageable</span><span class="p">(</span><span class="nc">Bool</span><span class="p">())</span><span class="w"></span>
@@ -658,7 +658,7 @@ plugin:</p>
 </div>
 <div class="section" id="pipeline">
 <h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h2>
-<p>To allow the definition of extendable/flexible pipelines, the Pipeline abstraction was put in place. This abstractions allow to define stages, arbitrations, connections and values connected through them.</p>
+<p>To allow the definition of extendable/flexible pipelines, the Pipeline abstraction was put into place. This abstraction allows to define stages, arbitrations, connections, and values connected through them.</p>
 <p>Here is a simple example :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nc">Pipeline</span><span class="p">{</span><span class="w"></span>
 <span class="w">       </span><span class="kd">val</span><span class="w"> </span><span class="n">fetch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newStage</span><span class="p">()</span><span class="w"></span>
@@ -682,11 +682,11 @@ plugin:</p>
 <span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Based on that API, multiple plugins in the NaxRiscv CPU can compose / extends existing pipelines.
-Also notes that some plugins maybe put in place as a squeleton pipeline for others plugin to work with. This was done for the FetchPlugin, FrontendPlugin and the ExecutionUnitBase.</p>
-<p>This API, combined with the concurrent hardware elaboration of the plugins also allows to have the number of stages in the pipeline to be adjusted depending the plugins needs, as it is done for the ExecutionUnitBase plugin.</p>
-<p>To be more concret, execution units plugins using a ExecutionUnitBase as pipeline squeleton only have to refer to a given stage number for it to be dynamicaly created (if it wasn’t already created before).</p>
-<p>Another functionaly in the pipeline API is allows identifying pipeline elements with a secondary key. For instance, in the following example some logic which could be used to calculate the next PC of a branch in a pipelined way.</p>
+<p>Based on that API, multiple plugins in the NaxRiscv CPU can compose / extend existing pipelines.
+Also notes that some plugins maybe put into place as a skeleton pipeline for other plugin to work with. This was done for the FetchPlugin, FrontendPlugin and the ExecutionUnitBase.</p>
+<p>This API, combined with the concurrent hardware elaboration of the plugins, also allows to adjust the number of stages in the pipeline depending on the plugins’ needs, as it is done for the ExecutionUnitBase plugin.</p>
+<p>To be more concrete, execution unit plugins using an ExecutionUnitBase as a pipeline skeleton only have to refer to a given stage number for it to be dynamically created (if it wasn’t already created before).</p>
+<p>Another function of the pipeline API is that it allows identifying pipeline elements with a secondary key. For instance, in the following example some logic which could be used to calculate the next PC of a branch in a pipelined way.</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span><span class="w"> </span><span class="nc">PC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Stageable</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="mi">32</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"></span>
 <span class="kd">val</span><span class="w"> </span><span class="nc">COND</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Stageable</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="mi">32</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"></span>
 <span class="n">stageA</span><span class="p">(</span><span class="nc">COND</span><span class="p">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">xxx</span><span class="w"></span>
@@ -699,7 +699,7 @@ Also notes that some plugins maybe put in place as a squeleton pipeline for othe
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>But more generaly, this seconday key is used to access a “dimention” for instance, the pipeline being used to decode two instruction at the time :</p>
+<p>But more generally, this secondary key is used to access a “dimension”. For instance, the pipeline being used to decode two instruction at the time :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span><span class="w"> </span><span class="nc">OPCODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Stageable</span><span class="p">(</span><span class="nc">Bits</span><span class="p">(</span><span class="mi">32</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"></span>
 <span class="k">for</span><span class="p">(</span><span class="n">decodeIndex</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="n">decodeCount</span><span class="p">){</span><span class="w"></span>
 <span class="w">   </span><span class="n">decodeStage</span><span class="p">(</span><span class="nc">OPCODE</span><span class="p">,</span><span class="w"> </span><span class="n">decodeIndex</span><span class="p">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">xxx</span><span class="w">   </span><span class="c1">//Using the index of the decoding unit we are working on as a secondary key</span>
@@ -734,15 +734,15 @@ Also notes that some plugins maybe put in place as a squeleton pipeline for othe
 </div>
 <div class="section" id="automated-multiport-memory-transformation">
 <h2>Automated multiport memory transformation<a class="headerlink" href="#automated-multiport-memory-transformation" title="Permalink to this headline">¶</a></h2>
-<p>In quite a few places in the design, there is memories which need multiple write ports. Such memories are most of the time not directly inferable by the FPGA synthesis tools.</p>
-<p>Still the NaxRiscv scala code define them all over the place, and to fill this gap, a custom SpinalHDL transformation phase was added to symplify them into groups of simple dual port ram with xor based glue.</p>
-<p>Here is how this transformation phase is added into the flow</p>
+<p>In quite a few places in the design, there are memories which need multiple write ports. Such memories are not directly inferable by the FPGA synthesis tools most of the time.</p>
+<p>Still the NaxRiscv Scala code defines them all over the place, and to fill this gap, a custom SpinalHDL transformation phase was added to simplify them into groups of simple dual port ram with xor based glue.</p>
+<p>Here is how this transformation phase is added into the flow :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span><span class="w"> </span><span class="n">spinalConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">SpinalConfig</span><span class="p">()</span><span class="w"></span>
 <span class="n">spinalConfig</span><span class="p">.</span><span class="n">addTransformationPhase</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">MultiPortWritesSymplifier</span><span class="p">)</span><span class="w"></span>
 <span class="n">spinalConfig</span><span class="p">.</span><span class="n">generateVerilog</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">NaxRiscv</span><span class="p">(</span><span class="n">xlen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="n">plugins</span><span class="p">))</span><span class="w"></span>
 </pre></div>
 </div>
-<p>And here is how such transformation phase is defined :</p>
+<p>And here is how such a transformation phase is defined :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MultiPortWritesSymplifier</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">PhaseMemBlackboxing</span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">override</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">doBlackboxing</span><span class="p">(</span><span class="n">pc</span><span class="p">:</span><span class="w"> </span><span class="nc">PhaseContext</span><span class="p">,</span><span class="w"> </span><span class="n">typo</span><span class="p">:</span><span class="w"> </span><span class="nc">MemTopology</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">typo</span><span class="p">.</span><span class="n">writes</span><span class="p">.</span><span class="n">size</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">typo</span><span class="p">.</span><span class="n">readsSync</span><span class="p">.</span><span class="n">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span><span class="w"></span>

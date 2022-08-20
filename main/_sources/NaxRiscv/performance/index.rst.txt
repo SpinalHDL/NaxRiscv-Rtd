@@ -10,18 +10,18 @@ Performance and Area
 RV32
 =========================
 
-A few things to keep in mind : 
+A few things to keep in mind :
 
 - You can trade FMax IPC Area
-- There is better IPC xor FMAX xor Area configs  
+- There is better IPC xor FMAX xor Area configs
 
-For the following configuration : 
+For the following configuration :
 
-- RV32IMASU, dual issue,OoO, linux compatible
+- RV32IMASU, dual issue, OoO, linux compatible
 - 64 bits fetch, 2 decode, 3 issue, 2 retire
 - Shared issue queue with 32 entries
 - Renaming with 64 physical registers
-- 3 execution unit (2\*Int/Shift/branch, 1\*load/store/mul/div/csr/env)
+- 3 execution units (2\*Int/Shift/branch, 1\*load/store/mul/div/csr/env)
 - LSU with 16 load queue, 16 store queue
 - Load hit predictor (3 cycles load to use delay)
 - Store to load bypass
@@ -43,7 +43,7 @@ On Artix 7 speed grade 3 :
 Reducing the number of int ALU to a single one and moving the branch to the shared pipeline will produce :
 
 
-Performance : 
+Performance :
 
 - Dhrystone   : 2.70 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
 - Coremark    : 4.42 Coremark/Mhz (-O3 and so many more random flags)
@@ -57,15 +57,15 @@ On Artix 7 speed grade 3 :
 
 To go further, increasing the GSHARE storage or implementing something as TAGE should help.
 
-Here are a pipeline representation of the two above configurations : 
+Here are a pipeline representation of the two above configurations :
 
 .. image:: /asset/image/pipeline_simple.png
 
-Also notes that the NaxRiscv simulator support gem5 / konata logs, allowing to visualise the execution flow.
+Also note that the NaxRiscv simulator support gem5 / konata logs, allowing to visualise the execution flow.
 
-Note that if you configure the core with 1 decode 1 alu 1 shared eu you get : 
+Note that if you configure the core with 1 decode 1 alu 1 shared eu you get :
 
-Performance : 
+Performance :
 
 - Dhrystone   : 1.70 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
 - Coremark    : 3.34 Coremark/Mhz (-O3 and so many more random flags)
@@ -80,9 +80,9 @@ On Artix 7 speed grade 3 :
 RV64
 =========================
 
-In a similar configuration than the above RV32 (2\*Int/Shift/Branch, 1\*/load/store/mul/div/csr/env)
+In a similar configuration as the above RV32 (2\*Int/Shift/Branch, 1\*/load/store/mul/div/csr/env)
 
-Performance : 
+Performance :
 
 - Dhrystone   : 2.97 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
 - Coremark    : 4.91 Coremark/Mhz (-O3, u32 as s32 and so many more random flags)
@@ -93,18 +93,18 @@ On Artix 7 speed grade 3 :
 - 18.6 KLUT, 11.8 KFF, 11.5 BRAM, 16 DSP
 - 137 Mhz
 
-So overall, the RV64 support do not has too much of an impact compared to RV32, mostly because the current critical path are in the addresses and control paths, which stays relatively similar between the two (39 bits for RV64, 32 bits for RV32).
+So overall, the RV64 support does not have too much of an impact compared to RV32, mostly because the current critical path is in the address and control paths, which stay relatively similar between the two configurations (39 bits for RV64, 32 bits for RV32).
 
 
 Notes
 ===============
 
-Here is a few notes collected durring the developpement : 
+Here are a few notes collected during the development :
 
-- An out of order CPU without branch prediction is performing realy bad ^^
-- Avoiding store having to wait for the store data in the IQ can realy help avoiding bad load speculation.
-- Some tests were made with two cycle latency ALU (in prevision of RV64 timing relaxation) seems to show "little" impact on the overall performances (~15%, need to verify on more benchmarks)
-- Adding more and more execution units seems to goerealy fast into diminushing returns lands
+- An out of order CPU without branch prediction is performing really bad ^^
+- Avoiding store having to wait for the store data in the IQ can really help avoiding bad load speculation.
+- Some tests were made with two cycle latency ALU (in prevision of RV64 timing relaxation) which seem to show "little" impact on the overall performances (~15%, need to verify on more benchmarks)
+- Adding more and more execution units seems to go fast into diminishing returns lands
 
 
 How to run the benchmark
@@ -112,11 +112,11 @@ How to run the benchmark
 
 First follow the steps in https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md#how-to-setup-things to get a functional simulator.
 
-Then dhrystone and coremark benchmark can be manualy run with : 
+Then dhrystone and coremark benchmark can be run manually with :
 
 .. code:: shell
 
     obj_dir/VNaxRiscv --name dhrystone --output-dir output/nax/dhrystone --load-elf ../../../../ext/NaxSoftware/baremetal/dhrystone/build/rv32im/dhrystone.elf --start-symbol _start  --stats-print --stats-toggle-symbol sim_time
     obj_dir/VNaxRiscv --name coremark --output-dir output/nax/coremark --load-elf ../../../../ext/NaxSoftware/baremetal/coremark/build/rv32im/coremark.elf --start-symbol _start --pass-symbol pass  --stats-print-all --stats-toggle-symbol sim_time
 
-To run embench, you have to clone https://github.com/SpinalHDL/embench-iot.git and then follow  the steps defined in config/riscv32/boards/naxriscv_sim/README.md
+To run embench, you have to clone https://github.com/SpinalHDL/embench-iot.git and then follow the steps defined in config/riscv32/boards/naxriscv_sim/README.md

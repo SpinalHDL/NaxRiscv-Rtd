@@ -91,9 +91,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-development-and-status">Project development and status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-ressources">Additional ressources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#pipeline">Pipeline</a></li>
@@ -242,24 +242,24 @@
             
   <div class="section" id="jtag-openocd-gdb">
 <h1>Jtag / OpenOCD / GDB<a class="headerlink" href="#jtag-openocd-gdb" title="Permalink to this headline">¶</a></h1>
-<p>NaxRiscv implement the RISCV External Debug Support v. 0.13.2 specification via JTAG. This enable upstream openocd support,
+<p>NaxRiscv implements the RISCV External Debug Support v. 0.13.2 specification via JTAG. This enables upstream openocd support,
 which in itself allows to use GDB to debug software running on a target.</p>
-<p>The JTAG layer support 2 modes:</p>
+<p>The JTAG layer supports 2 modes:</p>
 <ul class="simple">
-<li><p>Native : Where a full JTAG tap is implemented</p></li>
+<li><p>Native : Where a full JTAG TAP is implemented</p></li>
 <li><p>Tunneled : Where an external JTAG TAP should provide a single JTAG instruction port to take control (ex BSCANE2 from xilinx)</p></li>
 </ul>
-<p>The implementation of the debug spec is done as follow :</p>
+<p>The implementation of the debug spec is done as follows :</p>
 <ul class="simple">
-<li><p>Abstract access register to x0-x31 (implemented by running a hidden abstract programm buffer)</p></li>
+<li><p>Abstract access register to x0-x31 (implemented by running a hidden abstract program buffer)</p></li>
 <li><p>Abstract program buffer to do everything else (memory/CSR access)</p></li>
 <li><p>The HART can read abstract command arguments via a CSR read, and provide a return value via a CSR write</p></li>
 <li><p>Triggers can only be used as hardware breakpoints</p></li>
 <li><p>PrivilegedPlugin implement things related to the HART, while the EmbeddedJtagPlugin integrate the different JTAG alternatives and DM in the core.</p></li>
 <li><p>The tunneled jtag mode use the BSCAN_TUNNEL_DATA_REGISTER mode, not the default one.</p></li>
 </ul>
-<p>The reason why BSCAN_TUNNEL_DATA_REGISTER was picked instead of the BSCAN_TUNNEL_NESTED_TAP is to properly support jtag chaines with multiple taps.
-Durring a JTAG scan with openocd, the only reference you can have is relative to the end of a DR-SHIFT, you can’t use the beggining of the DR-SHIFT as a reference,
+<p>The reason why BSCAN_TUNNEL_DATA_REGISTER was picked instead of the BSCAN_TUNNEL_NESTED_TAP is to properly support JTAG chains with multiple taps.
+During a JTAG scan with openocd, the only reference you can have is relative to the end of a DR-SHIFT, you can’t use the beginning of the DR-SHIFT as a reference,
 because openocd may add a few cycles there to propagate the data through the chain to the selected tap, which make BSCAN_TUNNEL_NESTED_TAP unpractical as the bits which identify the nature of its DR-SHIFT are sent first.</p>
 </div>
 

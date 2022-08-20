@@ -93,9 +93,9 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-development-and-status">Project development and status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-ressources">Additional ressources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#pipeline">Pipeline</a></li>
@@ -247,15 +247,15 @@
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>You can find some documentation about how to use the simulator directly in <a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md">https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md</a></p>
-<p>Also note that the simulator support Gem5 / Konata traces which can show the execution of instruction through the different stage of the CPU.</p>
-<p>Here is a trace of the NaxRiscv going though a linked list until it find a node with some specific values.</p>
+<p>Also note that the simulator supports Gem5 / Konata traces which can show the execution of instructions through the different stages of the CPU.</p>
+<p>Here is a trace of the NaxRiscv going though a linked list until it finds a node with some specific values.</p>
 <img alt="../../_images/konata.png" src="../../_images/konata.png" />
 </div>
 <div class="section" id="spike">
 <h2>Spike<a class="headerlink" href="#spike" title="Permalink to this headline">¶</a></h2>
-<p>The simulator is running Spike (RISC-V ISA simulator) in parallel to the DUT in a lock-step manner to ensure the DUT isn’t diverging.</p>
+<p>The simulator is running Spike (a RISC-V ISA simulator) in parallel to the DUT in a lock-step manner to ensure the DUT isn’t diverging.</p>
 <p>It is done by compiling Spike as a shared object, which is then interfaced in the Verilator simulation.</p>
-<p>See the following git issue for more discution for this usage of Spike :</p>
+<p>See the following git issue for more discussion for this usage of Spike :</p>
 <p><a class="reference external" href="https://github.com/riscv-software-src/riscv-isa-sim/issues/911">https://github.com/riscv-software-src/riscv-isa-sim/issues/911</a></p>
 </div>
 </div>

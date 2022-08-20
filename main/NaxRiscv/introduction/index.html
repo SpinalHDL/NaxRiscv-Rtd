@@ -93,9 +93,9 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#project-development-and-status">Project development and status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#additional-ressources">Additional ressources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#pipeline">Pipeline</a></li>
@@ -250,7 +250,7 @@
 <ul class="simple">
 <li><p>Out of order execution with register renaming</p></li>
 <li><p>Superscalar (ex : 2 decode, 3 execution units, 2 retire)</p></li>
-<li><p>(RV32/RV64)IMAFDCSU (Linux / Buildroot works on harwdare)</p></li>
+<li><p>(RV32/RV64)IMAFDCSU (Linux / Buildroot works on hardware)</p></li>
 <li><p>Portable HDL, but target FPGA with distributed ram (Xilinx series 7 is the reference used so far)</p></li>
 <li><p>Target a (relatively) low area usage and high fmax (not the best IPC)</p></li>
 <li><p>Decentralized hardware elaboration (Empty toplevel parametrized with plugins)</p></li>
@@ -262,8 +262,8 @@
 <li><p>Pipeline visualisation via verilator simulation and Konata (gem5 file format)</p></li>
 <li><p>JTAG / OpenOCD / GDB support by implementing the RISCV External Debug Support v. 0.13.2</p></li>
 </ul>
-<div class="section" id="project-developpement-and-status">
-<h3>Project developpement and status<a class="headerlink" href="#project-developpement-and-status" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="project-development-and-status">
+<h3>Project development and status<a class="headerlink" href="#project-development-and-status" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>This project is free and open source</p></li>
 <li><p>It can run upstream buildroot/linux on hardware (ArtyA7-35T / Litex)</p></li>
@@ -279,14 +279,14 @@
 During the tests made with VexRiscv running linux, it was clear that even if the can multi core help, “most” applications aren’t made to take advantage of it.</p></li>
 <li><p>Hiding the memory latency (There isn’t much memory to have a big L2 cache on FPGA)</p></li>
 <li><p>To experiment with more advanced hardware description paradigms (scala / SpinalHDL)</p></li>
-<li><p>By personnal interest</p></li>
+<li><p>By personal interest</p></li>
 </ul>
 <p>Also there wasn’t many OoO opensource softcore out there in the wild (Marocchino, RSD, OPA, ..).
-The bet was that it was possible to do better in some metrics, and hopfully being good enough to justify in some project
+The bet was that it was possible to do better in some metrics, and hopefully being good enough to justify in some project
 the replacement of single issue / in order core softcore by providing better performances (at the cost of area).</p>
 </div>
-<div class="section" id="additional-ressources">
-<h3>Additional ressources<a class="headerlink" href="#additional-ressources" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="additional-resources">
+<h3>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h3>
 <p>RISC-V Week Paris 2022 :</p>
 <ul class="simple">
 <li><p>Slides : <a class="reference external" href="https://github.com/SpinalHDL/SpinalDoc/blob/master/presentation/en/nax_040522/slides_nax_040522.pdf">https://github.com/SpinalHDL/SpinalDoc/blob/master/presentation/en/nax_040522/slides_nax_040522.pdf</a></p></li>
@@ -299,15 +299,15 @@ the replacement of single issue / in order core softcore by providing better per
 <p>NaxRiscv is composed of multiple pipelines :</p>
 <ul class="simple">
 <li><p><strong>Fetch</strong> : Which provide the raw data for a given PC, provide a first level of branch prediction and do the PC memory translation</p></li>
-<li><p><strong>Frontend</strong> : Which align, decode the fetch raw data, provide a second level of branch prediction, then allocates and rename the ressources required for the instruction</p></li>
-<li><p><strong>Execution units</strong> : Which get the ressources required for a given instruction (ex RF, PC, ..), execute it, write its result back and notify completion.</p></li>
-<li><p><strong>LSU load</strong> : Which read the data cache, translate the memory address, check for older store depedencies and eventualy bypass a store value.</p></li>
-<li><p><strong>LSU store</strong> : Which translate the memory address and check for younger load having notified completion while having a depedency with the given store</p></li>
-<li><p><strong>LSU writeback</strong> : Which will write commited store into the data cache</p></li>
+<li><p><strong>Frontend</strong> : Which align, decode the fetch raw data, provide a second level of branch prediction, then allocates and rename the resources required for the instruction</p></li>
+<li><p><strong>Execution units</strong> : Which get the resources required for a given instruction (ex RF, PC, ..), execute it, write its result back and notify completion.</p></li>
+<li><p><strong>LSU load</strong> : Which read the data cache, translate the memory address, check for older store dependencies and eventually bypass a store value.</p></li>
+<li><p><strong>LSU store</strong> : Which translate the memory address and check for younger load having notified completion while having a dependency with the given store</p></li>
+<li><p><strong>LSU writeback</strong> : Which will write committed store into the data cache</p></li>
 </ul>
 <p>But it should also be noticed that there is a few state machines :</p>
 <ul class="simple">
-<li><p><strong>LSU Atomic</strong> : Which sequencialy execute SC/AMO operations once they are the next in line for commit.</p></li>
+<li><p><strong>LSU Atomic</strong> : Which sequentially execute SC/AMO operations once they are the next in line for commit.</p></li>
 <li><p><strong>MMU refill</strong> : Which walk the page tables to refill the TLB</p></li>
 <li><p><strong>Privileged</strong> : Which will check and update the CSR required for trap and privilege switches (mret, sret)</p></li>
 </ul>
@@ -316,7 +316,7 @@ the replacement of single issue / in order core softcore by providing better per
 </div>
 <div class="section" id="how-to-use">
 <h2>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h2>
-<p>There is currently two way you can try NaxRiscv :</p>
+<p>There are currently two ways to try NaxRiscv :</p>
 <ul class="simple">
 <li><p><strong>Simulation</strong> : Via verilator (<a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md">https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md</a>)</p></li>
 <li><p><strong>Hardware</strong> : Via the Litex integration (<a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv#running-on-hardware">https://github.com/SpinalHDL/NaxRiscv#running-on-hardware</a>)</p></li>
@@ -324,17 +324,17 @@ the replacement of single issue / in order core softcore by providing better per
 </div>
 <div class="section" id="hardware-description">
 <h2>Hardware description<a class="headerlink" href="#hardware-description" title="Permalink to this headline">¶</a></h2>
-<p>NaxRiscv was designed using SpinalHDL (A Scala hardware description library).
-One goal of the implementation was to explore new hardware elaboration paradigmes as :</p>
+<p>NaxRiscv was designed using SpinalHDL (a Scala hardware description library).
+One goal of the implementation was to explore new hardware elaboration paradigms as :</p>
 <ul class="simple">
 <li><p>Automatic pipelining framework</p></li>
 <li><p>Distributed hardware elaboration</p></li>
-<li><p>Software paradigmes applied to hardware elaboration (ex : software interface)</p></li>
+<li><p>Software paradigms applied to hardware elaboration (ex : software interface)</p></li>
 </ul>
 <p>A few notes about it :</p>
 <ul class="simple">
 <li><p>You can get generate the Verilog or the VHDL from it.</p></li>
-<li><p>A whole chapter (<a class="reference internal" href="../abstraction/index.html#abstraction-hdl"><span class="std std-ref">Abstractions / HDL</span></a>) of the doc is dedicated to explore the different paradigmes used</p></li>
+<li><p>A whole chapter (<a class="reference internal" href="../abstraction/index.html#abstraction-hdl"><span class="std std-ref">Abstractions / HDL</span></a>) of the doc is dedicated to explore the different paradigms used</p></li>
 </ul>
 </div>
 </div>

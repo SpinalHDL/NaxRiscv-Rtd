@@ -91,9 +91,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-development-and-status">Project development and status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-ressources">Additional ressources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#pipeline">Pipeline</a></li>
@@ -244,7 +244,7 @@
 <h1>Load store unite<a class="headerlink" href="#load-store-unite" title="Permalink to this headline">¶</a></h1>
 <p>The LSU implementation is characterised by :</p>
 <ul class="simple">
-<li><p><strong>LQ / SQ</strong> : Usualy, 16 of each</p></li>
+<li><p><strong>LQ / SQ</strong> : Usually, 16 of each</p></li>
 <li><p><strong>Store Address / Data</strong> : For store, only the address is provided through the issue queue / AGU, while there is some logic from the SQ to fetch the store value directly from the register file.</p></li>
 <li><p><strong>Load Hit speculation</strong> : In order to reduce the load to use latency (to 3 cycles instead of 6), there is a cache hit predictor, speculatively waking up depending instructions</p></li>
 <li><p><strong>Load from AGU</strong> : To reduce the load latency, if the LQ has nothing for the load pipeline, then the AGU can directly provide its fresh calculation without passing by the LQ registers</p></li>

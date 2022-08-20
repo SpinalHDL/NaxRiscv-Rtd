@@ -4,10 +4,10 @@
 Commit
 ============================
 
-The commit logic is mostly composed : 
+The commit logic is mostly composed :
 
-- **Reschedule status** Which specify the older ROB ID on which a jump / trap is pending.
-- **Commit Logic** Which wait for the older instruction completion before commiting it, and eventualy applying some reschedule.
+- **Reschedule status** Which specifies the older ROB ID on which a jump / trap is pending.
+- **Commit Logic** Which waits for the older instruction completion before committing it, and eventually applying some reschedule.
 
 
 .. image:: /asset/image/commit.png

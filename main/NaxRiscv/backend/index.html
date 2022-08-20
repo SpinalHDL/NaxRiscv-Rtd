@@ -93,9 +93,9 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-development-and-status">Project development and status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-ressources">Additional ressources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#pipeline">Pipeline</a></li>
@@ -248,14 +248,14 @@
 <h2>Commit<a class="headerlink" href="#commit" title="Permalink to this headline">¶</a></h2>
 <p>The commit logic is mostly composed :</p>
 <ul class="simple">
-<li><p><strong>Reschedule status</strong> Which specify the older ROB ID on which a jump / trap is pending.</p></li>
-<li><p><strong>Commit Logic</strong> Which wait for the older instruction completion before commiting it, and eventualy applying some reschedule.</p></li>
+<li><p><strong>Reschedule status</strong> Which specifies the older ROB ID on which a jump / trap is pending.</p></li>
+<li><p><strong>Commit Logic</strong> Which waits for the older instruction completion before committing it, and eventually applying some reschedule.</p></li>
 </ul>
 <img alt="../../_images/commit.png" src="../../_images/commit.png" />
 </div>
 <div class="section" id="register-file">
 <h2>Register file<a class="headerlink" href="#register-file" title="Permalink to this headline">¶</a></h2>
-<p>Currently, the register file is infered into simple dual ports distributed ram :</p>
+<p>Currently, the register file is inferred into simple dual-port distributed ram :</p>
 <ul class="simple">
 <li><p>Each write port will create its own bank</p></li>
 <li><p>Each read port will read each bank, and mux the correct one using a distributed-ram-xor-based LVT (live value table)</p></li>

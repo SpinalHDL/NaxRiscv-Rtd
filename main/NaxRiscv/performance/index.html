@@ -93,9 +93,9 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-development-and-status">Project development and status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-ressources">Additional ressources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#pipeline">Pipeline</a></li>
@@ -253,11 +253,11 @@
 </ul>
 <p>For the following configuration :</p>
 <ul class="simple">
-<li><p>RV32IMASU, dual issue,OoO, linux compatible</p></li>
+<li><p>RV32IMASU, dual issue, OoO, linux compatible</p></li>
 <li><p>64 bits fetch, 2 decode, 3 issue, 2 retire</p></li>
 <li><p>Shared issue queue with 32 entries</p></li>
 <li><p>Renaming with 64 physical registers</p></li>
-<li><p>3 execution unit (2*Int/Shift/branch, 1*load/store/mul/div/csr/env)</p></li>
+<li><p>3 execution units (2*Int/Shift/branch, 1*load/store/mul/div/csr/env)</p></li>
 <li><p>LSU with 16 load queue, 16 store queue</p></li>
 <li><p>Load hit predictor (3 cycles load to use delay)</p></li>
 <li><p>Store to load bypass</p></li>
@@ -291,7 +291,7 @@
 <p>To go further, increasing the GSHARE storage or implementing something as TAGE should help.</p>
 <p>Here are a pipeline representation of the two above configurations :</p>
 <img alt="../../_images/pipeline_simple.png" src="../../_images/pipeline_simple.png" />
-<p>Also notes that the NaxRiscv simulator support gem5 / konata logs, allowing to visualise the execution flow.</p>
+<p>Also note that the NaxRiscv simulator support gem5 / konata logs, allowing to visualise the execution flow.</p>
 <p>Note that if you configure the core with 1 decode 1 alu 1 shared eu you get :</p>
 <p>Performance :</p>
 <ul class="simple">
@@ -307,7 +307,7 @@
 </div>
 <div class="section" id="rv64">
 <h2>RV64<a class="headerlink" href="#rv64" title="Permalink to this headline">¶</a></h2>
-<p>In a similar configuration than the above RV32 (2*Int/Shift/Branch, 1*/load/store/mul/div/csr/env)</p>
+<p>In a similar configuration as the above RV32 (2*Int/Shift/Branch, 1*/load/store/mul/div/csr/env)</p>
 <p>Performance :</p>
 <ul class="simple">
 <li><p>Dhrystone   : 2.97 DMIPS/Mhz    (-O3 -fno-common -fno-inline)</p></li>
@@ -319,27 +319,27 @@
 <li><p>18.6 KLUT, 11.8 KFF, 11.5 BRAM, 16 DSP</p></li>
 <li><p>137 Mhz</p></li>
 </ul>
-<p>So overall, the RV64 support do not has too much of an impact compared to RV32, mostly because the current critical path are in the addresses and control paths, which stays relatively similar between the two (39 bits for RV64, 32 bits for RV32).</p>
+<p>So overall, the RV64 support does not have too much of an impact compared to RV32, mostly because the current critical path is in the address and control paths, which stay relatively similar between the two configurations (39 bits for RV64, 32 bits for RV32).</p>
 </div>
 <div class="section" id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
-<p>Here is a few notes collected durring the developpement :</p>
+<p>Here are a few notes collected during the development :</p>
 <ul class="simple">
-<li><p>An out of order CPU without branch prediction is performing realy bad ^^</p></li>
-<li><p>Avoiding store having to wait for the store data in the IQ can realy help avoiding bad load speculation.</p></li>
-<li><p>Some tests were made with two cycle latency ALU (in prevision of RV64 timing relaxation) seems to show “little” impact on the overall performances (~15%, need to verify on more benchmarks)</p></li>
-<li><p>Adding more and more execution units seems to goerealy fast into diminushing returns lands</p></li>
+<li><p>An out of order CPU without branch prediction is performing really bad ^^</p></li>
+<li><p>Avoiding store having to wait for the store data in the IQ can really help avoiding bad load speculation.</p></li>
+<li><p>Some tests were made with two cycle latency ALU (in prevision of RV64 timing relaxation) which seem to show “little” impact on the overall performances (~15%, need to verify on more benchmarks)</p></li>
+<li><p>Adding more and more execution units seems to go fast into diminishing returns lands</p></li>
 </ul>
 </div>
 <div class="section" id="how-to-run-the-benchmark">
 <h2>How to run the benchmark<a class="headerlink" href="#how-to-run-the-benchmark" title="Permalink to this headline">¶</a></h2>
 <p>First follow the steps in <a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md#how-to-setup-things">https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md#how-to-setup-things</a> to get a functional simulator.</p>
-<p>Then dhrystone and coremark benchmark can be manualy run with :</p>
+<p>Then dhrystone and coremark benchmark can be run manually with :</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>obj_dir/VNaxRiscv --name dhrystone --output-dir output/nax/dhrystone --load-elf ../../../../ext/NaxSoftware/baremetal/dhrystone/build/rv32im/dhrystone.elf --start-symbol _start  --stats-print --stats-toggle-symbol sim_time
 obj_dir/VNaxRiscv --name coremark --output-dir output/nax/coremark --load-elf ../../../../ext/NaxSoftware/baremetal/coremark/build/rv32im/coremark.elf --start-symbol _start --pass-symbol pass  --stats-print-all --stats-toggle-symbol sim_time
 </pre></div>
 </div>
-<p>To run embench, you have to clone <a class="reference external" href="https://github.com/SpinalHDL/embench-iot.git">https://github.com/SpinalHDL/embench-iot.git</a> and then follow  the steps defined in config/riscv32/boards/naxriscv_sim/README.md</p>
+<p>To run embench, you have to clone <a class="reference external" href="https://github.com/SpinalHDL/embench-iot.git">https://github.com/SpinalHDL/embench-iot.git</a> and then follow the steps defined in config/riscv32/boards/naxriscv_sim/README.md</p>
 </div>
 </div>
 

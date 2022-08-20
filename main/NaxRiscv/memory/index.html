@@ -93,9 +93,9 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-development-and-status">Project development and status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-ressources">Additional ressources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#pipeline">Pipeline</a></li>
@@ -248,7 +248,7 @@
 <h2>Load store unite<a class="headerlink" href="#load-store-unite" title="Permalink to this headline">¶</a></h2>
 <p>The LSU implementation is characterised by :</p>
 <ul class="simple">
-<li><p><strong>LQ / SQ</strong> : Usualy, 16 of each</p></li>
+<li><p><strong>LQ / SQ</strong> : Usually, 16 of each</p></li>
 <li><p><strong>Store Address / Data</strong> : For store, only the address is provided through the issue queue / AGU, while there is some logic from the SQ to fetch the store value directly from the register file.</p></li>
 <li><p><strong>Load Hit speculation</strong> : In order to reduce the load to use latency (to 3 cycles instead of 6), there is a cache hit predictor, speculatively waking up depending instructions</p></li>
 <li><p><strong>Load from AGU</strong> : To reduce the load latency, if the LQ has nothing for the load pipeline, then the AGU can directly provide its fresh calculation without passing by the LQ registers</p></li>
@@ -263,16 +263,16 @@
 <h2>MMU<a class="headerlink" href="#mmu" title="Permalink to this headline">¶</a></h2>
 <p>The MMU implementation is characterised by :</p>
 <ul class="simple">
-<li><p><strong>2D organisation</strong> : For each level of the pages table a parameterable number of direct mapped ways of translation cache can be specified.</p></li>
+<li><p><strong>2D organisation</strong> : For each level of the page table a parameterizable number of direct mapped ways of translation cache can be specified.</p></li>
 <li><p><strong>Hardware refilled</strong> : Because that’s cheap</p></li>
-<li><p><strong>Caches direct hit</strong> : Allows the instruction cache to check his way tags directly against the MMU TLB storage in order to improve timings (at the cost of area)</p></li>
+<li><p><strong>Caches direct hit</strong> : Allows the instruction cache to check its way tags directly against the MMU TLB storage in order to improve timings (at the cost of area)</p></li>
 </ul>
 <p>For RV32, the default configuration is to have :</p>
 <ul class="simple">
 <li><p>4 ways * 32 entries of level 0 (4KB pages) TLB</p></li>
 <li><p>2 ways * 32 entries of level 1 (4MB pages) TLB</p></li>
 </ul>
-<p>The area of the TLB cache is keept low by inferring each way into a distributed ram.</p>
+<p>The area of the TLB cache is kept low by inferring each way into a distributed ram.</p>
 <p>Here is a few illustrations of the MMU design</p>
 <img alt="../../_images/mmu_general.png" src="../../_images/mmu_general.png" />
 <img alt="../../_images/mmu_translation.png" src="../../_images/mmu_translation.png" />

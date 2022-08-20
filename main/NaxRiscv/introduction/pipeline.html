@@ -91,9 +91,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#project-development-and-status">Project development and status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#additional-ressources">Additional ressources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#pipeline">Pipeline</a></li>
@@ -245,15 +245,15 @@
 <p>NaxRiscv is composed of multiple pipelines :</p>
 <ul class="simple">
 <li><p><strong>Fetch</strong> : Which provide the raw data for a given PC, provide a first level of branch prediction and do the PC memory translation</p></li>
-<li><p><strong>Frontend</strong> : Which align, decode the fetch raw data, provide a second level of branch prediction, then allocates and rename the ressources required for the instruction</p></li>
-<li><p><strong>Execution units</strong> : Which get the ressources required for a given instruction (ex RF, PC, ..), execute it, write its result back and notify completion.</p></li>
-<li><p><strong>LSU load</strong> : Which read the data cache, translate the memory address, check for older store depedencies and eventualy bypass a store value.</p></li>
-<li><p><strong>LSU store</strong> : Which translate the memory address and check for younger load having notified completion while having a depedency with the given store</p></li>
-<li><p><strong>LSU writeback</strong> : Which will write commited store into the data cache</p></li>
+<li><p><strong>Frontend</strong> : Which align, decode the fetch raw data, provide a second level of branch prediction, then allocates and rename the resources required for the instruction</p></li>
+<li><p><strong>Execution units</strong> : Which get the resources required for a given instruction (ex RF, PC, ..), execute it, write its result back and notify completion.</p></li>
+<li><p><strong>LSU load</strong> : Which read the data cache, translate the memory address, check for older store dependencies and eventually bypass a store value.</p></li>
+<li><p><strong>LSU store</strong> : Which translate the memory address and check for younger load having notified completion while having a dependency with the given store</p></li>
+<li><p><strong>LSU writeback</strong> : Which will write committed store into the data cache</p></li>
 </ul>
 <p>But it should also be noticed that there is a few state machines :</p>
 <ul class="simple">
-<li><p><strong>LSU Atomic</strong> : Which sequencialy execute SC/AMO operations once they are the next in line for commit.</p></li>
+<li><p><strong>LSU Atomic</strong> : Which sequentially execute SC/AMO operations once they are the next in line for commit.</p></li>
 <li><p><strong>MMU refill</strong> : Which walk the page tables to refill the TLB</p></li>
 <li><p><strong>Privileged</strong> : Which will check and update the CSR required for trap and privilege switches (mret, sret)</p></li>
 </ul>

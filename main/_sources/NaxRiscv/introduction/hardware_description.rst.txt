@@ -4,16 +4,16 @@
 Hardware description
 ============================
 
-NaxRiscv was designed using SpinalHDL (A Scala hardware description library). 
-One goal of the implementation was to explore new hardware elaboration paradigmes as : 
+NaxRiscv was designed using SpinalHDL (a Scala hardware description library).
+One goal of the implementation was to explore new hardware elaboration paradigms as :
 
 - Automatic pipelining framework
 - Distributed hardware elaboration
-- Software paradigmes applied to hardware elaboration (ex : software interface)
+- Software paradigms applied to hardware elaboration (ex : software interface)
 
 
-A few notes about it : 
+A few notes about it :
 
 - You can get generate the Verilog or the VHDL from it.
-- A whole chapter (:ref:`abstraction_hdl`) of the doc is dedicated to explore the different paradigmes used
+- A whole chapter (:ref:`abstraction_hdl`) of the doc is dedicated to explore the different paradigms used
 

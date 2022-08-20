@@ -91,9 +91,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#project-development-and-status">Project development and status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#additional-ressources">Additional ressources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#pipeline">Pipeline</a></li>
@@ -246,7 +246,7 @@
 <ul class="simple">
 <li><p>Out of order execution with register renaming</p></li>
 <li><p>Superscalar (ex : 2 decode, 3 execution units, 2 retire)</p></li>
-<li><p>(RV32/RV64)IMAFDCSU (Linux / Buildroot works on harwdare)</p></li>
+<li><p>(RV32/RV64)IMAFDCSU (Linux / Buildroot works on hardware)</p></li>
 <li><p>Portable HDL, but target FPGA with distributed ram (Xilinx series 7 is the reference used so far)</p></li>
 <li><p>Target a (relatively) low area usage and high fmax (not the best IPC)</p></li>
 <li><p>Decentralized hardware elaboration (Empty toplevel parametrized with plugins)</p></li>
@@ -258,8 +258,8 @@
 <li><p>Pipeline visualisation via verilator simulation and Konata (gem5 file format)</p></li>
 <li><p>JTAG / OpenOCD / GDB support by implementing the RISCV External Debug Support v. 0.13.2</p></li>
 </ul>
-<div class="section" id="project-developpement-and-status">
-<h2>Project developpement and status<a class="headerlink" href="#project-developpement-and-status" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="project-development-and-status">
+<h2>Project development and status<a class="headerlink" href="#project-development-and-status" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>This project is free and open source</p></li>
 <li><p>It can run upstream buildroot/linux on hardware (ArtyA7-35T / Litex)</p></li>
@@ -275,14 +275,14 @@
 During the tests made with VexRiscv running linux, it was clear that even if the can multi core help, “most” applications aren’t made to take advantage of it.</p></li>
 <li><p>Hiding the memory latency (There isn’t much memory to have a big L2 cache on FPGA)</p></li>
 <li><p>To experiment with more advanced hardware description paradigms (scala / SpinalHDL)</p></li>
-<li><p>By personnal interest</p></li>
+<li><p>By personal interest</p></li>
 </ul>
 <p>Also there wasn’t many OoO opensource softcore out there in the wild (Marocchino, RSD, OPA, ..).
-The bet was that it was possible to do better in some metrics, and hopfully being good enough to justify in some project
+The bet was that it was possible to do better in some metrics, and hopefully being good enough to justify in some project
 the replacement of single issue / in order core softcore by providing better performances (at the cost of area).</p>
 </div>
-<div class="section" id="additional-ressources">
-<h2>Additional ressources<a class="headerlink" href="#additional-ressources" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="additional-resources">
+<h2>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
 <p>RISC-V Week Paris 2022 :</p>
 <ul class="simple">
 <li><p>Slides : <a class="reference external" href="https://github.com/SpinalHDL/SpinalDoc/blob/master/presentation/en/nax_040522/slides_nax_040522.pdf">https://github.com/SpinalHDL/SpinalDoc/blob/master/presentation/en/nax_040522/slides_nax_040522.pdf</a></p></li>

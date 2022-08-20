@@ -91,9 +91,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-development-and-status">Project development and status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-ressources">Additional ressources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#pipeline">Pipeline</a></li>
@@ -242,17 +242,17 @@
             
   <div class="section" id="dispatch-issue">
 <h1>Dispatch / Issue<a class="headerlink" href="#dispatch-issue" title="Permalink to this headline">¶</a></h1>
-<p>Here is a few specific points about the current implementation :</p>
+<p>Here are a few specific points about the current implementation :</p>
 <ul class="simple">
-<li><p><strong>Unified design</strong> : Mostly to save area / having the most usage of each entries</p></li>
+<li><p><strong>Unified design</strong> : Mostly to save area / having the most usage of each entry</p></li>
 <li><p><strong>2D queue</strong> : The entries arranged in C=decodeCount columns L=slotCount/decodeCount rows</p></li>
-<li><p><strong>Row push</strong> : When something is pushed in the queue, a whole row is “consumed”, even if the row isn’t fully used</p></li>
-<li><p><strong>No compression</strong> : There is no compression for empty rows. The while queue is shifted by one row on each push. It allows a better inferation of the matrix FF and a smaller/faster ROB ID wake logic.</p></li>
-<li><p><strong>Matrix based</strong> : The storage of which instruction depend on what is done as a half matrix</p></li>
-<li><p><strong>Older first</strong> : If multiple instruction can be dispatched at once on a given execution unit, the older one is selected</p></li>
-<li><p><strong>Wake by ROB ID</strong> : For dynamic wakes, the ROB ID is used as identifier (not the physical register file ID)</p></li>
+<li><p><strong>Row push</strong> : When something is pushed into the queue, a whole row is “consumed”, even if the row isn’t fully used</p></li>
+<li><p><strong>No compression</strong> : There is no compression for empty rows. The while queue is shifted by one row on each push. It allows for better inference of the matrix FF and a smaller/faster ROB ID wake logic.</p></li>
+<li><p><strong>Matrix based</strong> : The storage of which instruction depends on what is done as a half matrix</p></li>
+<li><p><strong>Older first</strong> : If multiple instructions can be dispatched at once on a given execution unit, the older one is selected</p></li>
+<li><p><strong>Wake by ROB ID</strong> : For dynamic wakes, the ROB ID is used as the identifier (not the physical register file ID)</p></li>
 </ul>
-<p>So, overall, a 32 slots queue seems a limite to not go beyond to preserve the timings. Also, with the current design, the area occupancy of the queue doesn’t seems to be a big deal compared to the CPU as a whole.</p>
+<p>So, overall, a 32 slot queue seems to be a limit to not go beyond to preserve the timings. Also, with the current design, the area occupancy of the queue doesn’t seem to to be a big deal compared to the CPU as a whole.</p>
 <p>Here are a few illustrations :</p>
 <img alt="../../_images/iq_push_pop.png" src="../../_images/iq_push_pop.png" />
 <img alt="../../_images/iq_wake_logic_nc.png" src="../../_images/iq_wake_logic_nc.png" />

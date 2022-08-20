@@ -3,16 +3,16 @@
 Custom instruction
 ==============================
 
-There is multiple ways you can add custom instruction into NaxRiscv, the following chapter will provide some demo.
+There are multiple ways you can add custom instructions into NaxRiscv. The following chapter will provide some demo.
 
 SIMD add
 -----------
 
 Let's define a plugin which will implement a SIMD add (4x8bits adder), working on the integer register file.
 
-The plugin will be based on the ExecutionUnitElementSimple which make implementing ALU plugins simpler. Such plugin can then be used to compose a given execution unit (hosted by a ExecutionUnitBase).
+The plugin will be based on the ExecutionUnitElementSimple which makes implementing ALU plugins simpler. Such a plugin can then be used to compose a given execution unit (hosted by a ExecutionUnitBase).
 
-For instance the Plugin configuration could be : 
+For instance the Plugin configuration could be :
 
 .. code:: scala
 
@@ -27,7 +27,7 @@ For instance the Plugin configuration could be :
 Plugin implementation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Here is a example how this plugin could be implemented : 
+Here is a example how this plugin could be implemented :
 (https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L36)
 
 .. code:: scala
@@ -101,10 +101,10 @@ Here is a example how this plugin could be implemented :
     }
 
 NaxRiscv generation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    
-    
-Then, to generate a NaxRiscv with this new plugin, we could run the following App : 
-(https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L71) 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Then, to generate a NaxRiscv with this new plugin, we could run the following App :
+(https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L71)
 
 .. code:: scala
 
@@ -132,22 +132,22 @@ Then, to generate a NaxRiscv with this new plugin, we could run the following Ap
 
       //Generate the NaxRiscv verilog file
       val report = spinalConfig.generateVerilog(new NaxRiscv(xlen = 32, plugins))
-      
+
       //Generate some C header files used by the verilator testbench to connect to the DUT
       report.toplevel.framework.getService[DocPlugin].genC()
-    }    
+    }
 
 
-To run this App, you can go to the NaxRiscv directory and run : 
+To run this App, you can go to the NaxRiscv directory and run :
 
 .. code:: shell
 
     sbt "runMain naxriscv.execute.SimdAddNaxGen"
-    
+
 Software test
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    
-    
-Then let's write some assembly test code : (https://github.com/SpinalHDL/NaxSoftware/tree/849679c70b238ceee021bdfd18eb2e9809e7bdd0/baremetal/simdAdd) 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Then let's write some assembly test code : (https://github.com/SpinalHDL/NaxSoftware/tree/849679c70b238ceee021bdfd18eb2e9809e7bdd0/baremetal/simdAdd)
 
 .. code:: shell
 
@@ -178,36 +178,36 @@ Then let's write some assembly test code : (https://github.com/SpinalHDL/NaxSoft
     fail:
         j fail
 
-Compile it with 
+Compile it with
 
 .. code:: shell
 
     make clean rv32im
-    
+
 Simulation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    
-    
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 And the run a simulation in src/test/cpp/naxriscv (You will have to setup things as described in its readme first)
 
 .. code:: shell
 
     make clean compile
     ./obj_dir/VNaxRiscv --load-elf ../../../../ext/NaxSoftware/baremetal/simdAdd/build/rv32im/simdAdd.elf --spike-disable --pass-symbol pass --fail-symbol fail --trace
-    
-Which will output us the value 2224666 in the shell :D
+
+Which will output the value 2224666 in the shell :D
 
 Conclusion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-So overall this example didn't introduced how to specify some additional decoding, nor how to define multi-cycle ALU. (TODO). 
+So overall this example didn't introduce how to specify some additional decoding, nor how to define multi-cycle ALU. (TODO).
 But you can take a look in the IntAluPlugin, ShiftPlugin, DivPlugin, MulPlugin and BranchPlugin which are doing those things using the same ExecutionUnitElementSimple base class.
 
-Also, you don't have to use the ExecutionUnitElementSimple base class, you can have more fondamental accesses, as the LoadPlugin, StorePlugin, EnvCallPlugin.
+Also, you don't have to use the ExecutionUnitElementSimple base class, you can have more fundamental accesses, as the LoadPlugin, StorePlugin, EnvCallPlugin.
 
 Hardcore way
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Note, here is a example of the same instruction, but implemented without the ExecutionUnitElementSimple facilities :
+Note, here is an example of the same instruction, but implemented without the ExecutionUnitElementSimple facilities :
 (https://github.com/SpinalHDL/NaxRiscv/blob/72b80e3345ecc3a25ca913f2b741e919a3f4c970/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L100)
 
 .. code:: scala
@@ -259,6 +259,6 @@ Note, here is a example of the same instruction, but implemented without the Exe
         eu.release()
       }
     }
-    
-    
+
+
 

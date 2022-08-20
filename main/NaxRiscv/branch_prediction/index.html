@@ -93,9 +93,9 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-developpement-and-status">Project developpement and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-development-and-status">Project development and status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-ressources">Additional ressources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#pipeline">Pipeline</a></li>
@@ -249,31 +249,31 @@
 <li><p><strong>Fetch prediction</strong> : Which is composed of the BTB and GShare predictors</p></li>
 <li><p><strong>Decode prediction</strong> : Which can use the RAS prediction, and in the case there was no BTB prediction it can do static jumps and gshare branch predictions</p></li>
 </ul>
-<p>Here is a illustration of the branch prediction pipeline :</p>
+<p>Here is an illustration of the branch prediction pipeline :</p>
 <img alt="../../_images/branch_prediction.png" src="../../_images/branch_prediction.png" />
 <div class="section" id="fetch-prediction">
 <h2>Fetch prediction<a class="headerlink" href="#fetch-prediction" title="Permalink to this headline">¶</a></h2>
-<p>In the fetch stages, the BTB predict a few things for a given fetch word :
+<p>In the fetch stages, the BTB predicts a few things for a given fetch word :
 - The target PC
-- The nature of the instruction (if it is a branch of not)
+- The nature of the instruction (if it is a branch or not)
 - Which slice of the word is the last part of the instruction (a slice is 4 byte without RVC, 2 bytes with RVC)</p>
-<p>Using that prediction, and eventualy using the GShare prediction, it will apply a prediction.</p>
+<p>Using that prediction, and eventually using the GShare prediction, it will apply a prediction.</p>
 </div>
 <div class="section" id="decode-prediction">
 <h2>Decode prediction<a class="headerlink" href="#decode-prediction" title="Permalink to this headline">¶</a></h2>
-<p>As the instruction is fetched, there is quite a few more informations which can be used to improve the prediction at that stage.</p>
-<p>If the fetch BTB prediction didn’t toke jump/branch then the decode prediction may :</p>
+<p>As the instruction is fetched, there is quite a bit more information which can be used to improve the prediction at that stage.</p>
+<p>If the fetch BTB prediction didn’t take the jump/branch then the decode prediction may :</p>
 <ul class="simple">
 <li><p>Do nothing</p></li>
-<li><p>Apply static jumps (call, j)</p></li>
-<li><p>Apply branch for which there was a GShare prediction</p></li>
+<li><p>Apply a static jump (call, j)</p></li>
+<li><p>Apply a branch for which there was a GShare prediction</p></li>
 <li><p>Apply the RAS prediction if the instruction is a return (ret)</p></li>
 </ul>
-<p>If the fetch BTB toke a jump/branch then the decode prediction may :</p>
+<p>If the fetch BTB took a jump/branch then the decode prediction may :</p>
 <ul class="simple">
 <li><p>Undo the jump/branch if the instruction wasn’t a jump/branch</p></li>
-<li><p>Correct the prediction if the RAS provide another value</p></li>
-<li><p>Assume the prediction target was correct (Calculating the branch target and then comparing it to the predicted PC is too much combinatorial path)</p></li>
+<li><p>Correct the prediction if the RAS provides another value</p></li>
+<li><p>Assume the prediction target was correct (calculating the branch target and then comparing it to the predicted PC is too much combinatorial path)</p></li>
 </ul>
 <p>Then the result of the prediction is stored into a jump/branch circular buffer which will later be used by the execute units branch logic for an eventual correction.</p>
 </div>
@@ -281,8 +281,8 @@
 <h2>Jump/branch circular buffer<a class="headerlink" href="#jump-branch-circular-buffer" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><strong>Push</strong> During the decode prediction</p></li>
-<li><p><strong>Read</strong> During the execute units branch execution to eventualy correct a miss predicted branch</p></li>
-<li><p><strong>Pop</strong> After the instruction commit, which also trigger the branch predictors learning</p></li>
+<li><p><strong>Read</strong> During the execute units branch execution to eventually correct a mispredicted branch</p></li>
+<li><p><strong>Pop</strong> After the instruction commit, which also triggers the branch predictors learning</p></li>
 </ul>
 </div>
 </div>
