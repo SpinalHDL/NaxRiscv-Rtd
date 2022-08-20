@@ -2,7 +2,7 @@
 NaxRiscv-RTD
 =============
 
-The documentation is hosted here : 
+The documentation is hosted here :
 
 https://spinalhdl.github.io/NaxRiscv-Rtd/main/NaxRiscv/introduction/index.html
 
@@ -23,7 +23,7 @@ Create a virtual environment with pipenv (will use the Pipfile for installing th
 
    python3 -m venv .venv
 
-then you can activate the virtual enviroment (in bash) and install the dependencies
+then you can activate the virtual envinroment (in bash) and install the dependencies
 
 .. code:: shell
 
@@ -70,7 +70,7 @@ you can create build multiple version of the doc via
 
    sphinx-multiversion source docs/html
 
-in the docs/html there will be a folder with the builded doc for each branch and tag
+in the docs/html there will be a folder with the built doc for each branch and tag
 
 Deploying the generated doc by hands
 ----------------------------------------
