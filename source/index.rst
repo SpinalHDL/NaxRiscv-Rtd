@@ -17,4 +17,5 @@
    NaxRiscv/performance/index
    NaxRiscv/abstraction/index
    NaxRiscv/misc/index
+   NaxRiscv/hardware/index
 
