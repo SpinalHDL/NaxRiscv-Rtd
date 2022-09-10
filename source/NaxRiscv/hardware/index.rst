@@ -42,7 +42,7 @@ Putting debian on the SDCARD
     echo p
     echo 2
     echo
-    echo +5G
+    echo +7G
     echo y
     echo t
     echo 1
@@ -52,7 +52,7 @@ Putting debian on the SDCARD
     ) | sudo fdisk $SDCARD
     
     sudo mkdosfs ${SDCARD}1
-    sudo mkfs -t ext4 ${SDCARD}2
+    sudo mkfs -t ext2 ${SDCARD}2
     
 
 
@@ -64,12 +64,12 @@ and extract them to ${SDCARD}1 and ${SDCARD}2
     # Download images from https://drive.google.com/drive/folders/1OWY_NtJYWXd3oT8A3Zujef4eJwZFP_Yh?usp=sharing 
     mkdir mnt
     
-    sudo mount ${SDCARD}1
-    tar -xf part1.tar.gz -C mnt
+    sudo mount ${SDCARD}1 mnt
+    sudo tar -xf part1.tar.gz -C mnt
     sudo umount mnt
 
-    sudo mount ${SDCARD}2
-    sudo tar -xf part2.tar.gz -C mnt
+    sudo mount ${SDCARD}2 mnt
+    umounsudo tar -xf part2.tar.gz -C mnt
     sudo umount mnt
 
 Note that the DTB was generated for the digilent nexys video with :
