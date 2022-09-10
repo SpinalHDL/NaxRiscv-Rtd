@@ -277,7 +277,7 @@ python3 -m litex_boards.targets.digilent_nexys_video --cpu-type<span class="o">=
 <span class="nb">echo</span> p
 <span class="nb">echo</span> <span class="m">2</span>
 <span class="nb">echo</span>
-<span class="nb">echo</span> +5G
+<span class="nb">echo</span> +7G
 <span class="nb">echo</span> y
 <span class="nb">echo</span> t
 <span class="nb">echo</span> <span class="m">1</span>
@@ -287,7 +287,7 @@ python3 -m litex_boards.targets.digilent_nexys_video --cpu-type<span class="o">=
 <span class="o">)</span> <span class="p">|</span> sudo fdisk <span class="nv">$SDCARD</span>
 
 sudo mkdosfs <span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">1</span>
-sudo mkfs -t ext4 <span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">2</span>
+sudo mkfs -t ext2 <span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">2</span>
 </pre></div>
 </div>
 <p>You need now to download part1 and part2 from <a class="reference external" href="https://drive.google.com/drive/folders/1OWY_NtJYWXd3oT8A3Zujef4eJwZFP_Yh?usp=sharing">https://drive.google.com/drive/folders/1OWY_NtJYWXd3oT8A3Zujef4eJwZFP_Yh?usp=sharing</a>
@@ -295,12 +295,12 @@ and extract them to ${SDCARD}1 and ${SDCARD}2</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download images from https://drive.google.com/drive/folders/1OWY_NtJYWXd3oT8A3Zujef4eJwZFP_Yh?usp=sharing</span>
 mkdir mnt
 
-sudo mount <span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">1</span>
-tar -xf part1.tar.gz -C mnt
+sudo mount <span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">1</span> mnt
+sudo tar -xf part1.tar.gz -C mnt
 sudo umount mnt
 
-sudo mount <span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">2</span>
-sudo tar -xf part2.tar.gz -C mnt
+sudo mount <span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">2</span> mnt
+umounsudo tar -xf part2.tar.gz -C mnt
 sudo umount mnt
 </pre></div>
 </div>
