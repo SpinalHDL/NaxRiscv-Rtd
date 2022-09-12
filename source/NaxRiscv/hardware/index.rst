@@ -69,7 +69,7 @@ and extract them to ${SDCARD}1 and ${SDCARD}2
     sudo umount mnt
 
     sudo mount ${SDCARD}2 mnt
-    umounsudo tar -xf part2.tar.gz -C mnt
+    sudo tar -xf part2.tar.gz -C mnt
     sudo umount mnt
 
 Note that the DTB was generated for the digilent nexys video with :
