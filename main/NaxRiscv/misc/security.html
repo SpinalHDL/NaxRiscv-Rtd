@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Dispatch / Issue &mdash; NaxRiscv  documentation</title>
+  <title>Security &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -101,12 +101,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#hardware-description">Hardware description</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Frontend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#decoder">Decoder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#physical-register-allocation">Physical register allocation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#architectural-to-physical">Architectural to physical</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#physical-to-rob-id">Physical to ROB ID</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#dispatch-issue">Dispatch / Issue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend/index.html">Frontend</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#decoder">Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#physical-register-allocation">Physical register allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#architectural-to-physical">Architectural to physical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#physical-to-rob-id">Physical to ROB ID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frontend/index.html#dispatch-issue">Dispatch / Issue</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../execution_units/index.html">Execution units</a><ul>
@@ -169,10 +169,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../abstraction/index.html#automated-multiport-memory-transformation">Automated multiport memory transformation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../misc/index.html">Misc</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../misc/index.html#jtag-openocd-gdb">Jtag / OpenOCD / GDB</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../misc/index.html#security">Security</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../misc/index.html#side-channel-attack">Side channel attack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Misc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#jtag-openocd-gdb">Jtag / OpenOCD / GDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#security">Security</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#side-channel-attack">Side channel attack</a></li>
 </ul>
 </li>
 </ul>
@@ -233,13 +233,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Dispatch / Issue</li>
+      <li>Security</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/NaxRiscv/frontend/dispatch.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/NaxRiscv/misc/security.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -252,24 +252,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="dispatch-issue">
-<h1>Dispatch / Issue<a class="headerlink" href="#dispatch-issue" title="Permalink to this headline">¶</a></h1>
-<p>Here are a few specific points about the current implementation :</p>
-<ul class="simple">
-<li><p><strong>Unified design</strong> : Mostly to save area / having the most usage of each entry</p></li>
-<li><p><strong>2D queue</strong> : The entries arranged in C=decodeCount columns L=slotCount/decodeCount rows</p></li>
-<li><p><strong>Row push</strong> : When something is pushed into the queue, a whole row is “consumed”, even if the row isn’t fully used</p></li>
-<li><p><strong>No compression</strong> : There is no compression for empty rows. The while queue is shifted by one row on each push. It allows for better inference of the matrix FF and a smaller/faster ROB ID wake logic.</p></li>
-<li><p><strong>Matrix based</strong> : The storage of which instruction depends on what is done as a half matrix</p></li>
-<li><p><strong>Older first</strong> : If multiple instructions can be dispatched at once on a given execution unit, the older one is selected</p></li>
-<li><p><strong>Wake by ROB ID</strong> : For dynamic wakes, the ROB ID is used as the identifier (not the physical register file ID)</p></li>
-</ul>
-<p>So, overall, a 32 slot queue seems to be a limit to not go beyond to preserve the timings. Also, with the current design, the area occupancy of the queue doesn’t seem to to be a big deal compared to the CPU as a whole.</p>
-<p>Here are a few illustrations :</p>
-<img alt="../../_images/iq_push_pop.png" src="../../_images/iq_push_pop.png" />
-<img alt="../../_images/iq_wake_logic_nc.png" src="../../_images/iq_wake_logic_nc.png" />
-<img alt="../../_images/iq_wake_logic_storage.png" src="../../_images/iq_wake_logic_storage.png" />
-<img alt="../../_images/iq_issue_logic.png" src="../../_images/iq_issue_logic.png" />
+  <div class="section" id="security">
+<h1>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="side-channel-attack">
+<h2>Side channel attack<a class="headerlink" href="#side-channel-attack" title="Permalink to this headline">¶</a></h2>
+<p>You can find an example of side channel attack here :
+<a class="reference external" href="https://github.com/SpinalHDL/NaxSoftware/tree/main/baremetal/side_channel/src">https://github.com/SpinalHDL/NaxSoftware/tree/main/baremetal/side_channel/src</a>
+<a class="reference external" href="https://github.com/SpinalHDL/NaxSoftware/blob/main/baremetal/side_channel/src/side_channel.S">https://github.com/SpinalHDL/NaxSoftware/blob/main/baremetal/side_channel/src/side_channel.S</a></p>
+<p>It is based on the speculative execution of memory loads and cache refill.</p>
+</div>
 </div>
 
     <script type="text/javascript">
