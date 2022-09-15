@@ -7,7 +7,7 @@ Security
 Side channel attack
 ---------------------
 
-You can find an example of side channel attack here : 
+You can find an example of side channel attack here (need NaxRiscv hardware protection to be disabled): 
 https://github.com/SpinalHDL/NaxSoftware/tree/main/baremetal/side_channel/src
 https://github.com/SpinalHDL/NaxSoftware/blob/main/baremetal/side_channel/src/side_channel.S
 
