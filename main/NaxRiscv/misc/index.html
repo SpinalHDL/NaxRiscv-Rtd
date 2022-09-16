@@ -285,7 +285,26 @@ because openocd may add a few cycles there to propagate the data through the cha
 <p>You can find an example of side channel attack here (need NaxRiscv hardware protection to be disabled):
 <a class="reference external" href="https://github.com/SpinalHDL/NaxSoftware/tree/main/baremetal/side_channel/src">https://github.com/SpinalHDL/NaxSoftware/tree/main/baremetal/side_channel/src</a>
 <a class="reference external" href="https://github.com/SpinalHDL/NaxSoftware/blob/main/baremetal/side_channel/src/side_channel.S">https://github.com/SpinalHDL/NaxSoftware/blob/main/baremetal/side_channel/src/side_channel.S</a></p>
-<p>It is based on the speculative execution of memory loads and cache refill.</p>
+<p>It allows in user mode to read the data from the supervisor. Bypassing page fault.</p>
+<p>It is based on a few things</p>
+<ul class="simple">
+<li><p>Speculative execution</p></li>
+<li><p>Load page fault still writting in the register file the readed value</p></li>
+<li><p>Load dependencies being waked up by the load cache hit predictor</p></li>
+<li><p>Using that rogue value to produce a cache line refill</p></li>
+<li><p>Mesuring which cache line is loaded to figure out the secret value</p></li>
+</ul>
+<p>The image bellow show the execution of the attack :</p>
+<img alt="../../_images/side_channel_timings.png" src="../../_images/side_channel_timings.png" />
+<ol class="arabic simple">
+<li><p>Call the attack function</p></li>
+<li><p>Execute some slow code (store -&gt; load value forwarding) to delay the commit / flush of the pipeline</p></li>
+<li><p>Having a misspredicted branch to avoid commiting the faulty code</p></li>
+<li><p>Attacking the supervisor memory with a load</p></li>
+<li><p>Producing a cache load at an address which depend on the readed supervisor memory (mem[(data &gt;&gt; bitId) &lt;&lt; 6]</p></li>
+<li><p>Back on track, the cpu rolled back all the speculative execution, but the step 5 got a specific cache line loaded</p></li>
+</ol>
+<p>Then after that execution, mesuring which cache line is loaded will tell use the value of the secret bit from supervisor</p>
 </div>
 </div>
 </div>
