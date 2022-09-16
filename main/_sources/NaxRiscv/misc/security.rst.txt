@@ -21,7 +21,7 @@ It is based on a few things
 - Using that rogue value to produce a cache line refill
 - Mesuring which cache line is loaded to figure out the secret value
 
-The image bellow show the execution of the attack : 
+The image bellow show the execution of the attack (in grayish color is the speculative execution which wasn't commited) : 
 
 .. image:: /asset/image/side_channel_timings.png
 
