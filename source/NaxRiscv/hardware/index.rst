@@ -84,4 +84,7 @@ Also, it was generated inside QEMU, using https://github.com/esmil/riscv-linux "
 
 You can also find the dts and linux .config on the google drive link. The .config came mostly from https://github.com/esmil/riscv-linux#kernel with a few additions, especialy, adding the litex drivers. The kernel was https://github.com/litex-hub/linux commit 53b46d10f9a438a29c061cac05fb250568d1d21b.
 
+Adding packages, like xfce-desktop, chocolate-doom, openttd, visualboyadvance you can get things as following : 
+
+.. image:: /asset/image/debian_demo1.png
 
