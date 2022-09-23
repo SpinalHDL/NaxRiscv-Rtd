@@ -174,7 +174,10 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Misc</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#jtag-openocd-gdb">Jtag / OpenOCD / GDB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#security">Security</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#side-channel-attack">Side channel attack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#side-channel-attack">Side channel attack</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-reproduce">How to reproduce</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -305,6 +308,20 @@ because openocd may add a few cycles there to propagate the data through the cha
 <li><p>Back on track, the cpu rolled back all the speculative execution, but the step 5 got a specific cache line loaded</p></li>
 </ol>
 <p>Then after that execution, mesuring which cache line is loaded will tell use the value of the secret bit from supervisor</p>
+<div class="section" id="how-to-reproduce">
+<h4>How to reproduce<a class="headerlink" href="#how-to-reproduce" title="Permalink to this headline">¶</a></h4>
+<p>Follow <a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/tree/main/src/test/cpp/naxriscv#how-to-setup-things">https://github.com/SpinalHDL/NaxRiscv/tree/main/src/test/cpp/naxriscv#how-to-setup-things</a> but with a few modification :</p>
+<ul class="simple">
+<li><p>Before sbt “runMain naxriscv.Gen”, edit sideChannels to true (<a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/95b1cc8e5c69d3a2fe12af8f7478a2492971a0d1/src/main/scala/naxriscv/Gen.scala#L435">https://github.com/SpinalHDL/NaxRiscv/blob/95b1cc8e5c69d3a2fe12af8f7478a2492971a0d1/src/main/scala/naxriscv/Gen.scala#L435</a>)</p></li>
+<li><p>Instead of sbt “runMain naxriscv.Gen”, run  sbt “runMain naxriscv.Gen64”</p></li>
+</ul>
+<p>Once that whole setup is done, you can run the simulation via :</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">obj_dir</span><span class="o">/</span><span class="nc">VNaxRiscv</span><span class="w"> </span><span class="o">--</span><span class="n">name</span><span class="w"> </span><span class="n">play</span><span class="w"> </span><span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">elf</span><span class="w"> </span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">ext</span><span class="o">/</span><span class="nc">NaxSoftware</span><span class="o">/</span><span class="n">baremetal</span><span class="o">/</span><span class="n">side_channel</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">rv64ima</span><span class="o">/</span><span class="n">side_channel</span><span class="p">.</span><span class="n">elf</span><span class="w"> </span><span class="o">--</span><span class="n">start</span><span class="o">-</span><span class="n">symbol</span><span class="w"> </span><span class="n">_start</span><span class="w"> </span><span class="o">--</span><span class="n">pass</span><span class="o">-</span><span class="n">symbol</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="o">--</span><span class="n">fail</span><span class="o">-</span><span class="n">symbol</span><span class="w"> </span><span class="n">fail</span><span class="w"></span>
+</pre></div>
+</div>
+<p>You can add some arguments to generate log files in the output folder (will slow down things) via :</p>
+<p>–trace –trace-ref –trace –trace-ref –spike-debug</p>
+</div>
 </div>
 </div>
 </div>
