@@ -21,7 +21,7 @@ Once Litex is installed, you can generate and load the Digilent nexys video bits
 .. code:: bash
 
     # RV64IMAFDCSU config, enough to run linux
-    python3 -m litex_boards.targets.digilent_nexys_video --cpu-type=naxriscv  --with-video-framebuffer --with-spi-sdcard --with-ethernet --xlen=64 --scala-args='rvc=true,rvf=true,rvd=true' --build --load
+    python3 -m litex_boards.targets.digilent_nexys_video --cpu-type=naxriscv  --bus-standard axi-lite --with-video-framebuffer --with-spi-sdcard --with-ethernet --xlen=64 --scala-args='rvc=true,rvf=true,rvd=true' --build --load
 
 
 Putting debian on the SDCARD

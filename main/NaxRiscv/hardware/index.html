@@ -265,7 +265,7 @@
 <h3>Digilent nexys video<a class="headerlink" href="#digilent-nexys-video" title="Permalink to this headline">¶</a></h3>
 <p>Once Litex is installed, you can generate and load the Digilent nexys video bitstream via for instance :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># RV64IMAFDCSU config, enough to run linux</span>
-python3 -m litex_boards.targets.digilent_nexys_video --cpu-type<span class="o">=</span>naxriscv  --with-video-framebuffer --with-spi-sdcard --with-ethernet --xlen<span class="o">=</span><span class="m">64</span> --scala-args<span class="o">=</span><span class="s1">&#39;rvc=true,rvf=true,rvd=true&#39;</span> --build --load
+python3 -m litex_boards.targets.digilent_nexys_video --cpu-type<span class="o">=</span>naxriscv  --bus-standard axi-lite --with-video-framebuffer --with-spi-sdcard --with-ethernet --xlen<span class="o">=</span><span class="m">64</span> --scala-args<span class="o">=</span><span class="s1">&#39;rvc=true,rvf=true,rvd=true&#39;</span> --build --load
 </pre></div>
 </div>
 </div>
