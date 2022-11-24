@@ -291,6 +291,7 @@
 <li><p>Assume the prediction target was correct (calculating the branch target and then comparing it to the predicted PC is too much combinatorial path)</p></li>
 </ul>
 <p>Then the result of the prediction is stored into a jump/branch circular buffer which will later be used by the execute units branch logic for an eventual correction.</p>
+<p>The RAS heal its pointer on reschedules, but will not heal any speculatively updated value.</p>
 </div>
 <div class="section" id="jump-branch-circular-buffer">
 <h2>Jump/branch circular buffer<a class="headerlink" href="#jump-branch-circular-buffer" title="Permalink to this headline">¶</a></h2>

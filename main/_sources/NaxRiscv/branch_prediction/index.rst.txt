@@ -46,6 +46,8 @@ If the fetch BTB took a jump/branch then the decode prediction may :
 
 Then the result of the prediction is stored into a jump/branch circular buffer which will later be used by the execute units branch logic for an eventual correction.
 
+The RAS heal its pointer on reschedules, but will not heal any speculatively updated value.
+
 Jump/branch circular buffer
 ==============================
 
