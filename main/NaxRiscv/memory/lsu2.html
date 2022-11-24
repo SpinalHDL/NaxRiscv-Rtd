@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Memory system &mdash; NaxRiscv  documentation</title>
+  <title>Load store unite &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -43,9 +43,7 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Branch prediction" href="../branch_prediction/index.html" />
-    <link rel="prev" title="Execution units" href="../execution_units/index.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,7 +88,7 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-development-and-status">Project development and status</a></li>
@@ -126,9 +124,9 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Memory system</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#load-store-unite">Load store unite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mmu">MMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Memory system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#load-store-unite">Load store unite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mmu">MMU</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../branch_prediction/index.html">Branch prediction</a><ul>
@@ -238,13 +236,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Memory system</li>
+      <li>Load store unite</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/NaxRiscv/memory/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/NaxRiscv/memory/lsu2.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -257,10 +255,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="memory-system">
-<h1>Memory system<a class="headerlink" href="#memory-system" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="load-store-unite">
-<h2>Load store unite<a class="headerlink" href="#load-store-unite" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="load-store-unite">
+<h1>Load store unite<a class="headerlink" href="#load-store-unite" title="Permalink to this headline">¶</a></h1>
 <p>The LSU implementation is characterised by :</p>
 <ul class="simple">
 <li><p><strong>LQ / SQ</strong> : Usually, 16 of each</p></li>
@@ -274,25 +270,6 @@
 <p>Here is a few illustrations of the shared and the writeback pipeline :</p>
 <img alt="../../_images/lsu2.png" src="../../_images/lsu2.png" />
 </div>
-<div class="section" id="mmu">
-<h2>MMU<a class="headerlink" href="#mmu" title="Permalink to this headline">¶</a></h2>
-<p>The MMU implementation is characterised by :</p>
-<ul class="simple">
-<li><p><strong>2D organisation</strong> : For each level of the page table a parameterizable number of direct mapped ways of translation cache can be specified.</p></li>
-<li><p><strong>Hardware refilled</strong> : Because that’s cheap</p></li>
-<li><p><strong>Caches direct hit</strong> : Allows the instruction cache to check its way tags directly against the MMU TLB storage in order to improve timings (at the cost of area)</p></li>
-</ul>
-<p>For RV32, the default configuration is to have :</p>
-<ul class="simple">
-<li><p>4 ways * 32 entries of level 0 (4KB pages) TLB</p></li>
-<li><p>2 ways * 32 entries of level 1 (4MB pages) TLB</p></li>
-</ul>
-<p>The area of the TLB cache is kept low by inferring each way into a distributed ram.</p>
-<p>Here is a few illustrations of the MMU design</p>
-<img alt="../../_images/mmu_general.png" src="../../_images/mmu_general.png" />
-<img alt="../../_images/mmu_translation.png" src="../../_images/mmu_translation.png" />
-</div>
-</div>
 
     <script type="text/javascript">
         function init() {
@@ -305,10 +282,6 @@
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../branch_prediction/index.html" class="btn btn-neutral float-right" title="Branch prediction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../execution_units/index.html" class="btn btn-neutral float-left" title="Execution units" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 
