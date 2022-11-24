@@ -31,27 +31,27 @@ For the following configuration :
 
 Performance :
 
-- Dhrystone   : 2.94 DMIPS/Mhz    1.65 IPC (-O3 -fno-common -fno-inline, 318 instruction per iteration)
-- Coremark    : 5.00 Coremark/Mhz 1.28 IPC (-O3 and so many more random flags)
-- Embench-iot : 1.68 baseline     1.42 IPC (-O2 -mcmodel=medany -ffunction-sections)
+- Dhrystone   : 2.93 DMIPS/Mhz    1.65 IPC (-O3 -fno-common -fno-inline, 318 instruction per iteration)
+- Coremark    : 5.02 Coremark/Mhz 1.28 IPC (-O3 and so many more random flags)
+- Embench-iot : 1.67 baseline     1.42 IPC (-O2 -mcmodel=medany -ffunction-sections)
 
 On Artix 7 speed grade 3 :
 
-- 14.2 KLUT, 9.7 KFF, 11.5 BRAM, 4 DSP
-- 150 Mhz
+- 13.3 KLUT, 10.3 KFF, 12 BRAM, 4 DSP
+- 155 Mhz
 
 Reducing the number of int ALU to a single one and moving the branch to the shared pipeline will produce :
 
 
 Performance :
 
-- Dhrystone   : 2.70 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
-- Coremark    : 4.42 Coremark/Mhz (-O3 and so many more random flags)
+- Dhrystone   : 2.71 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
+- Coremark    : 4.44 Coremark/Mhz (-O3 and so many more random flags)
 - Embench-iot : 1.46 baseline     (-O2 -mcmodel=medany -ffunction-sections)
 
 On Artix 7 speed grade 3 :
 
-- 12.9 KLUT, 9.5 KFF, 11.5 BRAM, 4 DSP
+- 12.1 KLUT, 9.9 KFF, 12 BRAM, 4 DSP
 - 148 Mhz
 
 
@@ -68,13 +68,13 @@ Note that if you configure the core with 1 decode 1 alu 1 shared eu you get :
 Performance :
 
 - Dhrystone   : 1.70 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
-- Coremark    : 3.34 Coremark/Mhz (-O3 and so many more random flags)
+- Coremark    : 3.35 Coremark/Mhz (-O3 and so many more random flags)
 - Embench-iot : 1.06 baseline     (-O2 -mcmodel=medany -ffunction-sections)
 
 On Artix 7 speed grade 3 :
 
-- 11.6 KLUT, 9.2 KFF, 11.5 BRAM, 4 DSP
-- 148 Mhz
+- 10.8 KLUT, 9.7 KFF, 12 BRAM, 4 DSP
+- 155 Mhz
 
 
 RV64
@@ -84,17 +84,14 @@ In a similar configuration as the above RV32 (2\*Int/Shift/Branch, 1\*/load/stor
 
 Performance :
 
-- Dhrystone   : 2.97 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
-- Coremark    : 4.91 Coremark/Mhz (-O3, u32 as s32 and so many more random flags)
-- Embench-iot : 1.83 baseline     (-O2 -ffunction-sections)
+- Dhrystone   : 2.94 DMIPS/Mhz    (-O3 -fno-common -fno-inline)
+- Coremark    : 4.94 Coremark/Mhz (-O3, u32 as s32 and so many more random flags)
+- Embench-iot : 1.84 baseline     (-O2 -ffunction-sections)
 
 On Artix 7 speed grade 3 :
 
-- 18.6 KLUT, 11.8 KFF, 11.5 BRAM, 16 DSP
+- 17.9 KLUT, 12.5 KFF, 12 BRAM, 16 DSP
 - 137 Mhz
-
-So overall, the RV64 support does not have too much of an impact compared to RV32, mostly because the current critical path is in the address and control paths, which stay relatively similar between the two configurations (39 bits for RV64, 32 bits for RV32).
-
 
 Notes
 ===============
