@@ -265,50 +265,50 @@
 <h3>Digilent nexys video<a class="headerlink" href="#digilent-nexys-video" title="Permalink to this headline">¶</a></h3>
 <p>Once Litex is installed, you can generate and load the Digilent nexys video bitstream via for instance :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># RV64IMAFDCSU config, enough to run linux</span>
-python3 -m litex_boards.targets.digilent_nexys_video --cpu-type<span class="o">=</span>naxriscv  --bus-standard axi-lite --with-video-framebuffer --with-spi-sdcard --with-ethernet --xlen<span class="o">=</span><span class="m">64</span> --scala-args<span class="o">=</span><span class="s1">&#39;rvc=true,rvf=true,rvd=true&#39;</span> --build --load
+python3<span class="w"> </span>-m<span class="w"> </span>litex_boards.targets.digilent_nexys_video<span class="w"> </span>--cpu-type<span class="o">=</span>naxriscv<span class="w">  </span>--bus-standard<span class="w"> </span>axi-lite<span class="w"> </span>--with-video-framebuffer<span class="w"> </span>--with-spi-sdcard<span class="w"> </span>--with-ethernet<span class="w"> </span>--xlen<span class="o">=</span><span class="m">64</span><span class="w"> </span>--scala-args<span class="o">=</span><span class="s1">&#39;rvc=true,rvf=true,rvd=true&#39;</span><span class="w"> </span>--build<span class="w"> </span>--load
 </pre></div>
 </div>
 </div>
 <div class="section" id="putting-debian-on-the-sdcard">
 <h3>Putting debian on the SDCARD<a class="headerlink" href="#putting-debian-on-the-sdcard" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SDCARD</span><span class="o">=</span>/dev/???
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">SDCARD</span><span class="o">=</span>/dev/???
 <span class="o">(</span>
-<span class="nb">echo</span> o
-<span class="nb">echo</span> n
-<span class="nb">echo</span> p
-<span class="nb">echo</span> <span class="m">1</span>
+<span class="nb">echo</span><span class="w"> </span>o
+<span class="nb">echo</span><span class="w"> </span>n
+<span class="nb">echo</span><span class="w"> </span>p
+<span class="nb">echo</span><span class="w"> </span><span class="m">1</span>
 <span class="nb">echo</span>
-<span class="nb">echo</span> +500M
-<span class="nb">echo</span> y
-<span class="nb">echo</span> n
-<span class="nb">echo</span> p
-<span class="nb">echo</span> <span class="m">2</span>
+<span class="nb">echo</span><span class="w"> </span>+500M
+<span class="nb">echo</span><span class="w"> </span>y
+<span class="nb">echo</span><span class="w"> </span>n
+<span class="nb">echo</span><span class="w"> </span>p
+<span class="nb">echo</span><span class="w"> </span><span class="m">2</span>
 <span class="nb">echo</span>
-<span class="nb">echo</span> +7G
-<span class="nb">echo</span> y
-<span class="nb">echo</span> t
-<span class="nb">echo</span> <span class="m">1</span>
-<span class="nb">echo</span> b
-<span class="nb">echo</span> p
-<span class="nb">echo</span> w
-<span class="o">)</span> <span class="p">|</span> sudo fdisk <span class="nv">$SDCARD</span>
+<span class="nb">echo</span><span class="w"> </span>+7G
+<span class="nb">echo</span><span class="w"> </span>y
+<span class="nb">echo</span><span class="w"> </span>t
+<span class="nb">echo</span><span class="w"> </span><span class="m">1</span>
+<span class="nb">echo</span><span class="w"> </span>b
+<span class="nb">echo</span><span class="w"> </span>p
+<span class="nb">echo</span><span class="w"> </span>w
+<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>fdisk<span class="w"> </span><span class="nv">$SDCARD</span>
 
-sudo mkdosfs <span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">1</span>
-sudo mkfs -t ext2 <span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">2</span>
+sudo<span class="w"> </span>mkdosfs<span class="w"> </span><span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">1</span>
+sudo<span class="w"> </span>mkfs<span class="w"> </span>-t<span class="w"> </span>ext2<span class="w"> </span><span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">2</span>
 </pre></div>
 </div>
 <p>You need now to download part1 and part2 from <a class="reference external" href="https://drive.google.com/drive/folders/1OWY_NtJYWXd3oT8A3Zujef4eJwZFP_Yh?usp=sharing">https://drive.google.com/drive/folders/1OWY_NtJYWXd3oT8A3Zujef4eJwZFP_Yh?usp=sharing</a>
 and extract them to ${SDCARD}1 and ${SDCARD}2</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download images from https://drive.google.com/drive/folders/1OWY_NtJYWXd3oT8A3Zujef4eJwZFP_Yh?usp=sharing</span>
-mkdir mnt
+mkdir<span class="w"> </span>mnt
 
-sudo mount <span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">1</span> mnt
-sudo tar -xf part1.tar.gz -C mnt
-sudo umount mnt
+sudo<span class="w"> </span>mount<span class="w"> </span><span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">1</span><span class="w"> </span>mnt
+sudo<span class="w"> </span>tar<span class="w"> </span>-xf<span class="w"> </span>part1.tar.gz<span class="w"> </span>-C<span class="w"> </span>mnt
+sudo<span class="w"> </span>umount<span class="w"> </span>mnt
 
-sudo mount <span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">2</span> mnt
-sudo tar -xf part2.tar.gz -C mnt
-sudo umount mnt
+sudo<span class="w"> </span>mount<span class="w"> </span><span class="si">${</span><span class="nv">SDCARD</span><span class="si">}</span><span class="m">2</span><span class="w"> </span>mnt
+sudo<span class="w"> </span>tar<span class="w"> </span>-xf<span class="w"> </span>part2.tar.gz<span class="w"> </span>-C<span class="w"> </span>mnt
+sudo<span class="w"> </span>umount<span class="w"> </span>mnt
 </pre></div>
 </div>
 <p>Note that the DTB was generated for the digilent nexys video with :
