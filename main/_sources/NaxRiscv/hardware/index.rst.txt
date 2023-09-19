@@ -88,3 +88,16 @@ Adding packages, like xfce-desktop, chocolate-doom, openttd, visualboyadvance yo
 
 .. image:: /asset/image/debian_demo1.png
 
+
+Generating everything from scratch
+------------------------------------------------------
+
+You can find some documentation about how to generate :
+- Debian rootfs
+- Linux kernel
+- OpenSBI
+
+here :
+- https://github.com/SpinalHDL/NaxSoftware/tree/main/debian_litex
+
+It also contains some tips / tricks for the none Debian / Linux experts.
