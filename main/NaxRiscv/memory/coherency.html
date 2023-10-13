@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Load store unite &mdash; NaxRiscv  documentation</title>
+  <title>Coherency &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -127,6 +127,8 @@
 <li class="toctree-l1"><a class="reference internal" href="index.html">Memory system</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#load-store-unite">Load store unite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#mmu">MMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#coherency">Coherency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#l2-cache">L2 cache</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../branch_prediction/index.html">Branch prediction</a><ul>
@@ -237,13 +239,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Load store unite</li>
+      <li>Coherency</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/NaxRiscv/memory/lsu.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/NaxRiscv/memory/coherency.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -256,20 +258,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="load-store-unite">
-<h1>Load store unite<a class="headerlink" href="#load-store-unite" title="Permalink to this headline">¶</a></h1>
-<p>The LSU implementation is characterised by :</p>
+  <div class="section" id="coherency">
+<h1>Coherency<a class="headerlink" href="#coherency" title="Permalink to this headline">¶</a></h1>
+<p>The memory coherency is implemented the following way on the CPU :</p>
 <ul class="simple">
-<li><p><strong>LQ / SQ</strong> : Usually, 16 of each</p></li>
-<li><p><strong>Store Address / Data</strong> : For store, only the address is provided through the issue queue / AGU, while there is some logic from the SQ to fetch the store value directly from the register file.</p></li>
-<li><p><strong>Load Hit speculation</strong> : In order to reduce the load to use latency (to 3 cycles instead of 6), there is a cache hit predictor, speculatively waking up depending instructions</p></li>
-<li><p><strong>Load from AGU</strong> : To reduce the load latency, if the LQ has nothing for the load pipeline, then the AGU can directly provide its fresh calculation without passing by the LQ registers</p></li>
-<li><p><strong>Store to load bypass</strong> : If a given load depend on a single store of the same size, then the load pipeline may bypass the store value instead of waiting for the store writeback</p></li>
-<li><p><strong>Parallel memory translation</strong> : For loads, to reduce the latency, the memory translation run in parallel of the cache read.</p></li>
+<li><p>Blocks of memory (in the data cache) have permission levels (unloaded &lt; shared &lt; unique[dirty])</p></li>
+<li><p>Shared permission only allows read-only access</p></li>
+<li><p>Unique permission allows read/write accesses</p></li>
+<li><p>When the data cache want to upgrade its permission, he will issue an acquire request (on the read bus)</p></li>
+<li><p>When the data cache want to free-up space, he will send a release request (on the write bus)</p></li>
+<li><p>The interconnect can downgrade the data cache permission on a given address (on the probe bus)</p></li>
+<li><p>Probe requests are handled by reusing the data cache store pipeline</p></li>
+<li><p>To allow the CPU to do atomic load/store access, a locking interface allows to prevent a given address permission downgrade</p></li>
 </ul>
-<p>Here is a few illustrations of the load and store pipeline :</p>
-<img alt="../../_images/load_pipeline.png" src="../../_images/load_pipeline.png" />
-<img alt="../../_images/store_pipeline.png" src="../../_images/store_pipeline.png" />
+<p>While NaxRiscv native data cache interface to the memory is custom, it is made to be bridged into Tilelink.</p>
+<img alt="../../_images/coherency_l1.png" src="../../_images/coherency_l1.png" />
+<p>From a SoC perspective, you can pick either a L2 coherent cache or a cacheless coherency hub to connect multiple masters.</p>
 </div>
 
     <script type="text/javascript">

@@ -127,6 +127,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../memory/index.html">Memory system</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../memory/index.html#load-store-unite">Load store unite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../memory/index.html#mmu">MMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/index.html#coherency">Coherency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/index.html#l2-cache">L2 cache</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../branch_prediction/index.html">Branch prediction</a><ul>
@@ -262,7 +264,7 @@
 <ul class="simple">
 <li><p>Out of order execution with register renaming</p></li>
 <li><p>Superscalar (ex : 2 decode, 3 execution units, 2 retire)</p></li>
-<li><p>(RV32/RV64)IMAFDCSU (Linux / Buildroot works on hardware)</p></li>
+<li><p>(RV32/RV64)IMAFDCSU (Linux / Buildroot / Debian)</p></li>
 <li><p>Portable HDL, but target FPGA with distributed ram (Xilinx series 7 is the reference used so far)</p></li>
 <li><p>Target a (relatively) low area usage and high fmax (not the best IPC)</p></li>
 <li><p>Decentralized hardware elaboration (Empty toplevel parametrized with plugins)</p></li>
@@ -273,12 +275,14 @@
 <li><p>Load to use latency of 3 cycles via the speculative cache hit predictor</p></li>
 <li><p>Pipeline visualisation via verilator simulation and Konata (gem5 file format)</p></li>
 <li><p>JTAG / OpenOCD / GDB support by implementing the RISCV External Debug Support v. 0.13.2</p></li>
+<li><p>Support memory coherency via Tilelink</p></li>
+<li><p>Optional coherent L2 cache</p></li>
 </ul>
 <div class="section" id="project-development-and-status">
 <h2>Project development and status<a class="headerlink" href="#project-development-and-status" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>This project is free and open source</p></li>
-<li><p>It can run upstream buildroot/linux on hardware (ArtyA7-35T / Litex)</p></li>
+<li><p>It can run upstream Debian/Buildroot/Linux on hardware (ArtyA7-35T / Litex)</p></li>
 <li><p>It started in October 2021, got some funding from NLnet later on.</p></li>
 <li><p>Unfortunately the project started with a single crew (not by wish), contribution are welcome.</p></li>
 </ul>

@@ -9,7 +9,7 @@ NaxRiscv is a core currently characterised by :
 
 - Out of order execution with register renaming
 - Superscalar (ex : 2 decode, 3 execution units, 2 retire)
-- (RV32/RV64)IMAFDCSU (Linux / Buildroot works on hardware)
+- (RV32/RV64)IMAFDCSU (Linux / Buildroot / Debian)
 - Portable HDL, but target FPGA with distributed ram (Xilinx series 7 is the reference used so far)
 - Target a (relatively) low area usage and high fmax (not the best IPC)
 - Decentralized hardware elaboration (Empty toplevel parametrized with plugins)
@@ -20,12 +20,14 @@ NaxRiscv is a core currently characterised by :
 - Load to use latency of 3 cycles via the speculative cache hit predictor
 - Pipeline visualisation via verilator simulation and Konata (gem5 file format)
 - JTAG / OpenOCD / GDB support by implementing the RISCV External Debug Support v. 0.13.2
+- Support memory coherency via Tilelink
+- Optional coherent L2 cache
 
 Project development and status
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - This project is free and open source
-- It can run upstream buildroot/linux on hardware (ArtyA7-35T / Litex)
+- It can run upstream Debian/Buildroot/Linux on hardware (ArtyA7-35T / Litex)
 - It started in October 2021, got some funding from NLnet later on.
 - Unfortunately the project started with a single crew (not by wish), contribution are welcome.
 

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Misc &mdash; NaxRiscv  documentation</title>
+  <title>L2 cache &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -43,9 +43,7 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Hardware" href="../hardware/index.html" />
-    <link rel="prev" title="Abstractions / HDL" href="../abstraction/index.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,7 +88,7 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-development-and-status">Project development and status</a></li>
@@ -126,11 +124,11 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">Memory system</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../memory/index.html#load-store-unite">Load store unite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../memory/index.html#mmu">MMU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../memory/index.html#coherency">Coherency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../memory/index.html#l2-cache">L2 cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Memory system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#load-store-unite">Load store unite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mmu">MMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#coherency">Coherency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#l2-cache">L2 cache</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../branch_prediction/index.html">Branch prediction</a><ul>
@@ -173,11 +171,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../abstraction/index.html#automated-multiport-memory-transformation">Automated multiport memory transformation</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Misc</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#jtag-openocd-gdb">Jtag / OpenOCD / GDB</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#security">Security</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#side-channel-attack">Side channel attack</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#how-to-reproduce">How to reproduce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/index.html">Misc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/index.html#jtag-openocd-gdb">Jtag / OpenOCD / GDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/index.html#security">Security</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../misc/index.html#side-channel-attack">Side channel attack</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../misc/index.html#how-to-reproduce">How to reproduce</a></li>
 </ul>
 </li>
 </ul>
@@ -241,13 +239,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Misc</li>
+      <li>L2 cache</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/NaxRiscv/misc/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/NaxRiscv/memory/l2.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -260,73 +258,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="misc">
-<h1>Misc<a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="jtag-openocd-gdb">
-<h2>Jtag / OpenOCD / GDB<a class="headerlink" href="#jtag-openocd-gdb" title="Permalink to this headline">¶</a></h2>
-<p>NaxRiscv implements the RISCV External Debug Support v. 0.13.2 specification via JTAG. This enables upstream openocd support,
-which in itself allows to use GDB to debug software running on a target.</p>
-<p>The JTAG layer supports 2 modes:</p>
+  <div class="section" id="l2-cache">
+<h1>L2 cache<a class="headerlink" href="#l2-cache" title="Permalink to this headline">¶</a></h1>
+<p>The L2 cache has the following characteristics :</p>
 <ul class="simple">
-<li><p>Native : Where a full JTAG TAP is implemented</p></li>
-<li><p>Tunneled : Where an external JTAG TAP should provide a single JTAG instruction port to take control (ex BSCANE2 from xilinx)</p></li>
+<li><p>Provide Tilelink interfaces (up for CPUS/DMA, down for the memories)</p></li>
+<li><p>Inclusive with L1 (only D$ for NaxRiscv), so it only send necessary probes, but always has a copy of the L1.</p></li>
+<li><p>PLRU line eviction</p></li>
+<li><p>non-blocking</p></li>
+<li><p>multi-way</p></li>
+<li><p>Data memory implemented as simple dual port ram (FPGA friendly)</p></li>
+<li><p>Support selective cachability of access in function of address / source (usefull to not cache video DMA accesses)</p></li>
 </ul>
-<p>The implementation of the debug spec is done as follows :</p>
+<p>In its default configuration, its timings are :
+- Hit latency 5 cycles
+- Miss latency penality 4 cycles</p>
+<p>Its architecture is mostly :</p>
 <ul class="simple">
-<li><p>Abstract access register to x0-x31 (implemented by running a hidden abstract program buffer)</p></li>
-<li><p>Abstract program buffer to do everything else (memory/CSR access)</p></li>
-<li><p>The HART can read abstract command arguments via a CSR read, and provide a return value via a CSR write</p></li>
-<li><p>Triggers can only be used as hardware breakpoints</p></li>
-<li><p>PrivilegedPlugin implement things related to the HART, while the EmbeddedJtagPlugin integrate the different JTAG alternatives and DM in the core.</p></li>
-<li><p>The tunneled jtag mode use the BSCAN_TUNNEL_DATA_REGISTER mode, not the default one.</p></li>
+<li><p>Requests goes into a centralized tags fetcher / controller</p></li>
+<li><p>That controller can feed a few pipelines / FSM, as described bellow :</p></li>
+<li><p>Probe controller when it is needed to remove data from a l1 cache, may be required to evict a L2 cache line or to aquire unique permissions</p></li>
+<li><p>Read down.a when we need to either refill a cache line or do a uncached read access</p></li>
+<li><p>Send direct responses to up.d, for instance on a up.c.release</p></li>
+<li><p>Send request to the data collector, which can then write the main memory / cache and also send data to up.d</p></li>
+<li><p>Send request to the read cache, used on cache hit and cache evict</p></li>
 </ul>
-<p>The reason why BSCAN_TUNNEL_DATA_REGISTER was picked instead of the BSCAN_TUNNEL_NESTED_TAP is to properly support JTAG chains with multiple taps.
-During a JTAG scan with openocd, the only reference you can have is relative to the end of a DR-SHIFT, you can’t use the beginning of the DR-SHIFT as a reference,
-because openocd may add a few cycles there to propagate the data through the chain to the selected tap, which make BSCAN_TUNNEL_NESTED_TAP unpractical as the bits which identify the nature of its DR-SHIFT are sent first.</p>
-</div>
-<div class="section" id="security">
-<h2>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="side-channel-attack">
-<h3>Side channel attack<a class="headerlink" href="#side-channel-attack" title="Permalink to this headline">¶</a></h3>
-<p>You can find an example of side channel attack here (need NaxRiscv hardware protection to be disabled):
-<a class="reference external" href="https://github.com/SpinalHDL/NaxSoftware/tree/main/baremetal/side_channel/src">https://github.com/SpinalHDL/NaxSoftware/tree/main/baremetal/side_channel/src</a>
-<a class="reference external" href="https://github.com/SpinalHDL/NaxSoftware/blob/main/baremetal/side_channel/src/side_channel.S">https://github.com/SpinalHDL/NaxSoftware/blob/main/baremetal/side_channel/src/side_channel.S</a></p>
-<p>It allows in user mode to read the data from the supervisor. Bypassing page fault.</p>
-<p>It is based on a few things</p>
-<ul class="simple">
-<li><p>Speculative execution</p></li>
-<li><p>Load page fault still writting in the register file the readed value</p></li>
-<li><p>Load dependencies being waked up by the load cache hit predictor</p></li>
-<li><p>Using that rogue value to produce a cache line refill</p></li>
-<li><p>Mesuring which cache line is loaded to figure out the secret value</p></li>
-</ul>
-<p>The image bellow show the execution of the attack (in grayish color is the speculative execution which wasn’t commited) :</p>
-<img alt="../../_images/side_channel_timings.png" src="../../_images/side_channel_timings.png" />
-<ol class="arabic simple">
-<li><p>Call the attack function</p></li>
-<li><p>Execute some slow code (store -&gt; load value forwarding) to delay the commit / flush of the pipeline</p></li>
-<li><p>Having a misspredicted branch to avoid commiting the faulty code</p></li>
-<li><p>Attacking the supervisor memory with a load</p></li>
-<li><p>Producing a cache load at an address which depend on the readed supervisor memory (mem[(data &gt;&gt; bitId) &lt;&lt; 6]</p></li>
-<li><p>Back on track, the cpu rolled back all the speculative execution, but the step 5 got a specific cache line loaded</p></li>
-</ol>
-<p>Then after that execution, mesuring which cache line is loaded will tell use the value of the secret bit from supervisor</p>
-<div class="section" id="how-to-reproduce">
-<h4>How to reproduce<a class="headerlink" href="#how-to-reproduce" title="Permalink to this headline">¶</a></h4>
-<p>Follow <a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/tree/main/src/test/cpp/naxriscv#how-to-setup-things">https://github.com/SpinalHDL/NaxRiscv/tree/main/src/test/cpp/naxriscv#how-to-setup-things</a> but with a few modification :</p>
-<ul class="simple">
-<li><p>Before sbt “runMain naxriscv.Gen”, edit sideChannels to true (<a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/95b1cc8e5c69d3a2fe12af8f7478a2492971a0d1/src/main/scala/naxriscv/Gen.scala#L435">https://github.com/SpinalHDL/NaxRiscv/blob/95b1cc8e5c69d3a2fe12af8f7478a2492971a0d1/src/main/scala/naxriscv/Gen.scala#L435</a>)</p></li>
-<li><p>Instead of sbt “runMain naxriscv.Gen”, run  sbt “runMain naxriscv.Gen64”</p></li>
-</ul>
-<p>Once that whole setup is done, you can run the simulation via :</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">obj_dir</span><span class="o">/</span><span class="nc">VNaxRiscv</span><span class="w"> </span><span class="o">--</span><span class="n">name</span><span class="w"> </span><span class="n">play</span><span class="w"> </span><span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">elf</span><span class="w"> </span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">ext</span><span class="o">/</span><span class="nc">NaxSoftware</span><span class="o">/</span><span class="n">baremetal</span><span class="o">/</span><span class="n">side_channel</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">rv64ima</span><span class="o">/</span><span class="n">side_channel</span><span class="p">.</span><span class="n">elf</span><span class="w"> </span><span class="o">--</span><span class="n">start</span><span class="o">-</span><span class="n">symbol</span><span class="w"> </span><span class="n">_start</span><span class="w"> </span><span class="o">--</span><span class="n">pass</span><span class="o">-</span><span class="n">symbol</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="o">--</span><span class="n">fail</span><span class="o">-</span><span class="n">symbol</span><span class="w"> </span><span class="n">fail</span>
-</pre></div>
-</div>
-<p>You can add some arguments to generate log files in the output folder (will slow down things) via :</p>
-<p>–trace –trace-ref –trace –trace-ref –spike-debug</p>
-</div>
-</div>
-</div>
+<img alt="../../_images/l2.png" src="../../_images/l2.png" />
 </div>
 
     <script type="text/javascript">
@@ -340,10 +297,6 @@ because openocd may add a few cycles there to propagate the data through the cha
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../hardware/index.html" class="btn btn-neutral float-right" title="Hardware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../abstraction/index.html" class="btn btn-neutral float-left" title="Abstractions / HDL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 
