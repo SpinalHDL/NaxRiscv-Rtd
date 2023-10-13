@@ -1,0 +1,33 @@
+.. role:: raw-html-m2r(raw)
+   :format: html
+
+L2 cache
+============================
+
+The L2 cache has the following characteristics :
+
+- Provide Tilelink interfaces (up for CPUS/DMA, down for the memories)
+- Inclusive with L1 (only D$ for NaxRiscv), so it only send necessary probes, but always has a copy of the L1.
+- PLRU line eviction
+- non-blocking
+- multi-way
+- Data memory implemented as simple dual port ram (FPGA friendly)
+- Support selective cachability of access in function of address / source (usefull to not cache video DMA accesses)
+
+
+In its default configuration, its timings are : 
+- Hit latency 5 cycles
+- Miss latency penality 4 cycles
+
+Its architecture is mostly : 
+
+- Requests goes into a centralized tags fetcher / controller
+- That controller can feed a few pipelines / FSM, as described bellow :
+- Probe controller when it is needed to remove data from a l1 cache, may be required to evict a L2 cache line or to aquire unique permissions
+- Read down.a when we need to either refill a cache line or do a uncached read access
+- Send direct responses to up.d, for instance on a up.c.release
+- Send request to the data collector, which can then write the main memory / cache and also send data to up.d
+- Send request to the read cache, used on cache hit and cache evict
+
+.. image:: /asset/image/l2.png
+
