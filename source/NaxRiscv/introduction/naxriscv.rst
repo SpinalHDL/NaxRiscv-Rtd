@@ -27,9 +27,10 @@ Project development and status
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - This project is free and open source
-- It can run upstream Debian/Buildroot/Linux on hardware (ArtyA7-35T / Litex)
+- It can run upstream Debian/Buildroot/Linux on hardware (ArtyA7 / Litex)
 - It started in October 2021, got some funding from NLnet later on.
-- Unfortunately the project started with a single crew (not by wish), contribution are welcome.
+
+An third party documentation is also available here : https://github.com/CEA-Leti/naxriscv_doc
 
 Why a OoO core targeting FPGA
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
