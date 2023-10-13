@@ -93,11 +93,11 @@ Generating everything from scratch
 ------------------------------------------------------
 
 You can find some documentation about how to generate :
+
 - Debian rootfs
 - Linux kernel
 - OpenSBI
 
-here :
-- https://github.com/SpinalHDL/NaxSoftware/tree/main/debian_litex
+here : https://github.com/SpinalHDL/NaxSoftware/tree/main/debian_litex
 
 It also contains some tips / tricks for the none Debian / Linux experts.
