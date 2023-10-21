@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Jtag / OpenOCD / GDB &mdash; NaxRiscv  documentation</title>
+  <title>Acknowledgment &mdash; NaxRiscv  documentation</title>
   
 
   
@@ -89,17 +89,17 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#naxriscv">NaxRiscv</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#project-development-and-status">Project development and status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../introduction/index.html#additional-resources">Additional resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#naxriscv">NaxRiscv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#project-development-and-status">Project development and status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#why-a-ooo-core-targeting-fpga">Why a OoO core targeting FPGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#additional-resources">Additional resources</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#pipeline">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#how-to-use">How to use</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#hardware-description">Hardware description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#acknowledgment">Acknowledgment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#pipeline">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#how-to-use">How to use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#hardware-description">Hardware description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#acknowledgment">Acknowledgment</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../frontend/index.html">Frontend</a><ul>
@@ -172,11 +172,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../abstraction/index.html#automated-multiport-memory-transformation">Automated multiport memory transformation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Misc</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#jtag-openocd-gdb">Jtag / OpenOCD / GDB</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#security">Security</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="index.html#side-channel-attack">Side channel attack</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="index.html#how-to-reproduce">How to reproduce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/index.html">Misc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/index.html#jtag-openocd-gdb">Jtag / OpenOCD / GDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/index.html#security">Security</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../misc/index.html#side-channel-attack">Side channel attack</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../misc/index.html#how-to-reproduce">How to reproduce</a></li>
 </ul>
 </li>
 </ul>
@@ -240,13 +240,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Jtag / OpenOCD / GDB</li>
+      <li>Acknowledgment</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/NaxRiscv/misc/jtag.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/NaxRiscv/introduction/acknowledgment.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -259,27 +259,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="jtag-openocd-gdb">
-<h1>Jtag / OpenOCD / GDB<a class="headerlink" href="#jtag-openocd-gdb" title="Permalink to this headline">¶</a></h1>
-<p>NaxRiscv implements the RISCV External Debug Support v. 0.13.2 specification via JTAG. This enables upstream openocd support,
-which in itself allows to use GDB to debug software running on a target.</p>
-<p>The JTAG layer supports 2 modes:</p>
+  <div class="section" id="acknowledgment">
+<h1>Acknowledgment<a class="headerlink" href="#acknowledgment" title="Permalink to this headline">¶</a></h1>
+<p>Thanks to nlnet for the founding</p>
 <ul class="simple">
-<li><p>Native : Where a full JTAG TAP is implemented</p></li>
-<li><p>Tunneled : Where an external JTAG TAP should provide a single JTAG instruction port to take control (ex BSCANE2 from xilinx)</p></li>
+<li><p><a class="reference external" href="https://nlnet.nl/project/NaxRiscv/#ack">https://nlnet.nl/project/NaxRiscv/#ack</a></p></li>
 </ul>
-<p>The implementation of the debug spec is done as follows :</p>
+<p>Thanks to Litex for the SoC infrastructure</p>
 <ul class="simple">
-<li><p>Abstract access register to x0-x31 (implemented by running a hidden abstract program buffer)</p></li>
-<li><p>Abstract program buffer to do everything else (memory/CSR access)</p></li>
-<li><p>The HART can read abstract command arguments via a CSR read, and provide a return value via a CSR write</p></li>
-<li><p>Triggers can only be used as hardware breakpoints</p></li>
-<li><p>PrivilegedPlugin implement things related to the HART, while the EmbeddedJtagPlugin integrate the different JTAG alternatives and DM in the core.</p></li>
-<li><p>The tunneled jtag mode use the BSCAN_TUNNEL_DATA_REGISTER mode, not the default one.</p></li>
+<li><p><a class="reference external" href="https://github.com/enjoy-digital/litex">https://github.com/enjoy-digital/litex</a></p></li>
 </ul>
-<p>The reason why BSCAN_TUNNEL_DATA_REGISTER was picked instead of the BSCAN_TUNNEL_NESTED_TAP is to properly support JTAG chains with multiple taps.
-During a JTAG scan with openocd, the only reference you can have is relative to the end of a DR-SHIFT, you can’t use the beginning of the DR-SHIFT as a reference,
-because openocd may add a few cycles there to propagate the data through the chain to the selected tap, which make BSCAN_TUNNEL_NESTED_TAP unpractical as the bits which identify the nature of its DR-SHIFT are sent first.</p>
+<p>Thanks to the CEA for the additional documentation</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/CEA-Leti/naxriscv_doc">https://github.com/CEA-Leti/naxriscv_doc</a></p></li>
+</ul>
 </div>
 
     <script type="text/javascript">
