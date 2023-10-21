@@ -28,7 +28,7 @@ Project development and status
 
 - This project is free and open source
 - It can run upstream Debian/Buildroot/Linux on hardware (ArtyA7 / Litex)
-- It started in October 2021, got some funding from NLnet later on.
+- It started in October 2021, got some funding from NLnet later on (https://nlnet.nl/project/NaxRiscv/#ack)
 
 An third party documentation is also available here : https://github.com/CEA-Leti/naxriscv_doc
 
