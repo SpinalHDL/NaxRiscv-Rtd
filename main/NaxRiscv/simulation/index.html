@@ -149,6 +149,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Simulation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#spike">Spike</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multi-core-simulation">Multi core simulation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../performance/index.html">Performance and Area</a><ul>
@@ -277,6 +278,12 @@
 <p>It is done by compiling Spike as a shared object, which is then interfaced in the Verilator simulation.</p>
 <p>See the following git issue for more discussion for this usage of Spike :</p>
 <p><a class="reference external" href="https://github.com/riscv-software-src/riscv-isa-sim/issues/911">https://github.com/riscv-software-src/riscv-isa-sim/issues/911</a></p>
+</div>
+<div class="section" id="multi-core-simulation">
+<h2>Multi core simulation<a class="headerlink" href="#multi-core-simulation" title="Permalink to this headline">¶</a></h2>
+<p>You can run multi-core simulation by using src/main/scala/naxriscv/platform/tilelinkdemo/SocSim.scala</p>
+<p>It is a little NaxRiscv/tilelink SoC which can load bin/elf files and integrate rvls checking.</p>
+<p>See SocSim.scala for usages.</p>
 </div>
 </div>
 

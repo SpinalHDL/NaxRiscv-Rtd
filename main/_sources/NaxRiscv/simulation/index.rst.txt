@@ -30,3 +30,12 @@ It is done by compiling Spike as a shared object, which is then interfaced in th
 See the following git issue for more discussion for this usage of Spike :
 
 https://github.com/riscv-software-src/riscv-isa-sim/issues/911
+
+Multi core simulation
+==============================
+
+You can run multi-core simulation by using src/main/scala/naxriscv/platform/tilelinkdemo/SocSim.scala
+
+It is a little NaxRiscv/tilelink SoC which can load bin/elf files and integrate rvls checking.
+
+See SocSim.scala for usages.
