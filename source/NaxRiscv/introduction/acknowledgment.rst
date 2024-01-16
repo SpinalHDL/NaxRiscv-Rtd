@@ -13,7 +13,7 @@ Thanks to Litex for the SoC infrastructure
 
 Thanks to the CEA for the additional documentation
 
-- https://github.com/CEA-Leti/naxriscv_doc
+- https://github.com/SpinalHDL/naxriscv_doc
 
 Funding
 =======

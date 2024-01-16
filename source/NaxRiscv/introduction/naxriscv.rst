@@ -30,7 +30,7 @@ Project development and status
 - It can run upstream Debian/Buildroot/Linux on hardware (ArtyA7 / Litex)
 - It started in October 2021, got some funding from NLnet later on (https://nlnet.nl/project/NaxRiscv/#ack)
 
-An third party documentation is also available here : https://github.com/CEA-Leti/naxriscv_doc
+An third party documentation is also available here (from CEA-Leti): https://github.com/SpinalHDL/naxriscv_doc
 
 Why a OoO core targeting FPGA
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -54,4 +54,8 @@ RISC-V Week Paris 2022 :
 
 - Slides : https://github.com/SpinalHDL/SpinalDoc/blob/master/presentation/en/nax_040522/slides_nax_040522.pdf
 - Video : https://peertube.f-si.org/videos/watch/b2c577b1-977a-48b9-b395-244ebf3d1ef6
+
+37C3 2023 :
+
+- Video : https://media.ccc.de/v/37c3-11777-open_cpu_soc_design_all_the_way_up_to_debian
 
