@@ -19,5 +19,8 @@ Latch based
 
 This configuration fit well on ASIC. It's implementation was inspired from ibex, with the addition of multi write ports support.
 
+- The storage is done via simple latches
+- The read ports are implemented using tristate "muxes"
+
 
 .. image:: /asset/image/rf_latch.png
