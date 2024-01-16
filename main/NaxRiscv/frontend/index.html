@@ -35,6 +35,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/2.6.8/skins/default.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/2.6.8/wavedrom.min.js"></script>
@@ -143,7 +144,11 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../backend/index.html#commit">Commit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#register-file">Register file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#register-file">Register file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../backend/index.html#dual-port-based">Dual-port based</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../backend/index.html#latch-based">Latch based</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation/index.html">Simulation</a><ul>
@@ -192,6 +197,17 @@
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#digilent-nexys-video">Digilent nexys video</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#putting-debian-on-the-sdcard">Putting debian on the SDCARD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#generating-everything-from-scratch">Generating everything from scratch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware/index.html#asic">ASIC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#generating-verilog">Generating verilog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#openram">OpenRam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#openlane">OpenLane</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#setup-how-to-reproduce">Setup / how to reproduce</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#issues">Issues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#running-simulation">Running simulation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -264,17 +280,17 @@
            <div itemprop="articleBody">
             
   <div class="section" id="frontend">
-<h1>Frontend<a class="headerlink" href="#frontend" title="Permalink to this headline">¶</a></h1>
+<h1>Frontend<a class="headerlink" href="#frontend" title="Permalink to this heading">¶</a></h1>
 <div class="section" id="decoder">
-<h2>Decoder<a class="headerlink" href="#decoder" title="Permalink to this headline">¶</a></h2>
+<h2>Decoder<a class="headerlink" href="#decoder" title="Permalink to this heading">¶</a></h2>
 <p>Nothing particular.</p>
 </div>
 <div class="section" id="physical-register-allocation">
-<h2>Physical register allocation<a class="headerlink" href="#physical-register-allocation" title="Permalink to this headline">¶</a></h2>
+<h2>Physical register allocation<a class="headerlink" href="#physical-register-allocation" title="Permalink to this heading">¶</a></h2>
 <p>This is done by implementing a circular buffer containing the indexes of unallocated physical registers. This fits well into an FPGA with distributed ram.</p>
 </div>
 <div class="section" id="architectural-to-physical">
-<h2>Architectural to physical<a class="headerlink" href="#architectural-to-physical" title="Permalink to this headline">¶</a></h2>
+<h2>Architectural to physical<a class="headerlink" href="#architectural-to-physical" title="Permalink to this heading">¶</a></h2>
 <p>The translation from architectural register file to physical is done by implementing three tables :</p>
 <ul class="simple">
 <li><p><strong>Speculative mapping</strong> : Translate from architectural to physical, updated after the instruction decoding, implemented in distributed ram</p></li>
@@ -285,7 +301,7 @@
 <img alt="../../_images/rf_translation.png" src="../../_images/rf_translation.png" />
 </div>
 <div class="section" id="physical-to-rob-id">
-<h2>Physical to ROB ID<a class="headerlink" href="#physical-to-rob-id" title="Permalink to this headline">¶</a></h2>
+<h2>Physical to ROB ID<a class="headerlink" href="#physical-to-rob-id" title="Permalink to this heading">¶</a></h2>
 <p>Once the physical register file of the dependencies is calculated, they are translated into the ROB ID on which it depends. This is done by two things :</p>
 <ul class="simple">
 <li><p><strong>ROB Mapping</strong> : A distributed ram which translates from physical to ROB ID</p></li>
@@ -293,7 +309,7 @@
 </ul>
 </div>
 <div class="section" id="dispatch-issue">
-<h2>Dispatch / Issue<a class="headerlink" href="#dispatch-issue" title="Permalink to this headline">¶</a></h2>
+<h2>Dispatch / Issue<a class="headerlink" href="#dispatch-issue" title="Permalink to this heading">¶</a></h2>
 <p>Here are a few specific points about the current implementation :</p>
 <ul class="simple">
 <li><p><strong>Unified design</strong> : Mostly to save area / having the most usage of each entry</p></li>

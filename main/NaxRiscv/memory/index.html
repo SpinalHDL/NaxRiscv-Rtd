@@ -35,6 +35,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/2.6.8/skins/default.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/2.6.8/wavedrom.min.js"></script>
@@ -143,7 +144,11 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../backend/index.html#commit">Commit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#register-file">Register file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#register-file">Register file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../backend/index.html#dual-port-based">Dual-port based</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../backend/index.html#latch-based">Latch based</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation/index.html">Simulation</a><ul>
@@ -192,6 +197,17 @@
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#digilent-nexys-video">Digilent nexys video</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#putting-debian-on-the-sdcard">Putting debian on the SDCARD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#generating-everything-from-scratch">Generating everything from scratch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware/index.html#asic">ASIC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#generating-verilog">Generating verilog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#openram">OpenRam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#openlane">OpenLane</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#setup-how-to-reproduce">Setup / how to reproduce</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#issues">Issues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#running-simulation">Running simulation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -264,9 +280,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="memory-system">
-<h1>Memory system<a class="headerlink" href="#memory-system" title="Permalink to this headline">¶</a></h1>
+<h1>Memory system<a class="headerlink" href="#memory-system" title="Permalink to this heading">¶</a></h1>
 <div class="section" id="load-store-unite">
-<h2>Load store unite<a class="headerlink" href="#load-store-unite" title="Permalink to this headline">¶</a></h2>
+<h2>Load store unite<a class="headerlink" href="#load-store-unite" title="Permalink to this heading">¶</a></h2>
 <p>The LSU implementation is characterised by :</p>
 <ul class="simple">
 <li><p><strong>LQ / SQ</strong> : Usually, 16 of each</p></li>
@@ -281,7 +297,7 @@
 <img alt="../../_images/lsu2.png" src="../../_images/lsu2.png" />
 </div>
 <div class="section" id="mmu">
-<h2>MMU<a class="headerlink" href="#mmu" title="Permalink to this headline">¶</a></h2>
+<h2>MMU<a class="headerlink" href="#mmu" title="Permalink to this heading">¶</a></h2>
 <p>The MMU implementation is characterised by :</p>
 <ul class="simple">
 <li><p><strong>2D organisation</strong> : For each level of the page table a parameterizable number of direct mapped ways of translation cache can be specified.</p></li>
@@ -299,7 +315,7 @@
 <img alt="../../_images/mmu_translation.png" src="../../_images/mmu_translation.png" />
 </div>
 <div class="section" id="coherency">
-<h2>Coherency<a class="headerlink" href="#coherency" title="Permalink to this headline">¶</a></h2>
+<h2>Coherency<a class="headerlink" href="#coherency" title="Permalink to this heading">¶</a></h2>
 <p>The memory coherency is implemented the following way on the CPU :</p>
 <ul class="simple">
 <li><p>Blocks of memory (in the data cache) have permission levels (unloaded &lt; shared &lt; unique[dirty])</p></li>
@@ -316,7 +332,7 @@
 <p>From a SoC perspective, you can pick either a L2 coherent cache or a cacheless coherency hub to connect multiple masters.</p>
 </div>
 <div class="section" id="l2-cache">
-<h2>L2 cache<a class="headerlink" href="#l2-cache" title="Permalink to this headline">¶</a></h2>
+<h2>L2 cache<a class="headerlink" href="#l2-cache" title="Permalink to this heading">¶</a></h2>
 <p>The L2 cache has the following characteristics :</p>
 <ul class="simple">
 <li><p>Provide Tilelink interfaces (up for CPUS/DMA, down for the memories)</p></li>

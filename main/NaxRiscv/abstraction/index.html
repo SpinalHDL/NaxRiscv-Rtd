@@ -35,6 +35,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/2.6.8/skins/default.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/2.6.8/wavedrom.min.js"></script>
@@ -143,7 +144,11 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../backend/index.html#commit">Commit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#register-file">Register file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#register-file">Register file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../backend/index.html#dual-port-based">Dual-port based</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../backend/index.html#latch-based">Latch based</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation/index.html">Simulation</a><ul>
@@ -192,6 +197,17 @@
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#digilent-nexys-video">Digilent nexys video</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#putting-debian-on-the-sdcard">Putting debian on the SDCARD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#generating-everything-from-scratch">Generating everything from scratch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware/index.html#asic">ASIC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#generating-verilog">Generating verilog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#openram">OpenRam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#openlane">OpenLane</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#setup-how-to-reproduce">Setup / how to reproduce</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#issues">Issues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#running-simulation">Running simulation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -264,10 +280,10 @@
            <div itemprop="articleBody">
             
   <div class="section" id="abstractions-hdl">
-<span id="abstraction-hdl"></span><h1>Abstractions / HDL<a class="headerlink" href="#abstractions-hdl" title="Permalink to this headline">¶</a></h1>
+<span id="abstraction-hdl"></span><h1>Abstractions / HDL<a class="headerlink" href="#abstractions-hdl" title="Permalink to this heading">¶</a></h1>
 <p>The NaxRiscv implementation takes advantage of quite a few paradigms available when using the SpinalHDL (a Scala hardware description library).</p>
 <div class="section" id="framework">
-<h2>Framework<a class="headerlink" href="#framework" title="Permalink to this headline">¶</a></h2>
+<h2>Framework<a class="headerlink" href="#framework" title="Permalink to this heading">¶</a></h2>
 <p>The toplevel of NaxRiscv is mostly an empty Component with a framework which can schedule a
 list of plugins. The framework itself does not create any hardware.</p>
 <p>Here is the NaxRiscv toplevel</p>
@@ -467,7 +483,7 @@ skeleton)</p></li>
 <li><p>Create late tasks (used in general to create the required hardware)</p></li>
 </ul>
 <div class="section" id="plugin-tasks">
-<h3>Plugin tasks<a class="headerlink" href="#plugin-tasks" title="Permalink to this headline">¶</a></h3>
+<h3>Plugin tasks<a class="headerlink" href="#plugin-tasks" title="Permalink to this heading">¶</a></h3>
 <p>Here is can instance of dummy plugin creating two tasks (setup / logic):</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DummyPlugin</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Plugin</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">setup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">early</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Area</span><span class="w"> </span><span class="p">{</span>
@@ -486,7 +502,7 @@ skeleton)</p></li>
 new threads, which are scheduled by the Framework class.</p>
 </div>
 <div class="section" id="service-definition">
-<h3>Service definition<a class="headerlink" href="#service-definition" title="Permalink to this headline">¶</a></h3>
+<h3>Service definition<a class="headerlink" href="#service-definition" title="Permalink to this heading">¶</a></h3>
 <p>For instance, the JumpService, providing a hardware jump interface to other plugins. Such a service can be defined as :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">//Software interface (elaboration time)</span>
 <span class="k">trait</span><span class="w"> </span><span class="nc">JumpService</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Service</span><span class="p">{</span>
@@ -501,7 +517,7 @@ new threads, which are scheduled by the Framework class.</p>
 </div>
 </div>
 <div class="section" id="service-implementation">
-<h3>Service implementation<a class="headerlink" href="#service-implementation" title="Permalink to this headline">¶</a></h3>
+<h3>Service implementation<a class="headerlink" href="#service-implementation" title="Permalink to this heading">¶</a></h3>
 <p>Taking the previously shown JumpService, the PcPlugin could implement it the following way :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">JumpSpec</span><span class="p">(</span><span class="n">interface</span><span class="w"> </span><span class="p">:</span><span class="w">  </span><span class="nc">Flow</span><span class="p">[</span><span class="nc">JumpCmd</span><span class="p">],</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">PcPlugin</span><span class="p">()</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Plugin</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="nc">JumpService</span><span class="p">{</span>
@@ -529,7 +545,7 @@ new threads, which are scheduled by the Framework class.</p>
 </div>
 </div>
 <div class="section" id="service-usage">
-<h3>Service usage<a class="headerlink" href="#service-usage" title="Permalink to this headline">¶</a></h3>
+<h3>Service usage<a class="headerlink" href="#service-usage" title="Permalink to this heading">¶</a></h3>
 <p>Another plugin could then retrieve and use this service by :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AnotherPlugin</span><span class="p">()</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Plugin</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">setup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">early</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Area</span><span class="w"> </span><span class="p">{</span>
@@ -545,7 +561,7 @@ new threads, which are scheduled by the Framework class.</p>
 </div>
 </div>
 <div class="section" id="service-pipeline-definition">
-<h3>Service Pipeline definition<a class="headerlink" href="#service-pipeline-definition" title="Permalink to this headline">¶</a></h3>
+<h3>Service Pipeline definition<a class="headerlink" href="#service-pipeline-definition" title="Permalink to this heading">¶</a></h3>
 <p>Some plugins may even create a pipeline skeleton which can then be
 populated by other plugins. For instance :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FetchPlugin</span><span class="p">()</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Plugin</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="nc">LockedImpl</span><span class="w"> </span><span class="p">{</span>
@@ -569,7 +585,7 @@ populated by other plugins. For instance :</p>
 </div>
 </div>
 <div class="section" id="service-pipeline-usage">
-<h3>Service Pipeline usage<a class="headerlink" href="#service-pipeline-usage" title="Permalink to this headline">¶</a></h3>
+<h3>Service Pipeline usage<a class="headerlink" href="#service-pipeline-usage" title="Permalink to this heading">¶</a></h3>
 <p>For instance, the PcPlugin will want to introduce the PC value into the
 fetch pipeline :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">object</span><span class="w"> </span><span class="nc">PcPlugin</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">AreaObject</span><span class="p">{</span>
@@ -594,7 +610,7 @@ fetch pipeline :</p>
 </div>
 </div>
 <div class="section" id="execution-units">
-<h3>Execution units<a class="headerlink" href="#execution-units" title="Permalink to this headline">¶</a></h3>
+<h3>Execution units<a class="headerlink" href="#execution-units" title="Permalink to this heading">¶</a></h3>
 <p>Implementation of the execution units is another practical use of this concept. You can spawn an execution unit by creating a new ExecutionUnitBase with
 a unique execution unit identifier :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">plugins</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">ExecutionUnitBase</span><span class="p">(</span><span class="s">&quot;EU0&quot;</span><span class="p">)</span>
@@ -634,7 +650,7 @@ ExecutionUnitElementSimple with the same identifier :</p>
 </div>
 </div>
 <div class="section" id="shiftplugin">
-<h3>ShiftPlugin<a class="headerlink" href="#shiftplugin" title="Permalink to this headline">¶</a></h3>
+<h3>ShiftPlugin<a class="headerlink" href="#shiftplugin" title="Permalink to this heading">¶</a></h3>
 <p>Here is the ShiftPlugin as an example of ExecutionUnitElementSimple
 plugin:</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">object</span><span class="w"> </span><span class="nc">ShiftPlugin</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">AreaObject</span><span class="w"> </span><span class="p">{</span>
@@ -678,7 +694,7 @@ plugin:</p>
 </div>
 </div>
 <div class="section" id="pipeline">
-<h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h2>
+<h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this heading">¶</a></h2>
 <p>To allow the definition of extendable/flexible pipelines, the Pipeline abstraction was put into place. This abstraction allows to define stages, arbitrations, connections, and values connected through them.</p>
 <p>Here is a simple example :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nc">Pipeline</span><span class="p">{</span>
@@ -729,7 +745,7 @@ Also notes that some plugins maybe put into place as a skeleton pipeline for oth
 </div>
 </div>
 <div class="section" id="state-machine-api">
-<h2>State machine API<a class="headerlink" href="#state-machine-api" title="Permalink to this headline">¶</a></h2>
+<h2>State machine API<a class="headerlink" href="#state-machine-api" title="Permalink to this heading">¶</a></h2>
 <p>Not something ground breaking, but in a few places, the SpinalHDL state machine API is used. Here is a short example of the API :</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span><span class="w"> </span><span class="n">fsm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">StateMachine</span><span class="p">{</span>
 <span class="w">   </span><span class="kd">val</span><span class="w"> </span><span class="n">stateA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">State</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="nc">EntryPoint</span>
@@ -754,7 +770,7 @@ Also notes that some plugins maybe put into place as a skeleton pipeline for oth
 </div>
 </div>
 <div class="section" id="automated-multiport-memory-transformation">
-<h2>Automated multiport memory transformation<a class="headerlink" href="#automated-multiport-memory-transformation" title="Permalink to this headline">¶</a></h2>
+<h2>Automated multiport memory transformation<a class="headerlink" href="#automated-multiport-memory-transformation" title="Permalink to this heading">¶</a></h2>
 <p>In quite a few places in the design, there are memories which need multiple write ports. Such memories are not directly inferable by the FPGA synthesis tools most of the time.</p>
 <p>Still the NaxRiscv Scala code defines them all over the place, and to fill this gap, a custom SpinalHDL transformation phase was added to simplify them into groups of simple dual port ram with xor based glue.</p>
 <p>Here is how this transformation phase is added into the flow :</p>

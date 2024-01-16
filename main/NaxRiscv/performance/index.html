@@ -35,6 +35,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/2.6.8/skins/default.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/2.6.8/wavedrom.min.js"></script>
@@ -143,7 +144,11 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../backend/index.html#commit">Commit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#register-file">Register file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#register-file">Register file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../backend/index.html#dual-port-based">Dual-port based</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../backend/index.html#latch-based">Latch based</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation/index.html">Simulation</a><ul>
@@ -192,6 +197,17 @@
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#digilent-nexys-video">Digilent nexys video</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#putting-debian-on-the-sdcard">Putting debian on the SDCARD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#generating-everything-from-scratch">Generating everything from scratch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware/index.html#asic">ASIC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#generating-verilog">Generating verilog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#openram">OpenRam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#openlane">OpenLane</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#setup-how-to-reproduce">Setup / how to reproduce</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#issues">Issues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#running-simulation">Running simulation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -264,9 +280,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="performance-and-area">
-<h1>Performance and Area<a class="headerlink" href="#performance-and-area" title="Permalink to this headline">¶</a></h1>
+<h1>Performance and Area<a class="headerlink" href="#performance-and-area" title="Permalink to this heading">¶</a></h1>
 <div class="section" id="rv32">
-<h2>RV32<a class="headerlink" href="#rv32" title="Permalink to this headline">¶</a></h2>
+<h2>RV32<a class="headerlink" href="#rv32" title="Permalink to this heading">¶</a></h2>
 <p>A few things to keep in mind :</p>
 <ul class="simple">
 <li><p>You can trade FMax IPC Area</p></li>
@@ -327,7 +343,7 @@
 </ul>
 </div>
 <div class="section" id="rv64">
-<h2>RV64<a class="headerlink" href="#rv64" title="Permalink to this headline">¶</a></h2>
+<h2>RV64<a class="headerlink" href="#rv64" title="Permalink to this heading">¶</a></h2>
 <p>In a similar configuration as the above RV32 (2*Int/Shift/Branch, 1*/load/store/mul/div/csr/env)</p>
 <p>Performance :</p>
 <ul class="simple">
@@ -342,7 +358,7 @@
 </ul>
 </div>
 <div class="section" id="notes">
-<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">¶</a></h2>
 <p>Here are a few notes collected during the development :</p>
 <ul class="simple">
 <li><p>An out of order CPU without branch prediction is performing really bad ^^</p></li>
@@ -352,7 +368,7 @@
 </ul>
 </div>
 <div class="section" id="how-to-run-the-benchmark">
-<h2>How to run the benchmark<a class="headerlink" href="#how-to-run-the-benchmark" title="Permalink to this headline">¶</a></h2>
+<h2>How to run the benchmark<a class="headerlink" href="#how-to-run-the-benchmark" title="Permalink to this heading">¶</a></h2>
 <p>First follow the steps in <a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md#how-to-setup-things">https://github.com/SpinalHDL/NaxRiscv/blob/main/src/test/cpp/naxriscv/README.md#how-to-setup-things</a> to get a functional simulator.</p>
 <p>Then dhrystone and coremark benchmark can be run manually with :</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>obj_dir/VNaxRiscv<span class="w"> </span>--name<span class="w"> </span>dhrystone<span class="w"> </span>--output-dir<span class="w"> </span>output/nax/dhrystone<span class="w"> </span>--load-elf<span class="w"> </span>../../../../ext/NaxSoftware/baremetal/dhrystone/build/rv32im/dhrystone.elf<span class="w"> </span>--start-symbol<span class="w"> </span>_start<span class="w">  </span>--stats-print<span class="w"> </span>--stats-toggle-symbol<span class="w"> </span>sim_time

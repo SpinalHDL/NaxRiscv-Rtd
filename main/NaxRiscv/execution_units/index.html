@@ -35,6 +35,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/2.6.8/skins/default.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/2.6.8/wavedrom.min.js"></script>
@@ -143,7 +144,11 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../backend/index.html#commit">Commit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#register-file">Register file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend/index.html#register-file">Register file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../backend/index.html#dual-port-based">Dual-port based</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../backend/index.html#latch-based">Latch based</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation/index.html">Simulation</a><ul>
@@ -192,6 +197,17 @@
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#digilent-nexys-video">Digilent nexys video</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#putting-debian-on-the-sdcard">Putting debian on the SDCARD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#generating-everything-from-scratch">Generating everything from scratch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware/index.html#asic">ASIC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#generating-verilog">Generating verilog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#openram">OpenRam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hardware/index.html#openlane">OpenLane</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#setup-how-to-reproduce">Setup / how to reproduce</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#issues">Issues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hardware/index.html#running-simulation">Running simulation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -264,7 +280,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="execution-units">
-<h1>Execution units<a class="headerlink" href="#execution-units" title="Permalink to this headline">¶</a></h1>
+<h1>Execution units<a class="headerlink" href="#execution-units" title="Permalink to this heading">¶</a></h1>
 <p>The main characteristic of an execution unit is the way in which it will wake up the instruction which depend on it.</p>
 <ul class="simple">
 <li><p><strong>Static wake</strong> : For EU with fixed latency (no stall), a static wake can be asked to the issue queue. This can reduce the completion-to-use delay by two cycles</p></li>
@@ -273,10 +289,10 @@
 <p>Here is an illustration with two EU (one with static wake, one with dynamic wake) interacting with the issue queue to wake up dependent instructions</p>
 <img alt="../../_images/eu_wakes.png" src="../../_images/eu_wakes.png" />
 <div class="section" id="custom-instruction">
-<h2>Custom instruction<a class="headerlink" href="#custom-instruction" title="Permalink to this headline">¶</a></h2>
+<h2>Custom instruction<a class="headerlink" href="#custom-instruction" title="Permalink to this heading">¶</a></h2>
 <p>There are multiple ways you can add custom instructions into NaxRiscv. The following chapter will provide some demo.</p>
 <div class="section" id="simd-add">
-<h3>SIMD add<a class="headerlink" href="#simd-add" title="Permalink to this headline">¶</a></h3>
+<h3>SIMD add<a class="headerlink" href="#simd-add" title="Permalink to this heading">¶</a></h3>
 <p>Let’s define a plugin which will implement a SIMD add (4x8bits adder), working on the integer register file.</p>
 <p>The plugin will be based on the ExecutionUnitElementSimple which makes implementing ALU plugins simpler. Such a plugin can then be used to compose a given execution unit (hosted by a ExecutionUnitBase).</p>
 <p>For instance the Plugin configuration could be :</p>
@@ -290,7 +306,7 @@
 </pre></div>
 </div>
 <div class="section" id="plugin-implementation">
-<h4>Plugin implementation<a class="headerlink" href="#plugin-implementation" title="Permalink to this headline">¶</a></h4>
+<h4>Plugin implementation<a class="headerlink" href="#plugin-implementation" title="Permalink to this heading">¶</a></h4>
 <p>Here is a example how this plugin could be implemented :
 (<a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L36">https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L36</a>)</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">package</span><span class="w"> </span><span class="nn">naxriscv</span><span class="p">.</span><span class="n">execute</span>
@@ -364,7 +380,7 @@
 </div>
 </div>
 <div class="section" id="naxriscv-generation">
-<h4>NaxRiscv generation<a class="headerlink" href="#naxriscv-generation" title="Permalink to this headline">¶</a></h4>
+<h4>NaxRiscv generation<a class="headerlink" href="#naxriscv-generation" title="Permalink to this heading">¶</a></h4>
 <p>Then, to generate a NaxRiscv with this new plugin, we could run the following App :
 (<a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L71">https://github.com/SpinalHDL/NaxRiscv/blob/d44ac3a3a3a4328cf2c654f9a46171511a798fae/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L71</a>)</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">object</span><span class="w"> </span><span class="nc">SimdAddNaxGen</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">App</span><span class="p">{</span>
@@ -403,7 +419,7 @@
 </div>
 </div>
 <div class="section" id="software-test">
-<h4>Software test<a class="headerlink" href="#software-test" title="Permalink to this headline">¶</a></h4>
+<h4>Software test<a class="headerlink" href="#software-test" title="Permalink to this heading">¶</a></h4>
 <p>Then let’s write some assembly test code : (<a class="reference external" href="https://github.com/SpinalHDL/NaxSoftware/tree/849679c70b238ceee021bdfd18eb2e9809e7bdd0/baremetal/simdAdd">https://github.com/SpinalHDL/NaxSoftware/tree/849679c70b238ceee021bdfd18eb2e9809e7bdd0/baremetal/simdAdd</a>)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>.globl<span class="w"> </span>_start
 _start:
@@ -439,7 +455,7 @@ fail:
 </div>
 </div>
 <div class="section" id="simulation">
-<h4>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h4>
+<h4>Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading">¶</a></h4>
 <p>And the run a simulation in src/test/cpp/naxriscv (You will have to setup things as described in its readme first)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>clean<span class="w"> </span>compile
 ./obj_dir/VNaxRiscv<span class="w"> </span>--load-elf<span class="w"> </span>../../../../ext/NaxSoftware/baremetal/simdAdd/build/rv32im/simdAdd.elf<span class="w"> </span>--spike-disable<span class="w"> </span>--pass-symbol<span class="w"> </span>pass<span class="w"> </span>--fail-symbol<span class="w"> </span>fail<span class="w"> </span>--trace
@@ -448,13 +464,13 @@ fail:
 <p>Which will output the value 2224666 in the shell :D</p>
 </div>
 <div class="section" id="conclusion">
-<h4>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h4>
+<h4>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">¶</a></h4>
 <p>So overall this example didn’t introduce how to specify some additional decoding, nor how to define multi-cycle ALU. (TODO).
 But you can take a look in the IntAluPlugin, ShiftPlugin, DivPlugin, MulPlugin and BranchPlugin which are doing those things using the same ExecutionUnitElementSimple base class.</p>
 <p>Also, you don’t have to use the ExecutionUnitElementSimple base class, you can have more fundamental accesses, as the LoadPlugin, StorePlugin, EnvCallPlugin.</p>
 </div>
 <div class="section" id="hardcore-way">
-<h4>Hardcore way<a class="headerlink" href="#hardcore-way" title="Permalink to this headline">¶</a></h4>
+<h4>Hardcore way<a class="headerlink" href="#hardcore-way" title="Permalink to this heading">¶</a></h4>
 <p>Note, here is an example of the same instruction, but implemented without the ExecutionUnitElementSimple facilities :
 (<a class="reference external" href="https://github.com/SpinalHDL/NaxRiscv/blob/72b80e3345ecc3a25ca913f2b741e919a3f4c970/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L100">https://github.com/SpinalHDL/NaxRiscv/blob/72b80e3345ecc3a25ca913f2b741e919a3f4c970/src/main/scala/naxriscv/execute/SimdAddPlugin.scala#L100</a>)</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">object</span><span class="w"> </span><span class="nc">SimdAddRawPlugin</span><span class="p">{</span>
