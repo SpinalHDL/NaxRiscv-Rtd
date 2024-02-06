@@ -137,7 +137,9 @@ If you want to target sky130, with openram memories, you can do :
 
     ls nax.v sram/*
 
-Note that for now, NaxAsicGen will generate a version of NaxRiscv without load/store/mmu in order to keep the design small (see issue)
+In order to artificialy reduce the register file, you can use the `--regfile-fake-ratio=X` argument, where X need to be a power of two, and will reduce the register file size by that ratio.
+
+You can also generate a design without load/store unit by having the `--no-lsu` arguement.
 
 OpenRam
 ---------
@@ -213,7 +215,7 @@ Then :
 
 If you want to reproduce with the ram macros, then :
 
-- Generate the NaxRiscv verilog file with the --sky130 argument.
+- Generate the NaxRiscv verilog file with the `--sky130` argument.
 - update the designs/nax/src/nax.v
 - Generate the ram macro using openram
 - Uncomment the ram macro related things in the OpenLane/designs/nax/config.tcl file and copy the macros files there.
@@ -236,13 +238,6 @@ If you want to reproduce with the ram macros, then :
 
 
 
-Issues
-^^^^^^^^
-
-Sky130 + openroad has "sever" density/congestion issues with the register file (4R2W/latch/tristate). One workaround would be https://github.com/AUCOHL/DFFRAM, but unfortunately, it doesn't support configs behond 2R1W (issue https://github.com/AUCOHL/DFFRAM/issues/192).
-
-There is a routing issue which makes the usage of openram macros impossible at the moment, where the power lines get too close to the macro, not giving enough room for the data pins to route. See https://github.com/The-OpenROAD-Project/OpenLane/issues/2030
-
 
 Running simulation
 ^^^^^^^^^^^^^^^^^^^^
@@ -254,4 +249,36 @@ You can run a simulation which use the NaxRiscv ASIC specific feature inside a l
     sbt "runMain naxriscv.platform.tilelinkdemo.SocSim --load-elf ext/NaxSoftware/baremetal/dhrystone/build/rv32ima/dhrystone.elf --no-rvls --iverilog --asic"
 
 By using iverilog instead of verilator, its ensure that the Latch based register file is functional.
+
+
+Results
+^^^^^^^^
+
+Here is the result of openlane with the sky130 PDK and NaxRiscv as toplevel (--regfile-fake-ratio=8), so, without any memory blackbox and with a reduced I$ / D$ / branch predictor size as follow : 
+
+.. code:: scala
+
+        case p: FetchCachePlugin => p.wayCount = 1; p.cacheSize = 256; p.memDataWidth = 64
+        case p: DataCachePlugin => p.wayCount = 1; p.cacheSize = 256; p.memDataWidth = 64
+        case p: BtbPlugin => p.entries = 8
+        case p: GSharePlugin => p.memBytes = 32
+        case p: Lsu2Plugin => p.hitPedictionEntries = 64
+
+.. image:: /asset/image/asic_1.png
+
+
+Issues
+^^^^^^^^
+
+There is mostly two main issues : 
+
+- Sky130 + openroad has "sever" density/congestion issues with the register file (4R2W/latch/tristate). One workaround would be https://github.com/AUCOHL/DFFRAM, but unfortunately, it doesn't support configs behond 2R1W (issue https://github.com/AUCOHL/DFFRAM/issues/192).
+- There is also a macro insertion halo issue which makes the usage of openram macros impossible at the moment, where the power lines get too close to the macro, not giving enough room for the data pins to route. See https://github.com/The-OpenROAD-Project/OpenLane/issues/2030
+
+One performance issue observed seems to be the inbalenced insertion of buffer on high fanout logics. One instance happend for the MMU TLB lookup. By mistake I had the TLB setup as 6 ways of 32 entries each (a lot), meaning the virtual address was used to gatter information from 7360 TLB bits (2530 muxes to drive). In this scenario, the ASIC critical path was this TLB lookup, where most of the timing budget was spent on distributing the virtual address signal to those muxes. The main issue being it was done through 13 layers of various buffer gates with a typical fanout of 10, while a utopian balanced fanout would be able to reach 10^13 gates, while here it is only to drive 2530 muxes. See https://github.com/The-OpenROAD-Project/OpenLane/issues/2090
+
+Here you can see in pink the buffer chain path.
+
+.. image:: /asset/image/asic_buf_1.png
+
 
