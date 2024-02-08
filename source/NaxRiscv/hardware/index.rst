@@ -209,7 +209,7 @@ Setup / how to reproduce
 
 You can get the openlane docker via :
 
-- https://openlane2.readthedocs.io/en/latest/getting_started/docker_installation/installation_ubuntu.html
+- https://openlane.readthedocs.io/en/latest/getting_started/installation/installation_common_section.html
 
 Then :
 
