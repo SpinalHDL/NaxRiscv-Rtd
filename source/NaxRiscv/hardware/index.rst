@@ -166,6 +166,8 @@ You can ask SpinalHDL to blackbox memories with combinatorial read using the `\-
 
 You can customize how the blackboxing is done by modifying https://github.com/SpinalHDL/NaxRiscv/blob/488c3397880b4c215022aa42f533574fe4dd366a/src/main/scala/naxriscv/compatibility/MultiportRam.scala#L488
 
+Also, if you use  `\-\-bb-comb-ram`, you may also consider using `\-\-no-rf-latch-ram` which will also enable the generation of the register file blackbox.
+
 OpenRam
 ---------
 
